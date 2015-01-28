@@ -219,6 +219,14 @@ public class Framework extends drawingpanel{
 				g2d.setFont(new Font("what wtahttttttt", Font.ITALIC, 20));
 				g2d.drawString("Game is Loading!", 800/2, 530/2); 
 				break; 
+				
+				//case select:              //adding control for level selecting. 
+				//g2d.drawImage(select_level, 0, 0 , null); //loadcontent for level select. 
+				//g2d.setColor(Color.white); 
+				//g2d.serFont(new Font("whatever you gonna do", Font.ITALIC,20)); 
+				//g2d.drawString("please input the level you want:", 800/2, 530/2); 
+				//g2d.drawString("press anykey to exit to main menu!", 800/2, 530/2+50); //add button to enter level and bring user to that level. gotta do it next week. 
+
 		}
 	}
 	
