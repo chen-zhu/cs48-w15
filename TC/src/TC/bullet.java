@@ -47,7 +47,6 @@ public class bullet {
 	//draw the bullet onto the screen 
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(bullet, (int)x, (int)y, null); 
-		
 	}
 	
 	
