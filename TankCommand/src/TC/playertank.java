@@ -58,7 +58,7 @@ public class playertank {
 		this.xgunontank=tank.getWidth()-40; //try to changed the position of bullet we shoot!!!!
 		this.ygunontank=tank.getHeight(); 
 		this.xgun=this.x+this.xgunontank; 
-		this.ygun=this.y+this.ygunontank; 
+		this.ygun=this.y+this.ygunontank;//update the position of gun  
 	}
 	
 	//load the image for tank body. 
