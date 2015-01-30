@@ -23,6 +23,8 @@ public class playertank {
 	//movingspeed 
 	public double xspeed; 
 	public double yspeed; //used for jump? 
+	//public  int tmp=0; 
+
 	
 	//image for tank 
 	public BufferedImage tank; 
@@ -115,7 +117,7 @@ public class playertank {
 			xspeed=-0; 
 		}
 		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
-			yspeed=-6; 
+			yspeed=-8; 
 			//yspeed-=yacc; 
 		}
 		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
@@ -129,7 +131,7 @@ public class playertank {
 	//making tank move according to the change of coordinate. 
 	public void update(){
 		x+=xspeed; 
-		y+=yspeed;
+		y+=yspeed; 
 		this.xgun=this.x+this.xgunontank; 
 		this.ygun=this.y+this.ygunontank; 
 	}
