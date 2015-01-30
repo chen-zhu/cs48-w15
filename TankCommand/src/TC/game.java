@@ -28,11 +28,15 @@ public class game {
 		}catch (AWTException e){
 			//Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
 		}
+		
+		//making background moving 
+		cloudmoving = new background(); 
+		desertmoving = new background(); 
+		
 		player=new playertank(Framework.width/10, Framework.height/4); //set the initial position for player tank 
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
 		
-		cloudmoving = new background(); 
-		desertmoving = new background(); 
+
 		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
 	}
 	
@@ -69,7 +73,7 @@ public class game {
 	public void isplayershooting(long gametime, Point mouseposition){
 		if(player.shotting(gametime)){
 			bullet.lastcreatbullet=gametime; 
-			bullet bullet=new bullet(player.xgun, player.ygun, mouseposition); 
+			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
 			bulletlist.add(bullet); 
 		}
 	}

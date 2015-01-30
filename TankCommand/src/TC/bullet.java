@@ -6,9 +6,9 @@ import java.awt.image.*;
 public class bullet {
 	
 	//set timeperiod for shooting bullet. 
-	public  static long bulletperiod = Framework.nanosecond/10; //time between the two bullet <------changed the data to change the frequency of the bullet. 
+	public  static long bulletperiod = (long) (Framework.nanosecond/0.5); //time between the two bullet <------changed the data to change the frequency of the bullet. 
 	public static long lastcreatbullet=0; 
-	
+		
 	//bulletimage 
 	public static BufferedImage bullet; 
 	
@@ -17,21 +17,25 @@ public class bullet {
 	
 	//bulletposition 
 	public double x,y; 
-	public static int speed=1; 
+	public static double speed=9;
+	public double yacc=0.01; 
 	public double xspeed; 
 	public double yspeed; 
+	public  int tmp=0; 
 	
 	//constructor for bullet 
 	public bullet (int x, int y, Point mousePosition){
 		this.x=x; 
-		this.y=y; 
+		this.y=y; //
 		xspeed=speed; 
-		yspeed=-(0.08*xspeed-18.7)*(0.08*xspeed-18.7)+350; 
+		yspeed=speed; 
+		//this.tmp=x; //?
+
 	}
 	
 	//detect if the bullet left the screen or hit the ground 
 	public boolean isleft(){
-		if (x>0 && x<Framework.width && y>0 && y<Framework.height)
+		if (x>0 && x<Framework.width  && y<Framework.height )//&& y>0) //bullet can in the air(no boundary on the top. )
 			return false; 
 		else 
 			return true; 
@@ -41,7 +45,15 @@ public class bullet {
 	//making bullet move according to the function in bullet constructor. 
 	public void update(){
 		x+=xspeed; 
-		y-=yspeed; 
+		y-=(28); 
+		tmp+=1; 
+		y+=tmp; 
+		//double tmp1=x-tmp; //?
+		System.out.println(tmp+" "+x+" "+y);
+		//y=398; 
+		//y=(2*(x-tmp1)-685)*(2*(x-tmp1)-685)/800+30; 
+		//y-=(tmp/100*tmp/100);                         //parabolic movement. 
+		
 	}
 	
 	//draw the bullet onto the screen 

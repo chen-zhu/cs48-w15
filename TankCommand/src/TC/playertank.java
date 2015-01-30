@@ -93,17 +93,36 @@ public class playertank {
 	
 	//show the status of tank, check if player's tank is moving, then setting the speed for jump if there is jumping. 
 	public void moving(){                                         //<------------------------------------------------controlling jimping speed. need to fix. 
+		if(y>350){
+			y=350;
+		}
+		if(x<0){
+			x=0; //boundary for tank 
+		}
+		if(x>900){
+			x=900; 
+		}
 		if(drawingpanel.keystate(KeyEvent.VK_D) ||drawingpanel.keystate(KeyEvent.VK_RIGHT) ){
 			xspeed=xacc; 
 		}
 		else if (drawingpanel.keystate(KeyEvent.VK_A) ||drawingpanel.keystate(KeyEvent.VK_LEFT) ){
 			xspeed=-xacc; 
 		}
-		
-		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
-			yspeed=20; 
-			yspeed-=yacc; 
+		else if(!drawingpanel.keystate(KeyEvent.VK_D) ||!drawingpanel.keystate(KeyEvent.VK_RIGHT) ){
+			xspeed=0; 
 		}
+		else if (!drawingpanel.keystate(KeyEvent.VK_A) ||!drawingpanel.keystate(KeyEvent.VK_LEFT) ){ //add condition when key is released
+			xspeed=-0; 
+		}
+		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
+			yspeed=-6; 
+			//yspeed-=yacc; 
+		}
+		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
+			yspeed=10; 
+			//yspeed-=yacc; 
+		}
+
 	}
 	
 	
