@@ -39,11 +39,11 @@ public class game {
 	//Assign images to variables. 
 	private void load(){
 		try {
-			URL cURL=this.getClass().getResource("cloud_layer_1.png"); 
+			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
 			cloud=ImageIO.read(cURL);
-			URL dURL=this.getClass().getResource("desert.png"); 
+			URL dURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
 			desert=ImageIO.read(dURL);
-			URL bulletURL=this.getClass().getResource("bullet.png"); 
+			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

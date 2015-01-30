@@ -62,7 +62,7 @@ public class playertank {
 	//load the image for tank body. 
 	public void loadimage(){
 		try {
-			URL tankurl=this.getClass().getResource("/resources/images/tank.png"); 
+			URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png"); 
 			tank=ImageIO.read(tankurl); 
 		}catch(IOException ex){
 			//do something. 
