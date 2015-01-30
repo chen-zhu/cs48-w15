@@ -61,7 +61,7 @@ public abstract class drawingpanel extends JPanel implements KeyListener, MouseL
 	
 	
 	//check if mouse click or not 
-	public static boolean mouseButtonSrare(int button){
+	public static boolean mouseButtonState(int button){
 		return mousestate[button - 1]; 
 	}
 	

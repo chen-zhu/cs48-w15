@@ -6,7 +6,7 @@ import java.awt.image.*;
 public class bullet {
 	
 	//set timeperiod for shooting bullet. 
-	public  static long bulletperiod = Framework.nanosecond/10; 
+	public  static long bulletperiod = Framework.nanosecond/10; //time between the two bullet <------changed the data to change the frequency of the bullet. 
 	public static long lastcreatbullet=0; 
 	
 	//bulletimage 
