@@ -18,7 +18,7 @@ public class playertank {
 	
 	//position of the tank on the screen 
 	public int x; 
-	public int y=500; //tank is always on the ground?? except jump? 
+	public int y=350; //tank is always on the ground?? except jump? 
 	
 	//movingspeed 
 	public double xspeed; 
@@ -32,7 +32,8 @@ public class playertank {
 	public int ygunontank; 
 	
 	//accelerate for jump (gravity)
-	public int yacc=4; 
+	public int xacc=4; 
+	public int yacc=1; 
 	
 	//position of gun 
 	public int xgun; 
@@ -49,8 +50,8 @@ public class playertank {
 	//initialize for all the tank data; 
 	public void initialize(){
 		this.health=healthinit;
-		this.xspeed=10; 
-		this.yspeed=20; //-(10*(xspeed-0.89))*(10*(xspeed-0.89))+80; //the data is not accurate yspeed set up for jumping. 
+		this.xspeed=0; 
+		this.yspeed=0; //-(10*(xspeed-0.89))*(10*(xspeed-0.89))+80; //the data is not accurate yspeed set up for jumping. 
 		//set gun position 
 		this.xgunontank=tank.getWidth()-40; //try to changed the position of bullet we shoot!!!!
 		this.ygunontank=tank.getHeight(); 
@@ -75,8 +76,8 @@ public class playertank {
 		//this.y=y; y position is always 500, it doesnt change
 		this.xgun=this.x+this.xgunontank; 
 		this.ygun=this.x+this.ygunontank;
-		this.xspeed=10; 
-		this.yspeed=20; //jumping initial speed; 
+		this.xspeed=0; 
+		this.yspeed=0; //jumping initial speed; 
 		
 	}
 	
@@ -92,26 +93,34 @@ public class playertank {
 	
 	//show the status of tank, check if player's tank is moving, then setting the speed for jump if there is jumping. 
 	public void moving(){                                         //<------------------------------------------------controlling jimping speed. need to fix. 
-		//if(drawingpanel.keystate(KeyEvent.VK_D) ||drawingpanel.keystate(KeyEvent.VK_RIGHT) ){
-			//left and right moving speed doesn change 
-		//}
+		if(drawingpanel.keystate(KeyEvent.VK_D) ||drawingpanel.keystate(KeyEvent.VK_RIGHT) ){
+			xspeed=xacc; 
+		}
+		else if (drawingpanel.keystate(KeyEvent.VK_A) ||drawingpanel.keystate(KeyEvent.VK_LEFT) ){
+			xspeed=-xacc; 
+		}
+		
 		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
+			yspeed=20; 
 			yspeed-=yacc; 
 		}
-		/*
-		else 
-			if(yspeed<0){
-				yspeed=10;//???????
-			}*/ 
-		
-		
 	}
 	
 	
 	//making tank move according to the change of coordinate. 
 	public void update(){
+		x+=xspeed; 
+		y+=yspeed;
+		this.xgun=this.x+this.xgunontank; 
+		this.ygun=this.y+this.ygunontank; 
+	}
+	
+	//draw the tank in jpanel 
+	public void Draw(Graphics2D g2d){
+		g2d.drawImage(tank, (int)x, (int)y, null); 
 		
 	}
+	
 	
 	
 	

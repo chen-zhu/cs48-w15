@@ -17,12 +17,12 @@ public class bullet {
 	
 	//bulletposition 
 	public double x,y; 
-	public static int speed=20; 
+	public static int speed=1; 
 	public double xspeed; 
 	public double yspeed; 
 	
 	//constructor for bullet 
-	public bullet (int x, int y){
+	public bullet (int x, int y, Point mousePosition){
 		this.x=x; 
 		this.y=y; 
 		xspeed=speed; 
@@ -40,7 +40,7 @@ public class bullet {
 	
 	//making bullet move according to the function in bullet constructor. 
 	public void update(){
-		x-=xspeed; 
+		x+=xspeed; 
 		y-=yspeed; 
 	}
 	

@@ -122,7 +122,7 @@ public class Framework extends drawingpanel{
 			switch (gamestate){
 			case playing : 
 				gametime +=System.nanoTime() - lasttime; 
-				//game.updategame(gametime, mouseposition()); <------------------------------------------
+				game.updategame(gametime, mouseposition()); //<------------------------------------------
 				lasttime = System.nanoTime(); 
 				break; 
 				

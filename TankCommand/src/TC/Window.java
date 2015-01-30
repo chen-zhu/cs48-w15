@@ -8,7 +8,7 @@ public class Window extends JFrame{
 		this.setTitle("Tank Command"); 
 		this.setSize(1000, 530);
 		this.setLocationRelativeTo(null);
-		this.setResizable(false); 
+		this.setResizable(true); 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		//create framework that extends the canvas and put it on the frame 
 		this.setContentPane(new Framework());
