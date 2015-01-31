@@ -44,7 +44,7 @@ public class Framework extends drawingpanel{
 	private BufferedImage cloud; 
 	private BufferedImage black; 	
 	
-	//update, showing the posotion of mouse 
+	//update, showing the position of mouse
 	private Point mouseposition(){
 		try {
 			Point a=this.getMousePosition(); 
@@ -198,7 +198,7 @@ public class Framework extends drawingpanel{
 			case gameover: 
 				drawmenu(g2d); 
 				g2d.setColor(Color.BLACK);
-				g2d.drawString("press Enter to restat or ESC to exit." , width/2-100, height/4+30);
+				g2d.drawString("press Enter to restart or ESC to exit." , width/2-100, height/4+30);
 				//game.drawstatistic(g2d, gametime); <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-90, height/4);
@@ -236,7 +236,7 @@ public class Framework extends drawingpanel{
 
 
 	@Override
-	public void keyrReleasedFramewoek(KeyEvent e) {
+	public void keyReleasedFramework(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
 			System.exit(0);

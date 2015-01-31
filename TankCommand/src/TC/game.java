@@ -71,7 +71,7 @@ public class game {
 	
 	//check if the player is shooting; 
 	public void isplayershooting(long gametime, Point mouseposition){
-		if(player.shotting(gametime)){
+		if(player.shooting(gametime)){
 			bullet.lastcreatbullet=gametime; 
 			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
 			bulletlist.add(bullet); 

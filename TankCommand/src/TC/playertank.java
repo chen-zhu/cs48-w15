@@ -17,7 +17,7 @@ public class playertank {
 	public int health; 
 	
 	//position of the tank on the screen 
-	public int x; 
+	public int x=0;
 	public int y=350; //tank is always on the ground?? except jump? 
 	
 	//movingspeed 
@@ -85,7 +85,7 @@ public class playertank {
 	
 	
 	//set tank shooting and the period between shooting 
-	public boolean shotting(long gametime){
+	public boolean shooting(long gametime){
 		if(drawingpanel.mouseButtonState(MouseEvent.BUTTON1) && ((gametime-bullet.lastcreatbullet)>=bullet.bulletperiod)){
 			return true; 
 		}
@@ -94,16 +94,21 @@ public class playertank {
 	}
 	
 	//show the status of tank, check if player's tank is moving, then setting the speed for jump if there is jumping. 
-	public void moving(){                                         //<------------------------------------------------controlling jimping speed. need to fix. 
+	public void moving(){ //<------------------------------------------------controlling jumping speed. need to fix.
+        //boundary for tank
 		if(y>350){
 			y=350;
 		}
+        if(y<0){
+            y=0;
+        }
 		if(x<0){
-			x=0; //boundary for tank 
+			x=0;
 		}
 		if(x>900){
 			x=900; 
 		}
+        //tank controls
 		if(drawingpanel.keystate(KeyEvent.VK_D) ||drawingpanel.keystate(KeyEvent.VK_RIGHT) ){
 			xspeed=xacc; 
 		}
@@ -117,11 +122,11 @@ public class playertank {
 			xspeed=-0; 
 		}
 		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
-			yspeed=-8; 
+			yspeed=-5;
 			//yspeed-=yacc; 
 		}
 		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
-			yspeed=10; 
+			yspeed=8;
 			//yspeed-=yacc; 
 		}
 

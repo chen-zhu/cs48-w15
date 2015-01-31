@@ -49,7 +49,7 @@ public abstract class drawingpanel extends JPanel implements KeyListener, MouseL
 	@Override
 	public void keyReleased(KeyEvent e){
 		keystate[e.getKeyCode()] = false;
-		keyrReleasedFramewoek(e); 
+		keyReleasedFramework(e);
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public abstract class drawingpanel extends JPanel implements KeyListener, MouseL
 		//keystate[e.getKeyCode()] = true; 
 	}
 
-	public abstract void keyrReleasedFramewoek(KeyEvent e);
+	public abstract void keyReleasedFramework(KeyEvent e);
 	
 	
 	//check if mouse click or not 
