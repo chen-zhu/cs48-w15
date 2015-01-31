@@ -53,7 +53,7 @@ public class enemytank {
 	//modify the time, frequency and the difficulty of enemy 
 	public static void speedup(){
 		if(enemytank.periodenemy > Framework.nanosecond){
-			enemytank.periodenemy-=Framework.nanosecond/100; 
+			enemytank.periodenemy-=Framework.nanosecond/10; 
 			enemytank.xmoving-=0.25; 
 		}
 		
