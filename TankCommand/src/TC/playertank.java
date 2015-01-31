@@ -122,11 +122,22 @@ public class playertank {
 			xspeed=-0; 
 		}
 		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
-			yspeed=-5;
-			//yspeed-=yacc; 
+			yspeed=-5; //yspeed-=yacc
+            try {
+                URL tankurl=this.getClass().getResource("/TC/resources/images/rocket_tank.png");
+                tank=ImageIO.read(tankurl);
+            }catch(IOException ex){
+                //do something.
+            }    //no set up for animination
 		}
 		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
 			yspeed=8;
+            try {
+                URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png");
+                tank=ImageIO.read(tankurl);
+            }catch(IOException ex){
+                //do something.
+            }    //no set up for animination
 			//yspeed-=yacc; 
 		}
 
