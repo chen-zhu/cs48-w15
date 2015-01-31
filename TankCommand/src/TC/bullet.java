@@ -17,7 +17,7 @@ public class bullet {
 	
 	//bulletposition 
 	public double x,y; 
-	public static double speed=9;
+	public static double speed=8;//9;
 	public double yacc=0.01; 
 	public double xspeed; 
 	public double yspeed; 
@@ -45,8 +45,13 @@ public class bullet {
 	//making bullet move according to the function in bullet constructor. 
 	public void update(){
 		x+=xspeed; 
-		y-=(28); 
-		tmp+=1; 
+		y-=28;//(28); 
+		//if(tmp>28){
+			//tmp+=1;
+			//xspeed=1;
+		//}
+		//else {
+		tmp+=1;//} 
 		y+=tmp; 
 		//double tmp1=x-tmp; //?
 		System.out.println(tmp+" "+x+" "+y);

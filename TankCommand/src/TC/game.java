@@ -19,6 +19,8 @@ public class game {
 	public Robot robot; 
 	public playertank player; 
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
+	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
+	
 	
 	//set down everything for the game
 	private void initialize(){
@@ -35,6 +37,8 @@ public class game {
 		
 		player=new playertank(Framework.width/10, Framework.height/4); //set the initial position for player tank 
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
+		enemylist=new ArrayList<enemytank>(); 
+		
 		
 
 		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
@@ -49,6 +53,8 @@ public class game {
 			desert=ImageIO.read(dURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
+			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.jpg"); 
+			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
@@ -102,6 +108,11 @@ public class game {
 		if(isplayeralive())
 			player.Draw(g2d);
 		
+		//draw enemytank 
+		for (int i=0; i<enemylist.size(); i++){
+			enemylist.get(i).Draw(g2d);
+		}
+		
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);
@@ -123,8 +134,41 @@ public class game {
 		//update bullet action
 		updatebullet(); 
 		
+		//update the enemy 
+		createenemytank(gametime); 
+		updateenemy(); 
+		
 	}
 	
+	
+	//creates the enemy when it comes to the right time 
+	public void createenemytank(long gametime){
+		if(gametime-enemytank.lastcreatedenemy>=enemytank.periodenemy){
+			enemytank r=new enemytank(); 
+			int x=Framework.width; 
+			int y=random.nextInt(Framework.height-enemytank.enemytankimg.getHeight()-120); 
+			r.initialize(x, y);
+			enemylist.add(r); 
+			enemytank.speedup();
+			//update the last created time!!!
+			enemytank.lastcreatedenemy=gametime; 
+		}
+	}
+	
+	//update all the enemy in the list 
+	private void updateenemy(){
+		for(int i=0; i<enemylist.size(); i++){
+			enemytank r=enemylist.get(i); 
+			r.update(); 
+			//is crashed or not???
+			//.. 
+			
+			if(r.isleft()){
+				enemylist.remove(i); 
+				//if runaway, remove from list 
+			}
+		}
+	}
 	
 	
 	public game(){
