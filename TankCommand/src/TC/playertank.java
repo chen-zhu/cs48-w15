@@ -132,14 +132,15 @@ public class playertank {
 		}
 		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
 			yspeed=8;
+			if(y<=348){     //============================================>tank will not shake when we dont move it. 
             try {
                 URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png");
                 tank=ImageIO.read(tankurl);
-            }catch(IOException ex){
+            }catch(IOException ex){                        
                 //do something.
-            }    //no set up for animination
+            }    //no set up for animination}
 			//yspeed-=yacc; 
-		}
+			}}
 
 	}
 	
