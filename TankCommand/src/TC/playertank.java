@@ -99,9 +99,9 @@ public class playertank {
 		if(y>350){
 			y=350;
 		}
-        if(y<0){
-            y=0;
-        }
+		if(y<0){
+		        y=0;
+		}
 		if(x<0){
 			x=0;
 		}
@@ -123,24 +123,25 @@ public class playertank {
 		}
 		if(drawingpanel.keystate(KeyEvent.VK_W) ||drawingpanel.keystate(KeyEvent.VK_UP) ){
 			yspeed=-5; //yspeed-=yacc
-            try {
-                URL tankurl=this.getClass().getResource("/TC/resources/images/rocket_tank.png");
-                tank=ImageIO.read(tankurl);
-            }catch(IOException ex){
-                //do something.
-            }    //no set up for animination
+			try {
+			    URL tankurl=this.getClass().getResource("/TC/resources/images/rocket_tank.png");
+			    tank=ImageIO.read(tankurl);
+			}catch(IOException ex){
+			    //do something.
+			}    //no set up for animination
 		}
 		else if(!drawingpanel.keystate(KeyEvent.VK_W) ||!drawingpanel.keystate(KeyEvent.VK_UP) ){
 			yspeed=8;
 			if(y<=348){     //============================================>tank will not shake when we dont move it. 
-            try {
-                URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png");
-                tank=ImageIO.read(tankurl);
-            }catch(IOException ex){                        
-                //do something.
-            }    //no set up for animination}
+			    try {
+				URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png");
+				tank=ImageIO.read(tankurl);
+			    }catch(IOException ex){                        
+				//do something.
+			    }    //no set up for animination}
 			//yspeed-=yacc; 
-			}}
+			}
+		}
 
 	}
 	
