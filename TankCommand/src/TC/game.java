@@ -135,11 +135,11 @@ public class game {
 		g2d.setFont(new Font("what wtahttttttt", Font.BOLD, 18));
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
-		g2d.drawString("Run away: "+runaway, 10, 40);
+		g2d.drawString("Run away: "+runaway, 350, 20);
 		if(player.health<0){
 			player.health=0;
 		}
-		g2d.drawString("Player's health: "+player.health, 10, 60);
+		g2d.drawString("Player's health: "+player.health, 700, 20);
 		
 	}
 	
