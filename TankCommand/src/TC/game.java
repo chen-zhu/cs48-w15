@@ -217,6 +217,7 @@ public class game {
 	public void createenemytank(long gametime){
 		if(gametime-enemytank.lastcreatedenemy>=enemytank.periodenemy){
 			enemytank r=new enemytank(); 
+			random = new Random(); 
 			int x=Framework.width; 
 			int y=random.nextInt(Framework.height-enemytank.enemytankimg.getHeight()-120); 
 			r.initialize(x, y);
