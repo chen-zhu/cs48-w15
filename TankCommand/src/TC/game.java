@@ -20,6 +20,8 @@ public class game {
 	public playertank player; 
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
+	public int runaway; 
+	public int killed; 
 	
 	
 	//set down everything for the game
@@ -40,7 +42,8 @@ public class game {
 		enemylist=new ArrayList<enemytank>(); 
 		
 		
-
+		runaway=0; 
+		killed=0; 
 		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
 	}
 	
@@ -129,6 +132,15 @@ public class game {
 			bulletlist.get(i).Draw(g2d);
 		}
 		
+		g2d.setFont(new Font("what wtahttttttt", Font.BOLD, 18));
+		g2d.setColor(Color.gray );
+		g2d.drawString("Killed: "+killed, 10, 20);
+		g2d.drawString("Run away: "+runaway, 10, 40);
+		if(player.health<0){
+			player.health=0;
+		}
+		g2d.drawString("Player's health: "+player.health, 10, 60);
+		
 	}
 	
 	
@@ -181,10 +193,12 @@ public class game {
 			}
 			if(r.health<=0){
 				enemylist.remove(i); 
+				killed+=1;
 				continue; 
 			}
 			if(r.isleft()){
 				enemylist.remove(i); 
+				runaway+=1; 
 				//if runaway, remove from list 
 			}
 		}
