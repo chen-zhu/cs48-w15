@@ -95,6 +95,17 @@ public class game {
 				continue; 
 			}
 			//check if the bullet hit the enemy; 
+			Rectangle b=new Rectangle((int)bullet.x, (int)bullet.y,bullet.bullet.getWidth(), bullet.bullet.getHeight()); 
+			//then use for loop to check enemylist, if there is any enemy got hit or not? 
+			for (int t=0; t<enemylist.size(); t++){
+				enemytank r=enemylist.get(t); 
+				Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
+				
+				if (b.intersects(e)){
+					r.health-=bullet.damage; 
+				}
+			}
+
 			
 		}
 	}
@@ -161,8 +172,17 @@ public class game {
 			enemytank r=enemylist.get(i); 
 			r.update(); 
 			//is crashed or not???
-			//.. 
-			
+			//enemy die after crashing with player 
+			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
+			if(p.intersects(e)){
+				player.health-=30; 
+				enemylist.remove(i);    //<============================================================Doing collision. 
+			}
+			if(r.health<=0){
+				enemylist.remove(i); 
+				continue; 
+			}
 			if(r.isleft()){
 				enemylist.remove(i); 
 				//if runaway, remove from list 
