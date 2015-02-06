@@ -24,6 +24,10 @@ public class playertank {
 	public double xspeed; 
 	public double yspeed; //used for jump? 
 	//public  int tmp=0; 
+	
+	//setup for super power. 
+	public int numberofsuperpower = 5;
+    public int superpowerfinal;
 
 	
 	//image for tank 
@@ -52,6 +56,7 @@ public class playertank {
 	//initialize for all the tank data; 
 	public void initialize(){
 		this.health=healthinit;
+		this.superpowerfinal=numberofsuperpower; 
 		this.xspeed=0; 
 		this.yspeed=0; //-(10*(xspeed-0.89))*(10*(xspeed-0.89))+80; //the data is not accurate yspeed set up for jumping. 
 		//set gun position 
@@ -87,6 +92,15 @@ public class playertank {
 	//set tank shooting and the period between shooting 
 	public boolean shooting(long gametime){
 		if(drawingpanel.mouseButtonState(MouseEvent.BUTTON1) && ((gametime-bullet.lastcreatbullet)>=bullet.bulletperiod)){
+			return true; 
+		}
+		else 
+			return false; 
+	}
+	
+	public boolean superpowering(long gametime){
+		if(drawingpanel.mouseButtonState(MouseEvent.BUTTON3) && superpowerfinal>0 && ((gametime-superpower.lastcreatsuperpower)>=superpower.superpowerperiod)){
+			superpowerfinal-=1; 
 			return true; 
 		}
 		else 

@@ -19,6 +19,7 @@ public class game {
 	public Robot robot; 
 	public playertank player; 
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
+	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
 	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
 	public int runaway; 
 	public int killed; 
@@ -40,6 +41,7 @@ public class game {
 		player=new playertank(Framework.width/10, Framework.height/4); //set the initial position for player tank 
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
 		enemylist=new ArrayList<enemytank>(); 
+		superpowerlist=new ArrayList<superpower>(); 
 		
 		
 		runaway=0; 
@@ -56,6 +58,8 @@ public class game {
 			desert=ImageIO.read(dURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
+			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
+			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.jpg"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 		} catch (IOException e) {
@@ -87,6 +91,15 @@ public class game {
 		}
 	}
 	
+	public void isplayerusingsuperpower(long gametime, Point mouseposition){
+		if(player.superpowering(gametime)){
+			superpower.lastcreatsuperpower=gametime; 
+			superpower s=new superpower(); 
+			superpowerlist.add(s); 
+		}
+	}
+	
+	
 	//make bullet move 
 	public void updatebullet(){
 		for(int i=0; i<bulletlist.size(); i++){
@@ -113,6 +126,34 @@ public class game {
 		}
 	}
 	
+	//make superpower move 
+	public void updatesuperpower(){
+		for(int i=0; i<superpowerlist.size(); i++){
+			superpower s = superpowerlist.get(i); 
+			s.update();
+			//check if bullet left screen 
+			if(s.isleft()){
+				superpowerlist.remove(i);
+				continue; 
+			}
+			//check if the bullet hit the enemy; 
+			Rectangle b=new Rectangle((int)s.x, (int)s.y,superpower.superpower.getWidth(), superpower.superpower.getHeight()); 
+			//then use for loop to check enemylist, if there is any enemy got hit or not? 
+			for (int t=0; t<enemylist.size(); t++){
+				enemytank r=enemylist.get(t); 
+				Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
+				
+				if (b.intersects(e)){
+					r.health-=s.superdamage; 
+				}
+			}
+
+			
+		}
+	}
+	
+	
+	
 	//draw the picture onto the screen 
 	public void Draw(Graphics2D g2d, Point mouseposition, long gametime){
 		desertmoving.Draw(g2d);
@@ -132,9 +173,15 @@ public class game {
 			bulletlist.get(i).Draw(g2d);
 		}
 		
+		//draw superpower 
+		for(int i=0; i<superpowerlist.size(); i++){
+			superpowerlist.get(i).Draw(g2d);
+		}
+		
 		g2d.setFont(new Font("what wtahttttttt", Font.BOLD, 18));
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
+		g2d.drawString("superpower: "+player.superpowerfinal, 10, 40);
 		g2d.drawString("Run away: "+runaway, 350, 20);
 		if(player.health<0){
 			player.health=0;
@@ -150,13 +197,14 @@ public class game {
 		//player is alive, the keep update. 
 		if(isplayeralive()){
 			isplayershooting(gametime, mouseposition); 
+			isplayerusingsuperpower(gametime, mouseposition);
 			player.moving();
 			player.update();
 		}
 		
 		//update bullet action
 		updatebullet(); 
-		
+		updatesuperpower(); 
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
