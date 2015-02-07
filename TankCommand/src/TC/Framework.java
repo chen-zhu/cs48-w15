@@ -207,7 +207,7 @@ public class Framework extends drawingpanel{
 				drawmenu(g2d); 
 				g2d.drawImage(title, width/2-title.getWidth()/2, height/4, null); 
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("use a, w, d to moove the tank, and left mouse button to fire bullet, right mouse button to file rockets." , width/2-310,  height/2);
+				g2d.drawString("use a, w, d to moove the tank, and left mouse button to fire bullet, right mouse button to use superpower." , width/2-310,  height/2);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
 				g2d.drawString("press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
 				break; 
