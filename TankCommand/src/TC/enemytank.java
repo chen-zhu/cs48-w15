@@ -87,16 +87,6 @@ public class enemytank {
 			x+=(xmoving); 
 			//y+=xmoving;
 		}
-		//if(i==3){
-			//x+=(xmoving+1); 
-			//y+=xmoving;
-		//}
-/*		if(i==0)
-			y+=xmoving;
-		if(i==4)
-			y-=xmoving;
-		if(i==5)
-			y-=xmoving;    */
 		if(y<40)
 			y=40; 
 		if(y>400)

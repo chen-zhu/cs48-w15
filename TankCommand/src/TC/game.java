@@ -21,6 +21,7 @@ public class game {
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
 	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
+	public ArrayList<enemyground> groundlist=new ArrayList<enemyground>(); 
 	public int runaway; 
 	public int killed; 
 	
@@ -41,6 +42,7 @@ public class game {
 		player=new playertank(Framework.width/10, Framework.height/4); //set the initial position for player tank 
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
 		enemylist=new ArrayList<enemytank>(); 
+		groundlist=new ArrayList<enemyground>(); 
 		superpowerlist=new ArrayList<superpower>(); 
 		
 		
@@ -62,6 +64,8 @@ public class game {
 			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.jpg"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
+			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
+			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
@@ -116,11 +120,17 @@ public class game {
 			for (int t=0; t<enemylist.size(); t++){
 				enemytank r=enemylist.get(t); 
 				Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
-				
 				if (b.intersects(e)){
 					r.health-=bullet.damage; 
 				}
 			}
+			for (int t=0; t<groundlist.size(); t++){
+				enemyground rr=groundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			} 
 
 			
 		}
@@ -142,11 +152,22 @@ public class game {
 			for (int t=0; t<enemylist.size(); t++){
 				enemytank r=enemylist.get(t); 
 				Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
-				
+
 				if (b.intersects(e)){
 					r.health-=s.superdamage; 
 				}
 			}
+			
+			for (int t=0; t<groundlist.size(); t++){
+				enemyground rr=groundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
+
+
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			}
+
 
 			
 		}
@@ -166,6 +187,11 @@ public class game {
 		//draw enemytank 
 		for (int i=0; i<enemylist.size(); i++){
 			enemylist.get(i).Draw(g2d);
+		}
+		
+		//draw enemyground
+		for (int i=0; i<groundlist.size(); i++){
+			groundlist.get(i).Draw(g2d);
 		}
 		
 		//draw arraylist for bullet 
@@ -209,9 +235,44 @@ public class game {
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
-		
+		//update the enemyground 
+		createenemyground(gametime); 
+		updateenemyground();
 	}
 	
+	
+	//create the enemyground when it comes to the right time 
+	public void createenemyground(long gametime){
+		if (gametime-enemyground.lastcreatedground>=enemyground.periodground){
+			enemyground r = new enemyground(); 
+			r.initialize(Framework.width, 400);
+			//System.out.println("1");
+			groundlist.add(r); 
+			//System.out.println("2");
+			enemyground.speedup();
+			enemyground.lastcreatedground=gametime; 
+		}
+	}
+	
+	//update all the ground enemy in the list(making the move and remove from the list if they are not exist 
+	public void updateenemyground(){
+		for (int i=0; i<groundlist.size(); i++){
+			enemyground r = groundlist.get(i); 
+			r.update(); 
+			//check if crashed or not 
+			//Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			//Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight());     <<_--------crashed when touch the playertank? 
+			if(r.health<=0){
+				groundlist.remove(i); 
+				killed+=1;
+				continue; 
+			}
+			if(r.isleft()){
+				groundlist.remove(i); 
+				runaway+=1; }
+			
+		}
+	}
 	
 	//creates the enemy when it comes to the right time 
 	public void createenemytank(long gametime){
@@ -221,6 +282,7 @@ public class game {
 			int x=Framework.width; 
 			int y=random.nextInt(Framework.height-enemytank.enemytankimg.getHeight()-120); 
 			r.initialize(x, y);
+			//System.out.println("1");
 			enemylist.add(r); 
 			enemytank.speedup();
 			//update the last created time!!!
