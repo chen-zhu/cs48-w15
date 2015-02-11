@@ -14,20 +14,20 @@ public class enemyground {
 	public static BufferedImage enemygroundimg; 
 	
 	//health of enemy 
-		public int health; 
+	public int health; 
 		
 		//position of enemy 
-		public int x;
-		public int y;
+	public int x;
+	public int y;
 		
 		//moving speed:
-		public static double xmovinginit=-0.1; 
-		public static double xmoving=xmovinginit; 
+	public static double xmovinginit=-0.1; 
+    public static double xmoving=xmovinginit; 
 	
 	//update speed up 
 	public static void speedup(){
 		if(enemyground.periodgroundinit > Framework.nanosecond){
-			enemyground.periodground-=Framework.nanosecond/10; 
+			enemyground.periodground-=Framework.nanosecond/18; 
 			enemyground.xmoving-=0.1; 
 		}
 		
@@ -45,8 +45,7 @@ public class enemyground {
 		health = 40; 
 		this.x=x; 
 		this.y=400; 
-		
-		//this.xmoving=-1; 
+		this.xmoving=-1; 
 	}
 
 	
@@ -56,12 +55,11 @@ public class enemyground {
 		/*if (x<300){
 			xmoving=0.1; 
 		}
-		
 		if (x>Framework.width){     ----------------------> bug!!! tank wont go back. 
 			xmoving=-0.1; 
 		} */
 
-		x+=(xmoving);
+		x+=xmoving;
 
 	}
 	

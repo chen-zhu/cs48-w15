@@ -69,8 +69,8 @@ public class Framework extends drawingpanel{
 	private void restartgame(){
 		gametime = 0; 
 		lasttime=System.nanoTime();
-		//game.restartgame(); <--------------------------------------------------------
-		gamestate=GameState.playing; 
+		game.restartgame(); //<--------------------------------------------------------
+		gamestate=GameState.playing; //changing the state of the game 
 	}
 	
 	
@@ -181,7 +181,7 @@ public class Framework extends drawingpanel{
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
 		g2d.drawImage(cloud, 0, 0, width, height, null); 
-		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
+		g2d.drawImage(menuborder, 0, 0, width, height, null); 
 		g2d.setColor(Color.WHITE);
 		g2d.drawString("UCSB -CS48 -G08", 15, height-10);
 	}
@@ -197,11 +197,11 @@ public class Framework extends drawingpanel{
 				break; 
 			case gameover: 
 				drawmenu(g2d); 
-				g2d.setColor(Color.BLACK);
-				g2d.drawString("press Enter to restart or ESC to exit." , width/2-100, height/4+30);
-				//game.drawstatistic(g2d, gametime); <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
+				g2d.setColor(Color.GRAY);
+				g2d.drawString("press Enter to restart or ESC to exit." , width/2-97, height/4+30);
+				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
-				g2d.drawString("Game over", width/2-90, height/4);
+				g2d.drawString("Game over", width/2-70, height/4);
 				break; 
 			case main_menu: 
 				drawmenu(g2d); 

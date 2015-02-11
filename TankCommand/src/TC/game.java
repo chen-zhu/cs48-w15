@@ -221,6 +221,12 @@ public class game {
 	//update the logic of the game//keep game check the whole logic. 
 	public void updategame(long gametime, Point mouseposition){
 		
+		//restart the game if the player is dead. 
+		if(!isplayeralive()){
+			Framework.gamestate=Framework.gamestate.gameover; 
+			return; //stop the game
+		}
+		
 		//player is alive, the keep update. 
 		if(isplayeralive()){
 			isplayershooting(gametime, mouseposition); 
@@ -331,6 +337,27 @@ public class game {
 		
 	}
 	
+	
+	//set restart game for gameover 
+	public void restartgame(){
+		player.reset(0,350); 
+		enemytank.restartenemy(); 
+		runaway=0; 
+		killed=0; 
+		superpower.lastcreatsuperpower=0; 
+		bullet.lastcreatbullet=0; 
+		enemylist.clear(); 
+		bulletlist.clear(); 
+		superpowerlist.clear(); 
+		groundlist.clear(); 
+	}
+	
+	public void print(Graphics2D g2d, long gametime){
+		g2d.drawString("time: "+gametime, 450, 530/2); 
+		g2d.drawString("you've killed: "+killed+" enemies", 450, 530/2+50); 
+		g2d.drawString("run away: "+runaway, 450, 530/2+100); 
+		
+	}
 	
 	
 
