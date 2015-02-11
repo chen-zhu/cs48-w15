@@ -207,7 +207,7 @@ public class game {
 		g2d.setFont(new Font("what wtahttttttt", Font.BOLD, 18));
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
-		g2d.drawString("superpower: "+player.superpowerfinal, 10, 40);
+		g2d.drawString("Rocket: "+player.superpowerfinal, 10, 40);
 		g2d.drawString("Run away: "+runaway, 350, 20);
 		g2d.drawString("bullet period: "+bullet.bulletperiod/1000000000+"s", 350, 40);
 		if(player.health<0){
