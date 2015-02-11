@@ -15,7 +15,7 @@ public class game {
 	public BufferedImage desert; 
 	public background cloudmoving; 
 	public background desertmoving; 
-	public Random random; 
+	private Random random= new Random(); 
 	public Robot robot; 
 	public playertank player; 
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
