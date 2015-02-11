@@ -74,7 +74,7 @@ public class enemyground {
 	
 	//override the method Draw in the superclass//for the enemy on the ground, the y coordinate doesnt change. 
 	public void Draw(Graphics2D g2d){
-		g2d.drawImage(enemygroundimg, x, 384, null); 
+		g2d.drawImage(enemygroundimg, x, 389, null); 
 	}
 
 
