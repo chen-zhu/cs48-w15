@@ -198,7 +198,7 @@ public class Framework extends drawingpanel{
 			case gameover: 
 				drawmenu(g2d); 
 				g2d.setColor(Color.GRAY);
-				g2d.drawString("press Enter to restart or ESC to exit." , width/2-97, height/4+30);
+				g2d.drawString("Press Enter to restart or ESC to exit." , width/2-97, height/4+30);
 				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-70, height/4);
@@ -207,9 +207,9 @@ public class Framework extends drawingpanel{
 				drawmenu(g2d); 
 				g2d.drawImage(title, width/2-title.getWidth()/2, height/4, null); 
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("use a, w, d to moove the tank, and left mouse button to fire bullet, right mouse button to use superpower." , width/2-310,  height/2);
+				g2d.drawString("Use A, W, D to move the tank. Press left mouse button to fire bullet and right mouse button to use superpower." , width/2-310,  height/2);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
-				g2d.drawString("press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
+				g2d.drawString("Press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
 				break; 
 			case options:
 				//......
