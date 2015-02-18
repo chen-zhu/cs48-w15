@@ -16,6 +16,9 @@ import javax.swing.JPanel;
 
 public class Framework extends drawingpanel{
 	
+	//pause time 
+	public long pause=10000; 
+	
 	public static int width; 
 	public static int height; 
 	//nanoseconds; 
@@ -29,7 +32,7 @@ public class Framework extends drawingpanel{
 	//period during two updates:
 	private long period = nanosecond/fps; 
 	
-	public static enum GameState{starting, gameloading, main_menu, options, playing, gameover, destroyed, visualizing} 
+	public static enum GameState{starting, gameloading, main_menu, options, playing, gameover, destroyed, visualizing, pause} 
 	
 	//current state of game:
 	public static GameState gamestate; 
@@ -76,6 +79,7 @@ public class Framework extends drawingpanel{
 		add(b); 
 		//--------------------------------------------------------test */
 	}
+	
 	
 	//restart a new game 
 	private void restartgame(){
@@ -212,11 +216,12 @@ public class Framework extends drawingpanel{
 				c.setVisible(false); 
 				d.setVisible(false); 
 				e.setVisible(false);
+				f.setVisible(true);
 				break; 
 			case gameover: 
 				drawmenu(g2d); 
 				g2d.setColor(Color.GRAY);
-				g2d.drawString("Press Enter to restart or ESC to exit." , width/2-97, height/4+30);
+				g2d.drawString("press Enter to restart or ESC to exit." , width/2-97, height/4+30);
 				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-70, height/4);
@@ -224,26 +229,31 @@ public class Framework extends drawingpanel{
 				c.setVisible(false); 
 				d.setVisible(false); 
 				e.setVisible(true);
+				f.setVisible(false);
 
 				break; 
 			case main_menu: 
 				drawmenu(g2d); 
 				g2d.drawImage(title, width/2-title.getWidth()/2, height/4, null); 
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("Use A, W, D to move the tank. Press left mouse button to fire bullet and right mouse button to use superpower." , width/2-310,  height/2);
+				g2d.drawString("use a, w, d to moove the tank, and left mouse button to fire bullet, right mouse button to use superpower." , width/2-310,  height/2);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
-<<<<<<< HEAD
 				g2d.drawString("press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
 				b.setVisible(true);
 				c.setVisible(true); 
 				e.setVisible(false);
 
-=======
-				g2d.drawString("Press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
->>>>>>> FETCH_HEAD
 				break; 
 			case options:
 				//......
+				break; 
+			case pause: 
+			/*try {
+				Thread.sleep(pause);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
 				break; 
 			case gameloading: 
 				g2d.drawImage(black, 0, 0,null); 
@@ -296,7 +306,7 @@ public class Framework extends drawingpanel{
 	public Framework(){
 		super();  
 		//construct new thread. runing the thread on the same time. 
-		Thread gameThread = new Thread(){
+		final Thread gameThread = new Thread(){
 			@Override 
 			public void run(){
 				loop(); 
@@ -327,16 +337,29 @@ public class Framework extends drawingpanel{
 				newgame(); 
 			}
 		});
+		
+		//pause menu 
+		f=new JButton("    Pause!    "); 
+		f.setFocusable(false);
+		f.setVisible(false);
+		add(f); 
+		f.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				try {
+					//game.threadForInitGame.sleep(pause);
+					Thread.sleep(pause);
+					//stop the enemy speed 
+				
+					//gameThread.sleep(pause); 
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}
+		});
 	}
 	
-	/*
-	public void actionPerformed(ActionEvent e){
-		if("start".equals(e.getActionCommand())){
-			gamestate=GameState.starting; 
-		}
-	}
-	
-	*/
+
 	
 	
 	

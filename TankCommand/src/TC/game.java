@@ -25,6 +25,8 @@ public class game {
 	public int runaway; 
 	public int killed; 
 	
+	static Thread threadForInitGame;
+	
 	
 	//set down everything for the game
 	private void initialize(){
@@ -322,10 +324,9 @@ public class game {
 		}
 	}
 	
-	
 	public game(){
 		Framework.gamestate=Framework.GameState.gameloading; 
-		Thread threadForInitGame=new Thread(){
+	    Thread threadForInitGame=new Thread(){
 			@Override 
 			public void run(){
 				initialize(); 
@@ -334,7 +335,7 @@ public class game {
 			}
 		};
 		threadForInitGame.start(); 
-		
+		//System.out.println("thread"); 
 	}
 	
 	
