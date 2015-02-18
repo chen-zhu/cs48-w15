@@ -8,10 +8,14 @@ import java.net.URL;
 import java.util.logging.*; 
 
 import javax.imageio.ImageIO; 
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 //the main class that provide the function for the whole game. 
 
 public class Framework extends drawingpanel{
+	
 	public static int width; 
 	public static int height; 
 	//nanoseconds; 
@@ -34,8 +38,10 @@ public class Framework extends drawingpanel{
 	public long gametime; 
 	public long lasttime; 
 	
-	private game game; 
+	public game game; 
 	private Font font; 
+	
+	private JButton b,c,d,e,f; 
 	
 	//Image for starting menu. 
 	private BufferedImage b1; 
@@ -63,6 +69,12 @@ public class Framework extends drawingpanel{
 		gametime = 0; 
 		lasttime=System.nanoTime();
 		game = new game(); 
+		/*//--------------------------------------------------------test 
+		b=new JButton("whatttever?"); 
+		b.setVerticalTextPosition(AbstractButton.CENTER); 
+		b.setHorizontalTextPosition(AbstractButton.CENTER);
+		add(b); 
+		//--------------------------------------------------------test */
 	}
 	
 	//restart a new game 
@@ -133,6 +145,7 @@ public class Framework extends drawingpanel{
 			case options: 
 				break; 
 			case gameloading: 
+				//b.setVisible(false);
 				break; 
 			case starting:
 				initialize(); 
@@ -191,9 +204,14 @@ public class Framework extends drawingpanel{
 	//draw onto the screen. 
 	@Override
 	public void Draw(Graphics2D g2d){
+		
 		switch (gamestate){
 			case playing: 
 				game.Draw(g2d, mouseposition(), gametime); 
+				b.setVisible(false); 
+				c.setVisible(false); 
+				d.setVisible(false); 
+				e.setVisible(false);
 				break; 
 			case gameover: 
 				drawmenu(g2d); 
@@ -202,6 +220,11 @@ public class Framework extends drawingpanel{
 				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-70, height/4);
+				b.setVisible(false); 
+				c.setVisible(false); 
+				d.setVisible(false); 
+				e.setVisible(true);
+
 				break; 
 			case main_menu: 
 				drawmenu(g2d); 
@@ -210,6 +233,10 @@ public class Framework extends drawingpanel{
 				g2d.drawString("use a, w, d to moove the tank, and left mouse button to fire bullet, right mouse button to use superpower." , width/2-310,  height/2);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
 				g2d.drawString("press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
+				b.setVisible(true);
+				c.setVisible(true); 
+				e.setVisible(false);
+
 				break; 
 			case options:
 				//......
@@ -219,7 +246,12 @@ public class Framework extends drawingpanel{
 				g2d.setColor(Color.white); 
 				g2d.setFont(new Font("what wtahttttttt", Font.ITALIC, 20));
 				g2d.drawString("Game is Loading!", 800/2, 530/2); 
+				b.setVisible(false); 
+				c.setVisible(false); 
+				d.setVisible(false); 
+				e.setVisible(false);
 				break; 
+				
 				
 				//case select:              //adding control for level selecting. 
 				//g2d.drawImage(select_level, 0, 0 , null); //loadcontent for level select. 
@@ -258,9 +290,7 @@ public class Framework extends drawingpanel{
 	
 	
 	public Framework(){
-		super(); 
-		gamestate = GameState.visualizing; 
-		
+		super();  
 		//construct new thread. runing the thread on the same time. 
 		Thread gameThread = new Thread(){
 			@Override 
@@ -268,10 +298,41 @@ public class Framework extends drawingpanel{
 				loop(); 
 			}}; 
 			gameThread.start(); 
+
+		gamestate = GameState.visualizing; 
+		b=new JButton("       Start       "); 
+		b.setFocusable(false);
+		add(b);
+		b.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				newgame(); 
+			}
+		});
+		c=new JButton("     High Score     "); 
+		b.setFocusable(false);
+		add(c);  
+		d=new JButton("   Music Control   "); 
+		b.setFocusable(false);
+		add(d); 
+		e=new JButton("    Restart    "); 
+		e.setFocusable(false);
+		e.setVisible(false);
+		add(e); 
+		e.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				newgame(); 
+			}
+		});
 	}
 	
+	/*
+	public void actionPerformed(ActionEvent e){
+		if("start".equals(e.getActionCommand())){
+			gamestate=GameState.starting; 
+		}
+	}
 	
-	
+	*/
 	
 	
 	

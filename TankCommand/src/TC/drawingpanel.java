@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*; 
 import java.awt.image.*; 
 
+import javax.swing.JButton;
 import javax.swing.JPanel; 
 
 //it is JPanel, we can draw on it and put it inside the window. //add keylistener. 
@@ -11,17 +12,20 @@ import javax.swing.JPanel;
 public abstract class drawingpanel extends JPanel implements KeyListener, MouseListener {
 	private static boolean[] keystate=new boolean[525]; //record the state of keys
 	private static boolean[] mousestate=new boolean[3];
+	JButton b = new JButton(); 
+	
 	public drawingpanel(){
 		//using double buffer to draw on screen 
+		//this.setLayout(null); 
 		this.setDoubleBuffered(true);
 		this.setFocusable(true); 
 		this.setBackground(Color.black); 
-		//remove the mouse cursor 
+		/*//remove the mouse cursor 
 		if(true){
 			BufferedImage blankCursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB); 
 			Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(blankCursorImg, new Point(0, 0), null); 
 			this.setCursor(blankCursor);
-		}
+		}*/
 		this.addKeyListener(this); 
 		this.addMouseListener(this); 
 	}
