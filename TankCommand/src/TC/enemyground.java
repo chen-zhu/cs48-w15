@@ -9,6 +9,7 @@ public class enemyground {
 	public static long periodgroundinit=8*Framework.nanosecond; 
 	public static long periodground=periodgroundinit; 
 	public static long lastcreatedground=0; 
+	private Random random= new Random(); 
 	
 	//img for enemyground.java
 	public static BufferedImage enemygroundimg; 
@@ -19,6 +20,7 @@ public class enemyground {
 		//position of enemy 
 	public int x;
 	public int y;
+	private int tmp=random.nextInt(300)+600; 
 		
 		//moving speed:
 	public static double xmovinginit=-0.1; 
@@ -46,6 +48,7 @@ public class enemyground {
 		this.x=x; 
 		this.y=400; 
 		this.xmoving=-1; 
+		//this.tmp=random.nextInt(200)+700; 
 	}
 
 	
@@ -68,6 +71,15 @@ public class enemyground {
 		if(x<0 - enemygroundimg.getWidth())
 			return true; 
 		else
+			return false; 
+	}
+	
+	//check it the enemy is shooting or not. 
+	public boolean shooting(int r){
+		if(x==tmp){
+			return true; 
+		}
+		else 
 			return false; 
 	}
 

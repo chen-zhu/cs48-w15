@@ -18,8 +18,8 @@ public class enemytank {
 	public static long lastcreatedenemy=0; 
 	
 	//construct a random function for flying 
-	public Random random;  
-	
+	public Random random= new Random();  
+	private int tmp=random.nextInt(300)+600 ;
 	//health of enemy 
 	public int health; 
 	
@@ -67,7 +67,15 @@ public class enemytank {
 			return false; 
 	}
 	
-	
+	//check if the plane is shooting or not
+	public boolean shooting(int r){
+		if(x==tmp){
+			return true; 
+		}
+		else 
+			return false; 
+	}
+
 	
 	//make enemytank move 
 	public void update(){

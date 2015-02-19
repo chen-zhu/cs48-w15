@@ -24,8 +24,10 @@ public class game {
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
 	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
 	public ArrayList<enemyground> groundlist=new ArrayList<enemyground>(); 
+	public ArrayList<enemybullet> enemybulletlist=new ArrayList<enemybullet>(); //the arraylist for bullet given by enemy 
 	public int runaway; 
 	public int killed; 
+	//public int r = random.nextInt(400)+500; 
 	AudioClip explode, attack, rocket, crash; 
 	
 	static Thread threadForInitGame;
@@ -49,7 +51,7 @@ public class game {
 		enemylist=new ArrayList<enemytank>(); 
 		groundlist=new ArrayList<enemyground>(); 
 		superpowerlist=new ArrayList<superpower>(); 
-		
+		enemybulletlist=new ArrayList<enemybullet>();
 		
 		runaway=0; 
 		killed=0; 
@@ -77,6 +79,8 @@ public class game {
 			desert=ImageIO.read(dURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
+			URL enemybulletURL=this.getClass().getResource("/TC/resources/images/enemybullet.png"); 
+			enemybullet.enemybullet=ImageIO.read(enemybulletURL);     //read image for enemybullet
 			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
 			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.jpg"); 
@@ -114,6 +118,26 @@ public class game {
 			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
 			bulletlist.add(bullet);
 			 
+		}
+	}
+	
+	//check if the enemy is shooting 
+	public void isgroundenemyshooting(){
+		for (int i =0; i<groundlist.size(); i++){
+			if(groundlist.get(i).shooting(random.nextInt(400)+500)){
+				enemybullet enb=new enemybullet(groundlist.get(i).x, groundlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	//check if the plane is shooting 
+	public void isenemyshooting(){
+		for (int i =0; i<enemylist.size(); i++){
+			if(enemylist.get(i).shooting(random.nextInt(400)+500)){
+				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
 		}
 	}
 	
@@ -158,7 +182,30 @@ public class game {
 			
 		}
 	}
-	
+
+	//make enemybullet move
+	public void updateenemybullet(){
+		for(int i=0; i<enemybulletlist.size(); i++){
+			enemybullet enemybullet = enemybulletlist.get(i); 
+			enemybullet.update();
+			//check if bullet left screen 
+			if(enemybullet.isleft()){
+				enemybulletlist.remove(i);
+				continue; 
+			}
+			//check if the bullet hit the enemy; 
+			Rectangle b=new Rectangle((int)enemybullet.x, (int)enemybullet.y,enemybullet.enemybullet.getWidth(), enemybullet.enemybullet.getHeight()); 
+			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			if(p.intersects(b)){
+				crash.play();
+				player.health-=enemybullet.damage; 
+				enemybulletlist.remove(i);    //<============================================================Doing collision. 
+			}
+		} 
+
+			
+	}
+
 	//make superpower move 
 	public void updatesuperpower(){
 		for(int i=0; i<superpowerlist.size(); i++){
@@ -196,8 +243,6 @@ public class game {
 		}
 	}
 	
-	
-	
 	//draw the picture onto the screen 
 	public void Draw(Graphics2D g2d, Point mouseposition, long gametime){
 		desertmoving.Draw(g2d);
@@ -220,6 +265,11 @@ public class game {
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);
+		}
+		
+		//draw arraylist for enemybullet 
+		for(int i=0; i<enemybulletlist.size(); i++){
+			enemybulletlist.get(i).Draw(g2d);
 		}
 		
 		//draw superpower 
@@ -258,9 +308,13 @@ public class game {
 			player.update();
 		}
 		
+		//go through all the groundenemy 
+		isgroundenemyshooting();
+		isenemyshooting(); 
 		//update bullet action
 		updatebullet(); 
 		updatesuperpower(); 
+		updateenemybullet();
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
@@ -375,6 +429,7 @@ public class game {
 		bullet.lastcreatbullet=0; 
 		enemylist.clear(); 
 		bulletlist.clear(); 
+		enemybulletlist.clear(); 
 		superpowerlist.clear(); 
 		groundlist.clear(); 
 	}
@@ -385,7 +440,6 @@ public class game {
 		g2d.drawString("run away: "+runaway, 450, 530/2+70); 
 		
 	}
-	
 	
 
 }

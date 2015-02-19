@@ -302,6 +302,7 @@ public class Framework extends drawingpanel{
 		case gameover: 
 			if(e.getKeyCode() == KeyEvent.VK_ENTER)
 				restartgame(); 
+			    clip.loop(); 
 			break; 
 		case main_menu: 
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) //delete? //press enter key to start game!!!!!!!!!!!!
