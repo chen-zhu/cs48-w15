@@ -31,7 +31,7 @@ public class playertank {
 
 	
 	//image for tank 
-	public BufferedImage tank; 
+	public BufferedImage tank, healthbar, healthbar1; 
 	
 	//initialize the position of bullet 
 	public int xgunontank;
@@ -70,7 +70,11 @@ public class playertank {
 	public void loadimage(){
 		try {
 			URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png"); 
-			tank=ImageIO.read(tankurl); 
+			tank=ImageIO.read(tankurl);
+			tankurl=this.getClass().getResource("/TC/resources/images/healthbar.png"); 
+			healthbar=ImageIO.read(tankurl);
+			tankurl=this.getClass().getResource("/TC/resources/images/healthbar2.png"); 
+			healthbar1=ImageIO.read(tankurl);
 		}catch(IOException ex){
 			//do something. 
 		}    //no set up for animination 
@@ -171,7 +175,9 @@ public class playertank {
 	//draw the tank in jpanel 
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(tank, (int)x, (int)y, null); 
-		
+        int h = healthbar.getHeight();
+        g2d.drawImage(healthbar1, x+27, y+6, (healthbar.getWidth()/4)/100*106, h/4*2, null); 
+		g2d.drawImage(healthbar, x+30, y+10, (healthbar.getWidth()/4)/100*health, h/4, null); 
 	}
 	
 	
