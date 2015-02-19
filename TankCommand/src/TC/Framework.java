@@ -105,7 +105,7 @@ public class Framework extends drawingpanel{
 	
 	private void load(){
 		try {
-			URL music=this.getClass().getResource("/TC/resources/images/firework.wav"); 
+			URL music=this.getClass().getResource("/TC/resources/sound/firework.wav");
 			clip = Applet.newAudioClip(music);      //----------------------------------->>background music 
 			//clip.loop(); 
 		
