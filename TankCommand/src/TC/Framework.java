@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.applet.Applet;
+import java.applet.AudioClip;
 
 //the main class that provide the function for the whole game. 
 
@@ -52,6 +54,9 @@ public class Framework extends drawingpanel{
 	private BufferedImage menuborder; 
 	private BufferedImage cloud; 
 	private BufferedImage black; 	
+	
+	//background music 
+	static AudioClip clip; 
 	
 	//update, showing the position of mouse
 	private Point mouseposition(){
@@ -100,6 +105,10 @@ public class Framework extends drawingpanel{
 	
 	private void load(){
 		try {
+			URL music=this.getClass().getResource("/TC/resources/images/firework.wav"); 
+			clip = Applet.newAudioClip(music);      //----------------------------------->>background music 
+			//clip.loop(); 
+		
 			URL burl=this.getClass().getResource("/TC/resources/images/desert.png");
 			b1 = ImageIO.read(burl); 
 			
@@ -174,6 +183,7 @@ public class Framework extends drawingpanel{
 			}
 			
 			//update 
+			//check pause status here...???pause before repaint ...-----------------------------------------<<<<<<<<<<<<<<<
 			repaint(); 
 			
 			//calc how long should we put thread into sleep to satisfy fps; 
@@ -230,7 +240,7 @@ public class Framework extends drawingpanel{
 				d.setVisible(false); 
 				e.setVisible(true);
 				f.setVisible(false);
-
+				
 				break; 
 			case main_menu: 
 				drawmenu(g2d); 
@@ -242,6 +252,7 @@ public class Framework extends drawingpanel{
 				b.setVisible(true);
 				c.setVisible(true); 
 				e.setVisible(false);
+				
 
 				break; 
 			case options:
@@ -312,6 +323,7 @@ public class Framework extends drawingpanel{
 				loop(); 
 			}}; 
 			gameThread.start(); 
+			
 
 		gamestate = GameState.visualizing; 
 		b=new JButton("       Start       "); 
@@ -346,17 +358,19 @@ public class Framework extends drawingpanel{
 		f.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
-					//game.threadForInitGame.sleep(pause);
+					game.threadForInitGame.sleep(pause);
 					Thread.sleep(pause);
 					//stop the enemy speed 
 				
-					//gameThread.sleep(pause); 
+					gameThread.sleep(pause); 
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} 
 			}
 		});
+		
+		
 	}
 	
 

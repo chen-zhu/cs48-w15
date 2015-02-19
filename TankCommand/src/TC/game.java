@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.logging.*; 
 
 import javax.imageio.*; 
+import java.applet.Applet;
+import java.applet.AudioClip;
 
 public class game {
 	public BufferedImage cloud; 
@@ -24,6 +26,7 @@ public class game {
 	public ArrayList<enemyground> groundlist=new ArrayList<enemyground>(); 
 	public int runaway; 
 	public int killed; 
+	AudioClip explode, attack, rocket; 
 	
 	static Thread threadForInitGame;
 	
@@ -50,12 +53,22 @@ public class game {
 		
 		runaway=0; 
 		killed=0; 
+		Framework.clip.loop();
 		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
 	}
 	
 	//Assign images to variables. 
 	private void load(){
 		try {
+			//music
+			URL musicURL=this.getClass().getResource("/TC/resources/images/explode.wav");
+			explode=Applet.newAudioClip(musicURL);
+			URL music1URL=this.getClass().getResource("/TC/resources/images/tank.wav");
+			attack=Applet.newAudioClip(music1URL);
+			music1URL=this.getClass().getResource("/TC/resources/images/rocket.wav");
+			rocket=Applet.newAudioClip(music1URL);
+			
+			//pics
 			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
 			cloud=ImageIO.read(cURL);
 			URL dURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
@@ -82,23 +95,29 @@ public class game {
 	//check if the player is alive; 
 	public boolean isplayeralive(){
 		if (player.health<=0){
+			Framework.clip.stop(); 
+			explode.play(); 
 			return false; 
 		}
 		else 
+			//attack.play();
 			return true; 
 	}
 	
 	//check if the player is shooting; 
 	public void isplayershooting(long gametime, Point mouseposition){
 		if(player.shooting(gametime)){
+			attack.play();
 			bullet.lastcreatbullet=gametime; 
 			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
-			bulletlist.add(bullet); 
+			bulletlist.add(bullet);
+			 
 		}
 	}
 	
 	public void isplayerusingsuperpower(long gametime, Point mouseposition){
 		if(player.superpowering(gametime)){
+			rocket.play(); 
 			superpower.lastcreatsuperpower=gametime; 
 			superpower s=new superpower(); 
 			superpowerlist.add(s); 
@@ -271,6 +290,8 @@ public class game {
 			//Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
 			//Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight());     <<_--------crashed when touch the playertank? 
 			if(r.health<=0){
+				//attack.play();
+				explode.play(); 
 				groundlist.remove(i); 
 				killed+=1;
 				continue; 
@@ -312,6 +333,7 @@ public class game {
 				enemylist.remove(i);    //<============================================================Doing collision. 
 			}
 			if(r.health<=0){
+				explode.play(); 
 				enemylist.remove(i); 
 				killed+=1;
 				continue; 
