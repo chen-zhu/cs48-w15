@@ -26,7 +26,7 @@ public class game {
 	public ArrayList<enemyground> groundlist=new ArrayList<enemyground>(); 
 	public int runaway; 
 	public int killed; 
-	AudioClip explode, attack, rocket; 
+	AudioClip explode, attack, rocket, crash; 
 	
 	static Thread threadForInitGame;
 	
@@ -67,6 +67,8 @@ public class game {
 			attack=Applet.newAudioClip(music1URL);
 			music1URL=this.getClass().getResource("/TC/resources/images/rocket.wav");
 			rocket=Applet.newAudioClip(music1URL);
+			music1URL=this.getClass().getResource("/TC/resources/images/crash.wav");
+			crash=Applet.newAudioClip(music1URL);
 			
 			//pics
 			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
@@ -329,6 +331,7 @@ public class game {
 			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
 			if(p.intersects(e)){
+				crash.play();
 				player.health-=30; 
 				enemylist.remove(i);    //<============================================================Doing collision. 
 			}
@@ -363,8 +366,9 @@ public class game {
 	
 	//set restart game for gameover 
 	public void restartgame(){
-		player.reset(0,350); 
-		enemytank.restartenemy(); 
+		player.reset(0,450); 
+		enemytank.restartenemy();
+		enemyground.restartenemyground();
 		runaway=0; 
 		killed=0; 
 		superpower.lastcreatsuperpower=0; 
