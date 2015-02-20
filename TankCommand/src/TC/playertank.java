@@ -71,7 +71,7 @@ public class playertank {
 		try {
 			URL tankurl=this.getClass().getResource("/TC/resources/images/tank.png"); 
 			tank=ImageIO.read(tankurl);
-			tankurl=this.getClass().getResource("/TC/resources/images/healthbar.png"); 
+			tankurl=this.getClass().getResource("/TC/resources/images/healthbar5.jpg"); 
 			healthbar=ImageIO.read(tankurl);
 			tankurl=this.getClass().getResource("/TC/resources/images/healthbar2.png"); 
 			healthbar1=ImageIO.read(tankurl);
@@ -175,9 +175,11 @@ public class playertank {
 	//draw the tank in jpanel 
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(tank, (int)x, (int)y, null); 
-        int h = healthbar.getHeight();
-        g2d.drawImage(healthbar1, x+27, y+6, (healthbar.getWidth()/4)/100*106, h/4*2, null); 
-		g2d.drawImage(healthbar, x+30, y+10, (healthbar.getWidth()/4)/100*health, h/4, null); 
+        int h = healthbar1.getHeight();
+        int w = healthbar1.getWidth();
+        //System.out.println(w);
+        g2d.drawImage(healthbar1, x+27, y+6, (w/4)/100*106, h/4, null); 
+		g2d.drawImage(healthbar,x+30, y+10, (w/4)/100*health + 1, h/6 - 1, null); 
 	}
 	
 	
