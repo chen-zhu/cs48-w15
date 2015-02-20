@@ -342,9 +342,13 @@ public class game {
 		for (int i=0; i<groundlist.size(); i++){
 			enemyground r = groundlist.get(i); 
 			r.update(); 
-			//check if crashed or not 
-			//Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
-			//Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight());     <<_--------crashed when touch the playertank? 
+			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			Rectangle e=new Rectangle(r.x, r.y,r.enemygroundimg.getWidth(), r.enemygroundimg.getHeight()); 
+			if(p.intersects(e)){
+				crash.play();
+				player.health-=30; 
+				groundlist.remove(i);   
+			}
 			if(r.health<=0){
 				//attack.play();
 				explode.play(); 
