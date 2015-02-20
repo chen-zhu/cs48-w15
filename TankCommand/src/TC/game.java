@@ -63,13 +63,13 @@ public class game {
 	private void load(){
 		try {
 			//music
-			URL musicURL=this.getClass().getResource("/TC/resources/images/explode.wav");
+			URL musicURL=this.getClass().getResource("/TC/resources/sound/explode.wav");
 			explode=Applet.newAudioClip(musicURL);
-			URL music1URL=this.getClass().getResource("/TC/resources/images/tank.wav");
+			URL music1URL=this.getClass().getResource("/TC/resources/sound/tank.wav");
 			attack=Applet.newAudioClip(music1URL);
-			music1URL=this.getClass().getResource("/TC/resources/images/rocket.wav");
+			music1URL=this.getClass().getResource("/TC/resources/sound/rocket.wav");
 			rocket=Applet.newAudioClip(music1URL);
-			music1URL=this.getClass().getResource("/TC/resources/images/crash.wav");
+			music1URL=this.getClass().getResource("/TC/resources/sound/crash.wav");
 			crash=Applet.newAudioClip(music1URL);
 			
 			//pics
