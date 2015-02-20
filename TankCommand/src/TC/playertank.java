@@ -175,11 +175,11 @@ public class playertank {
 	//draw the tank in jpanel 
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(tank, (int)x, (int)y, null); 
-        int h = healthbar1.getHeight();
-        int w = healthbar1.getWidth();
+        int h = healthbar.getHeight();
+        int w = healthbar.getWidth();
         //System.out.println(w);
-        g2d.drawImage(healthbar1, x+27, y+6, (w/4)/100*106, h/4, null); 
-		g2d.drawImage(healthbar,x+30, y+10, (w/4)/100*health + 1, h/6 - 1, null); 
+        g2d.drawImage(healthbar1, x+27, y+15, (w/4)/100*106, h/3, null); 
+		g2d.drawImage(healthbar,x+30, y+18, (w/4)/100*health + 1, h/5 - 1, null); 
 	}
 	
 	
