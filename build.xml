@@ -1,0 +1,28 @@
+<project default="compile">
+
+  <!-- build.xml for Tank Command
+       name: @@@ Group 08 @@@ -->
+
+  <target name="compile" description="compile my code">
+    <javac srcdir="TankCommand/src" destdir="TankCommand/bin" debug="true" debuglevel="lines,source" includeantruntime="false">
+	<classpath>
+		<pathelement location="TankCommand/bin"/>
+	</classpath>
+    </javac>
+  </target>
+
+  <target name="run" depends="compile" description="run TankCommand">
+    <java classname="TC.Window" classpath="TankCommand/bin" />
+  </target>
+
+  <target name="clean" description="delete unnecessary files and directories">
+    <delete dir="TankCommand/bin" quiet="true" />
+  </target>
+
+  <target name="copy" description="copy files">
+    <copy todir="TankCommand/bin/TC/resources" overwrite="true">
+	<fileset dir="TankCommand/src/TC/resources"/>
+    </copy>
+  </target> 
+
+</project>
