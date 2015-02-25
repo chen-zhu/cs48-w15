@@ -197,7 +197,7 @@ public class game {
 			}
 			//check if the bullet hit the enemy; 
 			Rectangle b=new Rectangle((int)enemybullet.x, (int)enemybullet.y,enemybullet.enemybullet.getWidth(), enemybullet.enemybullet.getHeight()); 
-			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			if(p.intersects(b)){
 				crash.play();
 				player.health-=enemybullet.damage; 
@@ -251,6 +251,8 @@ public class game {
 		//draw player 
 		if(isplayeralive())
 			player.Draw(g2d);
+		
+		g2d.drawRect (player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10);//=====>show collision box 
 		
 		//draw enemytank 
 		for (int i=0; i<enemylist.size(); i++){
@@ -356,7 +358,7 @@ public class game {
 		for (int i=0; i<groundlist.size(); i++){
 			enemyground r = groundlist.get(i); 
 			r.update(); 
-			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemygroundimg.getWidth(), r.enemygroundimg.getHeight()); 
 			if(p.intersects(e)){
 				crash.play();
@@ -400,7 +402,7 @@ public class game {
 			r.update(); 
 			//is crashed or not???
 			//enemy die after crashing with player 
-			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
 			if(p.intersects(e)){
 				crash.play();
