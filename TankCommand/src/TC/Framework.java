@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException; 
+import java.io.InterruptedIOException;
 import java.net.URL; 
 import java.util.logging.*; 
 
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 
@@ -19,8 +21,8 @@ import java.applet.AudioClip;
 public class Framework extends drawingpanel{
 	
 	//pause time 
-	public long pause=10000; 
-	
+	public static boolean pause=false; 
+ 
 	public static int width; 
 	public static int height; 
 	//nanoseconds; 
@@ -208,7 +210,7 @@ public class Framework extends drawingpanel{
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
 		g2d.drawImage(cloud, 0, 0, width, height, null); 
-		g2d.drawImage(menuborder, 0, 0, width, height, null); 
+		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
 		g2d.setColor(Color.WHITE);
 		g2d.drawString("UCSB -CS48 -G08", 15, height-10);
 	}
@@ -358,16 +360,12 @@ public class Framework extends drawingpanel{
 		add(f); 
 		f.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				try {
-					game.threadForInitGame.sleep(pause);
-					Thread.sleep(pause);
-					//stop the enemy speed 
-				
-					gameThread.sleep(pause); 
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
+				pause=!pause; 
+				System.out.println(pause); 
+				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
+					game.currThread.interrupt();
+				}
+				System.out.println(game.currThread.getName()+" "+game.currThread.getState());
 			}
 		});
 		

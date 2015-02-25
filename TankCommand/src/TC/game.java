@@ -9,10 +9,12 @@ import java.util.*;
 import java.util.logging.*; 
 
 import javax.imageio.*; 
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 
 public class game {
+	static Thread currThread; 
 	public BufferedImage cloud; 
 	public BufferedImage desert; 
 	public background cloudmoving; 
@@ -195,7 +197,7 @@ public class game {
 			}
 			//check if the bullet hit the enemy; 
 			Rectangle b=new Rectangle((int)enemybullet.x, (int)enemybullet.y,enemybullet.enemybullet.getWidth(), enemybullet.enemybullet.getHeight()); 
-			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
 			if(p.intersects(b)){
 				crash.play();
 				player.health-=enemybullet.damage; 
@@ -231,8 +233,6 @@ public class game {
 			for (int t=0; t<groundlist.size(); t++){
 				enemyground rr=groundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
-
-
 				if (b.intersects(f)){
 					rr.health-=bullet.damage; 
 				}
@@ -292,6 +292,7 @@ public class game {
 	
 	
 	//update the logic of the game//keep game check the whole logic. 
+	@SuppressWarnings("deprecation")
 	public void updategame(long gametime, Point mouseposition){
 		
 		//restart the game if the player is dead. 
@@ -321,6 +322,19 @@ public class game {
 		//update the enemyground 
 		createenemyground(gametime); 
 		updateenemyground();
+		currThread=Thread.currentThread();
+		if(Framework.pause == true){
+		try {
+			Thread.currentThread().sleep(10000);
+			Framework.pause = false; 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} }
+		/*if(Framework.pause == false && Thread.currentThread().getState()==Thread.State.TIMED_WAITING){
+			Thread.currentThread().interrupt();
+		}*/
+		//System.out.println(Thread.currentThread().getName()+" "+Thread.currentThread().getState()); 
 	}
 	
 	
@@ -342,7 +356,7 @@ public class game {
 		for (int i=0; i<groundlist.size(); i++){
 			enemyground r = groundlist.get(i); 
 			r.update(); 
-			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemygroundimg.getWidth(), r.enemygroundimg.getHeight()); 
 			if(p.intersects(e)){
 				crash.play();
@@ -386,7 +400,7 @@ public class game {
 			r.update(); 
 			//is crashed or not???
 			//enemy die after crashing with player 
-			Rectangle p=new Rectangle(player.x, player.y,player.tank.getWidth(), player.tank.getHeight()); 
+			Rectangle p=new Rectangle(player.x, player.y+50,player.tank.getWidth()/2, player.tank.getHeight()/2); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
 			if(p.intersects(e)){
 				crash.play();
