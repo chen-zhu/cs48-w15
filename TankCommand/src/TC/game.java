@@ -48,7 +48,7 @@ public class game {
 		cloudmoving = new background(); 
 		desertmoving = new background(); 
 		
-		player=new playertank(Framework.width/10, Framework.height/4); //set the initial position for player tank 
+		player=new playertank(Framework.width/10); //set the initial position for player tank
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
 		enemylist=new ArrayList<enemytank>(); 
 		groundlist=new ArrayList<enemyground>(); 

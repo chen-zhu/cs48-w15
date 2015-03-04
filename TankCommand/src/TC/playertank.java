@@ -18,7 +18,7 @@ public class playertank {
 	
 	//position of the tank on the screen 
 	public int x=0;
-	public int y=350; //tank is always on the ground?? except jump? 
+	public int y=350; //tank is always on the ground?? except jump?
 	
 	//movingspeed 
 	public double xspeed; 
@@ -46,8 +46,8 @@ public class playertank {
 	public int ygun; 
 	
 	//playertank constructor; 
-	public playertank(int x, int y){
-		this.x=x; 
+	public playertank(int x){
+        this.x = x;
 		loadimage(); 
 		initialize(); 
 	}

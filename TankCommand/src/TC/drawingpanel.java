@@ -77,17 +77,17 @@ public abstract class drawingpanel extends JPanel implements KeyListener, MouseL
 		else if(e.getButton() == MouseEvent.BUTTON3)
 			mousestate[2]=status; 
 	}
-	
+
 	@Override
 	public void mousePressed(MouseEvent e){
 		mouseKeyStatus(e, true); 
 	}
 	
 	@Override
-	public void mouseReleased(MouseEvent e){
-		mouseKeyStatus(e, false); 
-	}
-	
+	public void mouseReleased(MouseEvent e) {
+        mouseKeyStatus(e, false);
+    }
+
 	@Override
 	public void mouseClicked(MouseEvent e){}
 	
