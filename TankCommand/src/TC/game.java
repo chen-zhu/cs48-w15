@@ -85,7 +85,7 @@ public class game {
 			enemybullet.enemybullet=ImageIO.read(enemybulletURL);     //read image for enemybullet
 			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
 			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
-			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.jpg"); 
+			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.png"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
@@ -327,7 +327,7 @@ public class game {
 		currThread=Thread.currentThread();
 		if(Framework.pause == true){
 		try {
-			Thread.currentThread().sleep(10000);
+			Thread.currentThread().sleep(100000);
 			Framework.pause = false; 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

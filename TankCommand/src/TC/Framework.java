@@ -117,8 +117,8 @@ public class Framework extends drawingpanel{
 			URL turl=this.getClass().getResource("/TC/resources/images/title.png");
 			title = ImageIO.read(turl); 
 			
-		/*	URL murl=this.getClass().getResource("/TC/resources/images/menu_border.png");
-			menuborder = ImageIO.read(murl); */
+			URL murl=this.getClass().getResource("/TC/resources/images/menu_border.png");
+			menuborder = ImageIO.read(murl); //--------------------------------------------------------------<<<<<<<<<<<<<
 			
 			URL curl=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png");
 			cloud = ImageIO.read(curl); 
@@ -211,7 +211,8 @@ public class Framework extends drawingpanel{
 		g2d.drawImage(b1, 0, 0, width, height, null); 
 		g2d.drawImage(cloud, 0, 0, width, height, null); 
 		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
-		g2d.setColor(Color.WHITE);
+		g2d.setColor(Color.YELLOW);
+		//g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
 		g2d.drawString("UCSB -CS48 -G08", 15, height-10);
 	}
 	
@@ -246,11 +247,12 @@ public class Framework extends drawingpanel{
 				break; 
 			case main_menu: 
 				drawmenu(g2d); 
-				g2d.drawImage(title, width/2-title.getWidth()/2, height/4, null); 
+				g2d.drawImage(title, width/2-title.getWidth()/2+30, height/4-50, null);
+				g2d.setFont(new Font("whatevereverever", Font.BOLD, 18));
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("Use A, W, D to move the tank. Press left mouse button to fire bullet and right mouse button to use superpower." , width/2-310,  height/2);
-				g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
-				g2d.drawString("Press Enter key to start the game, or ESC to exit.", width/2-250, height/2+30);
+				g2d.drawString("Use A, W, D to move the tank." , width/2-130,  height/2);
+				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket." , width/2-330,  height/2+30);
+				g2d.drawString("Press Enter key to start the game, or ESC to exit.", width/2-210, height/2+60);
 				b.setVisible(true);
 				c.setVisible(true); 
 				e.setVisible(false);
@@ -354,7 +356,7 @@ public class Framework extends drawingpanel{
 		});
 		
 		//pause menu 
-		f=new JButton("    Pause!    "); 
+		f=new JButton("    Pause    "); 
 		f.setFocusable(false);
 		f.setVisible(false);
 		add(f); 
@@ -362,8 +364,10 @@ public class Framework extends drawingpanel{
 			public void actionPerformed(ActionEvent e){
 				pause=!pause; 
 				System.out.println(pause); 
+				f.setText("  Resume  ");
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
+					f.setText("    Pause    ");
 				}
 				System.out.println(game.currThread.getName()+" "+game.currThread.getState());
 			}
