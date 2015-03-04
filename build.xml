@@ -4,6 +4,7 @@
        name: @@@ Group 08 @@@ -->
 
   <target name="compile" description="compile my code">
+    <mkdir dir="TankCommand/bin"/>
     <javac srcdir="TankCommand/src" destdir="TankCommand/bin" debug="true" debuglevel="lines,source" includeantruntime="false">
 	<classpath>
 		<pathelement location="TankCommand/bin"/>

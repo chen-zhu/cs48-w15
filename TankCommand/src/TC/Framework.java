@@ -250,9 +250,9 @@ public class Framework extends drawingpanel{
 				g2d.drawImage(title, width/2-title.getWidth()/2+30, height/4-50, null);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 18));
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("Use A, W, D to move the tank." , width/2-130,  height/2);
-				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket." , width/2-330,  height/2+30);
-				g2d.drawString("Press Enter key to start the game, or ESC to exit.", width/2-210, height/2+60);
+				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 50,  height/2);
+				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 8 + 50, height / 2 + 30);
+				g2d.drawString("Press ESC to exit.", (width/8)*3 + 50, height/2+60);
 				b.setVisible(true);
 				c.setVisible(true); 
 				e.setVisible(false);
@@ -299,22 +299,9 @@ public class Framework extends drawingpanel{
 	@Override
 	public void keyReleasedFramework(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
-			System.exit(0);
-		}
-		switch (gamestate){
-		case gameover: 
-			if(e.getKeyCode() == KeyEvent.VK_ENTER)
-				restartgame(); 
-			    clip.loop(); 
-			break; 
-		case main_menu: 
-			if(e.getKeyCode() == KeyEvent.VK_ENTER) //delete? //press enter key to start game!!!!!!!!!!!!
-			newgame(); 
-			break; 
-		}
-		
-		
+		if (e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+            System.exit(0);
+        }
 	}
 
 	
