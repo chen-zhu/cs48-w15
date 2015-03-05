@@ -48,7 +48,7 @@ public class Framework extends drawingpanel{
 	public game game; 
 	private Font font; 
 	
-	private JButton b,c,d,e,f; 
+	private JButton b,c,d,e,f,re; 
 	
 	//Image for starting menu. 
 	private BufferedImage b1; 
@@ -338,9 +338,24 @@ public class Framework extends drawingpanel{
 		add(e); 
 		e.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				newgame(); 
+				restartgame(); 
 			}
 		});
+		
+		re=new JButton("    Restart!!   "); 
+		re.setFocusable(false); 
+		re.setVisible(false);
+		add(re); 
+		re.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pause=false; 
+				game.currThread.interrupt();
+				f.setText("    Pause    ");
+				re.setVisible(false); 
+				restartgame(); 
+			}
+		});
+		
 		
 		//pause menu 
 		f=new JButton("    Pause    "); 
@@ -352,6 +367,7 @@ public class Framework extends drawingpanel{
 				pause=!pause; 
 				System.out.println(pause); 
 				f.setText("  Resume  ");
+				re.setVisible(pause);
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
 					f.setText("    Pause    ");
