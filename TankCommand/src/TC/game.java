@@ -57,7 +57,8 @@ public class game {
 		
 		runaway=0; 
 		killed=0; 
-		Framework.clip.loop();
+		if(Framework.musicplay){
+		Framework.clip.loop();}
 		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
 	}
 	
@@ -104,7 +105,8 @@ public class game {
 	public boolean isplayeralive(){
 		if (player.health<=0){
 			Framework.clip.stop(); 
-			explode.play(); 
+			if(Framework.musicplay){
+			explode.play(); }
 			return false; 
 		}
 		else 
@@ -115,7 +117,8 @@ public class game {
 	//check if the player is shooting; 
 	public void isplayershooting(long gametime, Point mouseposition){
 		if(player.shooting(gametime)){
-			attack.play();
+			if(Framework.musicplay){
+			attack.play();}
 			bullet.lastcreatbullet=gametime; 
 			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
 			bulletlist.add(bullet);
@@ -140,12 +143,17 @@ public class game {
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
+			if(enemylist.get(i).shooting(random.nextInt(400)+400)){
+				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
 		}
 	}
 	
 	public void isplayerusingsuperpower(long gametime, Point mouseposition){
 		if(player.superpowering(gametime)){
-			rocket.play(); 
+			if(Framework.musicplay){
+			rocket.play(); }
 			superpower.lastcreatsuperpower=gametime; 
 			superpower s=new superpower(); 
 			superpowerlist.add(s); 
@@ -199,7 +207,8 @@ public class game {
 			Rectangle b=new Rectangle((int)enemybullet.x, (int)enemybullet.y,enemybullet.enemybullet.getWidth(), enemybullet.enemybullet.getHeight()); 
 			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			if(p.intersects(b)){
-				crash.play();
+				if(Framework.musicplay){
+				crash.play();}
 				player.health-=enemybullet.damage; 
 				enemybulletlist.remove(i);    //<============================================================Doing collision. 
 			}
@@ -252,7 +261,7 @@ public class game {
 		if(isplayeralive())
 			player.Draw(g2d);
 		
-		g2d.drawRect (player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10);//=====>show collision box 
+		//g2d.drawRect (player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10);//=====>show collision box 
 		
 		//draw enemytank 
 		for (int i=0; i<enemylist.size(); i++){
@@ -361,13 +370,15 @@ public class game {
 			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemygroundimg.getWidth(), r.enemygroundimg.getHeight()); 
 			if(p.intersects(e)){
-				crash.play();
+				if(Framework.musicplay){
+				crash.play();}
 				player.health-=30; 
 				groundlist.remove(i);   
 			}
 			if(r.health<=0){
 				//attack.play();
-				explode.play(); 
+				if(Framework.musicplay){
+				explode.play(); }
 				groundlist.remove(i); 
 				killed+=1;
 				continue; 
@@ -405,12 +416,14 @@ public class game {
 			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemytankimg.getWidth(), r.enemytankimg.getHeight()); 
 			if(p.intersects(e)){
-				crash.play();
+				if(Framework.musicplay){
+				crash.play();}
 				player.health-=30; 
 				enemylist.remove(i);    //<============================================================Doing collision. 
 			}
 			if(r.health<=0){
-				explode.play(); 
+				if(Framework.musicplay){
+				explode.play(); }
 				enemylist.remove(i); 
 				killed+=1;
 				continue; 
@@ -452,14 +465,17 @@ public class game {
 		enemybulletlist.clear(); 
 		superpowerlist.clear(); 
 		groundlist.clear(); 
+		if(Framework.musicplay){
+			Framework.clip.loop();}
 	}
 	
 	public void print(Graphics2D g2d, long gametime){
         g2d.setFont(new Font("Results", Font.BOLD, 18));
-		g2d.drawString("time: "+gametime/1000000000+"s", 450, 530/2-30); 
-		g2d.drawString("you've killed: "+killed+" enemies", 450, 530/2+20); 
-		g2d.drawString("run away: "+runaway, 450, 530/2+70);
-        g2d.drawString("total score: " + (killed - runaway), 450, 530/2 + 120);
+        g2d.setColor(Color.GRAY);
+		g2d.drawString("time: "+gametime/1000000000+"s", 400, 530/2-30); 
+		g2d.drawString("you've killed: "+killed+" enemies", 400, 530/2+20); 
+		g2d.drawString("run away: "+runaway, 400, 530/2+70);
+        g2d.drawString("total score: " + (killed - runaway), 400, 530/2 + 120);
 		
 	}
 	

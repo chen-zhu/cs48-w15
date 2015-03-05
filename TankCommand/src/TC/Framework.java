@@ -22,6 +22,7 @@ public class Framework extends drawingpanel{
 	
 	//pause time 
 	public static boolean pause=false; 
+	public static boolean musicplay=true; 
  
 	public static int width; 
 	public static int height; 
@@ -234,13 +235,13 @@ public class Framework extends drawingpanel{
 			case gameover: 
 				drawmenu(g2d); 
 				g2d.setColor(Color.GRAY);
-				g2d.drawString("Press Enter to restart or ESC to exit." , width/2-97, height/4+30);
+				g2d.drawString("Press  ESC to exit." , width/2-55, height/4-75);
 				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-70, height/4);
 				b.setVisible(false); 
 				c.setVisible(false); 
-				d.setVisible(false); 
+				d.setVisible(true); 
 				e.setVisible(true);
 				f.setVisible(false);
 				
@@ -327,11 +328,24 @@ public class Framework extends drawingpanel{
 			}
 		});
 		c=new JButton("     High Score     "); 
-		b.setFocusable(false);
+		c.setFocusable(false);
 		add(c);  
-		d=new JButton("   Music Control   "); 
-		b.setFocusable(false);
+		
+		
+		d=new JButton("   Music On   "); 
+		d.setFocusable(false);
 		add(d); 
+		d.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				musicplay=!musicplay;
+				if(d.getText()=="   Music On   "){
+				d.setText("   Music Off   "); }
+				else 
+					d.setText("   Music On   ");
+			}
+		});
+		
+		
 		e=new JButton("    Restart    "); 
 		e.setFocusable(false);
 		e.setVisible(false);

@@ -13,7 +13,7 @@ import javax.imageio.*;
 public class playertank {
 	
 	//setup the health of tank. 
-	public int healthinit=100; //initial health. 
+	public int healthinit=101; //initial health. 
 	public int health; 
 	
 	//position of the tank on the screen 
