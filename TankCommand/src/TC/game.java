@@ -22,6 +22,7 @@ public class game {
 	private Random random= new Random(); 
 	public Robot robot; 
 	public playertank player; 
+	public ArrayList<powerup> poweruplist; 
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
 	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
@@ -54,6 +55,7 @@ public class game {
 		groundlist=new ArrayList<enemyground>(); 
 		superpowerlist=new ArrayList<superpower>(); 
 		enemybulletlist=new ArrayList<enemybullet>();
+		poweruplist=new ArrayList<powerup>(); 
 		
 		runaway=0; 
 		killed=0; 
@@ -216,6 +218,33 @@ public class game {
 
 			
 	}
+	
+	//update powerup 
+	public void updatepowerup(long gametime){
+		for (int i = 0; i<poweruplist.size(); i++){
+			powerup po=poweruplist.get(i); 
+			po.update();
+			if(po.isleft()){
+				poweruplist.remove(i); 
+				continue; 
+			}
+			random=new Random(); 
+			Rectangle b=new Rectangle((int)po.x, (int)po.y,powerup.powerupimg.getWidth(), powerup.powerupimg.getHeight()); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
+			if(p.intersects(b)){
+				if(random.nextInt(2)==1){
+					if (player.health+50>=101)
+						{player.health=101;}
+				    else 
+				    	{player.health+=50;}
+				}
+				else 
+					player.superpowerfinal+=1; 
+				poweruplist.remove(i); 
+
+			}
+		}
+	}
 
 	//make superpower move 
 	public void updatesuperpower(){
@@ -268,6 +297,7 @@ public class game {
 			enemylist.get(i).Draw(g2d);
 		}
 		
+		
 		//draw enemyground
 		for (int i=0; i<groundlist.size(); i++){
 			groundlist.get(i).Draw(g2d);
@@ -286,6 +316,11 @@ public class game {
 		//draw superpower 
 		for(int i=0; i<superpowerlist.size(); i++){
 			superpowerlist.get(i).Draw(g2d);
+		}
+		
+		//draw powerups
+		for (int i=0; i<poweruplist.size(); i++){
+			poweruplist.get(i).Draw(g2d);
 		}
 		
 		g2d.setFont(new Font("what wtahttttttt", Font.BOLD, 18));
@@ -330,6 +365,8 @@ public class game {
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
+		//update powerup 
+		updatepowerup(gametime); 
 		//update the enemyground 
 		createenemyground(gametime); 
 		updateenemyground();
@@ -424,6 +461,11 @@ public class game {
 			if(r.health<=0){
 				if(Framework.musicplay){
 				explode.play(); }
+				random = new Random(); 
+				if (random.nextInt(12)==4){ //<==================change the possibility to generate powerup
+					powerup pow=new powerup(r.x, r.y); 
+					poweruplist.add(pow); 
+				}
 				enemylist.remove(i); 
 				killed+=1;
 				continue; 
