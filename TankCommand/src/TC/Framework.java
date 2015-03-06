@@ -225,7 +225,7 @@ public class Framework extends drawingpanel{
 		
 		switch (gamestate){
 			case playing: 
-				game.Draw(g2d, mouseposition(), gametime); 
+				game.Draw(g2d);
 				b.setVisible(false); 
 				c.setVisible(false); 
 				d.setVisible(false); 
@@ -292,10 +292,6 @@ public class Framework extends drawingpanel{
 
 		}
 	}
-	
-
-	
-
 
 	@Override
 	public void keyReleasedFramework(KeyEvent e) {
@@ -305,7 +301,13 @@ public class Framework extends drawingpanel{
         }
 	}
 
-	
+    public void keyTyped(KeyEvent e){}
+
+    public void mouseClicked(MouseEvent e){}
+
+    public void mouseEntered(MouseEvent e){}
+
+    public void mouseExited(MouseEvent e){}
 	
 	public Framework(){
 		super();  
