@@ -508,6 +508,7 @@ public class game {
 		enemybulletlist.clear(); 
 		superpowerlist.clear(); 
 		groundlist.clear(); 
+		poweruplist.clear(); 
 		if(Framework.musicplay){
 			Framework.clip.loop();}
 	}
