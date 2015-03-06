@@ -49,7 +49,7 @@ public class game {
 		cloudmoving = new background(); 
 		desertmoving = new background(); 
 		
-		player=new playertank(Framework.width/10); //set the initial position for player tank
+		player=new playertank(0); //set the initial position for player tank
 		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
 		enemylist=new ArrayList<enemytank>(); 
 		groundlist=new ArrayList<enemyground>(); 
@@ -117,12 +117,12 @@ public class game {
 	}
 	
 	//check if the player is shooting; 
-	public void isplayershooting(long gametime, Point mouseposition){
+	public void isplayershooting(long gametime){
 		if(player.shooting(gametime)){
 			if(Framework.musicplay){
 			attack.play();}
 			bullet.lastcreatbullet=gametime; 
-			bullet bullet=new bullet(player.xgun-120, player.ygun-50, mouseposition); 
+			bullet bullet=new bullet(player.xgun-120, player.ygun-50);
 			bulletlist.add(bullet);
 			 
 		}
@@ -152,7 +152,7 @@ public class game {
 		}
 	}
 	
-	public void isplayerusingsuperpower(long gametime, Point mouseposition){
+	public void isplayerusingsuperpower(long gametime){
 		if(player.superpowering(gametime)){
 			if(Framework.musicplay){
 			rocket.play(); }
@@ -282,7 +282,7 @@ public class game {
 	}
 	
 	//draw the picture onto the screen 
-	public void Draw(Graphics2D g2d, Point mouseposition, long gametime){
+	public void Draw(Graphics2D g2d){
 		desertmoving.Draw(g2d);
 		cloudmoving.Draw(g2d);
 
@@ -349,8 +349,8 @@ public class game {
 		
 		//player is alive, the keep update. 
 		if(isplayeralive()){
-			isplayershooting(gametime, mouseposition); 
-			isplayerusingsuperpower(gametime, mouseposition);
+			isplayershooting(gametime);
+			isplayerusingsuperpower(gametime);
 			player.moving();
 			player.update();
 		}
@@ -495,7 +495,8 @@ public class game {
 	
 	//set restart game for gameover 
 	public void restartgame(){
-		player.reset(0,450); 
+		player.reset(0,350);
+        player.superpowerfinal = 5;
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
 		runaway=0; 

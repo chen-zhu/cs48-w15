@@ -1,11 +1,17 @@
 package TC;
 
 import java.awt.Graphics2D; 
-import java.awt.image.*; 
+import java.awt.image.*;
 
-
+/**
+ * Side-scrolling background class that makes it
+ * look like the player is progressing through the map.
+ *
+ * @author UCSB-CS48-W15-G08
+ * @version 3/5/15
+ */
 public class background {
-	
+	//Background image
 	public BufferedImage background; 
 	
 	//speed of rolling 
@@ -13,10 +19,15 @@ public class background {
 	
 	//position 
 	public double x[]; 
-	public int y; 
-	
-	//initialize the content 
-	
+	public int y;
+
+    /**
+     * Initialize the background's components
+     *
+     * @param i background image
+     * @param a speed the background will be side-scrolling
+     * @param b y-coordinate of background
+     */
 	public void initialize(BufferedImage i, double a, int b){
 		this.background = i; 
 		this.speed = a; 
@@ -29,8 +40,10 @@ public class background {
 			x[f]=f*background.getWidth(); 
 		}
 	}
-	
-	//make image move, change coordinate move 
+
+    /**
+     * Make image move and change coordinates as the background moves
+     */
 	private void update(){
 		for (int i = 0; i<x.length; i++){
 			
@@ -50,8 +63,12 @@ public class background {
 			
 		}
 	}
-	
-	//update all the pictures' coordinate. 
+
+    /**
+     * Draws the background.
+     *
+     * @param g2d helps draw the background in a way that the background is side-scrolling
+     */
 	public void Draw(Graphics2D g2d){
 		this.update(); 
 		for (int i = 0; i<x.length; i++){

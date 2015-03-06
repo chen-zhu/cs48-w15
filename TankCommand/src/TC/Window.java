@@ -4,7 +4,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * The main for our game.
+ *
+ * @author UCSB-CS48-W15-G08
+ * @version 3/5/15
+ */
 public class Window extends JFrame{
+    /**
+     * No-arg constructor to set up the Window of our game.
+     */
 	public Window(){
 		this.setTitle("Tank Command"); 
 		this.setSize(1000, 530);
@@ -16,6 +25,9 @@ public class Window extends JFrame{
 		this.setVisible(true); 
 	}
 
+    /**
+     * Game starts here.
+     */
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub

@@ -1,12 +1,20 @@
 package TC;
 
 import java.awt.*; 
-import java.awt.image.*; 
+import java.awt.image.*;
+
+/**
+ * A weapon that the player uses to attack enemies.
+ *
+ * @author UCSB-CS48-W15-G08
+ * @version 3/5/15
+ */
 
 public class bullet {
 	
 	//set timeperiod for shooting bullet. 
-	public static long bulletperiod = (long) (Framework.nanosecond/.5); //time between the two bullet <------changed the data to change the frequency of the bullet.
+	public static long bulletperiod = (long) (Framework.nanosecond/.5); //time between the two bullet <------changed the
+	                                                                    // data to change the frequency of the bullet.
 	public static long lastcreatbullet=0; 
 		
 	//bulletimage 
@@ -16,52 +24,55 @@ public class bullet {
 	public static int damage=20; 
 	
 	//bulletposition 
-	public double x,y; 
-	public static double speed=8;//9;
-	public double yacc=0.01; 
+	public double x,y;
+	public static double speed=8;
 	public double xspeed; 
 	public double yspeed; 
-	public  int tmp=0; 
-	
-	//constructor for bullet 
-	public bullet (int x, int y, Point mousePosition){
+	public  int tmp=0;
+
+    /**
+     * Constructor for bullet.
+     *
+     * @param x initial x-coordinate
+     * @param y initial y-coordinate
+     */
+	public bullet (int x, int y){
 		this.x=x; 
-		this.y=y; //
+		this.y=y;
 		xspeed=speed; 
-		yspeed=speed; 
-		//this.tmp=x; //?
+		yspeed=speed;
 
 	}
-	
-	//detect if the bullet left the screen or hit the ground 
+
+    /**
+     * Detects if the bullet left the screen or hit the ground.
+     *
+     * @return a boolean indicating whether left the screen or hit the ground
+     */
 	public boolean isleft(){
-		if (x>0 && x<Framework.width  && y<Framework.height )//&& y>0) //bullet can in the air(no boundary on the top. )
+		if (x>0 && x<Framework.width  && y<Framework.height ) //bullet can in the air(no boundary on the top. )
 			return false; 
 		else 
 			return true; 
 	}
-	
-	
-	//making bullet move according to the function in bullet constructor. 
+
+
+    /**
+     * Makes bullet move according to the function in bullet constructor.
+     */
 	public void update(){
 		x+=xspeed; 
-		y-=28;//(28); 
-		//if(tmp>28){
-			//tmp+=1;
-			//xspeed=1;
-		//}
-		//else {
-		tmp+=1;//} 
-		y+=tmp; 
-		//double tmp1=x-tmp; //?
+		y-=28;
+		tmp+=1;
+		y+=tmp;
 		System.out.println(tmp+" "+x+" "+y);
-		//y=398; 
-		//y=(2*(x-tmp1)-685)*(2*(x-tmp1)-685)/800+30; 
-		//y-=(tmp/100*tmp/100);                         //parabolic movement. 
-		
 	}
-	
-	//draw the bullet onto the screen 
+
+    /**
+     * Draws the bullet onto the screen.
+     *
+     * @param g2d helps draw bullet on screen so that it makes it look like it's moving
+     */
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(bullet, (int)x, (int)y, null); 
 	}

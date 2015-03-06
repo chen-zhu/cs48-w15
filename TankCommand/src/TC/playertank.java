@@ -13,7 +13,7 @@ import javax.imageio.*;
 public class playertank {
 	
 	//setup the health of tank. 
-	public int healthinit=101; //initial health. 
+	public int healthinit=100; //initial health.
 	public int health; 
 	
 	//position of the tank on the screen 
@@ -82,13 +82,14 @@ public class playertank {
 	
 	//reset the position for tank for each round of tank 
 	public void reset(int x, int y){
-		this.health = healthinit; 
-		this.x=x; 
-		//this.y=y; y position is always 500, it doesnt change
+		this.health = healthinit;
+		this.x=x;
+        this.y=y;
 		this.xgun=this.x+this.xgunontank; 
 		this.ygun=this.x+this.ygunontank;
 		this.xspeed=0; 
-		this.yspeed=0; //jumping initial speed; 
+		this.yspeed=0; //jumping initial speed;
+        this.loadimage();
 		
 	}
 	
@@ -174,10 +175,9 @@ public class playertank {
 	
 	//draw the tank in jpanel 
 	public void Draw(Graphics2D g2d){
-		g2d.drawImage(tank, (int)x, (int)y, null); 
+		g2d.drawImage(tank, x, y, null);
         int h = healthbar.getHeight();
         int w = healthbar.getWidth();
-        //System.out.println(w);
         g2d.drawImage(healthbar1, x+27, y+15, (w/4)/100*106, h/3, null); 
 		g2d.drawImage(healthbar,x+30, y+18, (w/4)/100*health + 1, h/5 - 1, null); 
 	}
