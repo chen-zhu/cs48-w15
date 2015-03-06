@@ -68,8 +68,12 @@ public class Framework extends drawingpanel{
 	private BufferedImage cloud; 
 	private BufferedImage black; 	
 	
+	//number control 
+	public int count=0; 
+	
 	//background music 
 	static AudioClip clip; 
+	public URL music; 
 	
 	/**
 	 * Shows the mouse positon.
@@ -354,9 +358,32 @@ public class Framework extends drawingpanel{
 				newgame(); 
 			}
 		});
-		c=new JButton("     High Score     "); 
+		
+		
+		//change the background music 
+		c=new JButton("   Sound Change   "); 
 		c.setFocusable(false);
 		add(c);  
+		c.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				count++; 
+				if(count % 3 == 0){
+					music=this.getClass().getResource("/TC/resources/sound/firework1.wav");
+					clip = Applet.newAudioClip(music);
+					c.setText("   \"Firework\"   ");
+				}
+				else if(count%3 == 1){
+					music=this.getClass().getResource("/TC/resources/sound/firework.wav");
+					clip = Applet.newAudioClip(music);
+					c.setText("   \"Desperate\"   ");
+				}
+				else if(count%3 == 2){
+					music=this.getClass().getResource("/TC/resources/sound/Space.wav");
+					clip = Applet.newAudioClip(music);
+					c.setText("  \"Blank Space\"  ");	
+				}
+			}
+		}); 
 		
 		
 		d=new JButton("   Music On   "); 
