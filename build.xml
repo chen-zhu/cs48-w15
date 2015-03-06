@@ -1,15 +1,26 @@
 <project default="compile">
 
   <!-- build.xml for Tank Command
-       name: @@@ Group 08 @@@ -->
+       name: @@@ UCSB-CS48-W15-Group 08 @@@ -->
+
+  <property environment="env"/> <!-- load the environment variables -->
+  <property name="webRoot" value="${env.HOME}/public_html/cs56" />
+  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
+  <property name="projectName" value="TankCommand" />
+  <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" />
+  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
 
   <target name="compile" description="compile my code">
     <mkdir dir="TankCommand/bin"/>
     <javac srcdir="TankCommand/src" destdir="TankCommand/bin" debug="true" debuglevel="lines,source" includeantruntime="false">
 	<classpath>
 		<pathelement location="TankCommand/bin"/>
+		<pathelement location="lib/junit-4.12.jar"/>
 	</classpath>
     </javac>
+    <copy todir="TankCommand/bin/TC/resources" overwrite="true">
+      <fileset dir="TankCommand/src/TC/resources"/>
+    </copy>
   </target>
 
   <target name="run" depends="compile" description="run TankCommand">
@@ -20,10 +31,31 @@
     <delete dir="TankCommand/bin" quiet="true" />
   </target>
 
-  <target name="copy" description="copy files">
-    <copy todir="TankCommand/bin/TC/resources" overwrite="true">
-	<fileset dir="TankCommand/src/TC/resources"/>
+  <target name="javadoc" depends="compile">
+    <delete dir="javadoc" quiet="true" />
+    <javadoc destdir="javadoc" author="true" version="true" use="true" >
+      <fileset dir="TankCommand/src/TC" includes="**/*.java"/>
+    </javadoc>
+
+    <!-- delete the old javadoc -->
+
+    <delete quiet="true" dir="${javadocDest}" />
+
+    <!-- copy everything you just made to the javadoc destination, and then make it readable -->
+
+    <copy todir="${javadocDest}" >
+      <fileset dir="javadoc"/>
     </copy>
-  </target> 
+
+    <!-- Note: this only does the chmod command on the
+	 javadoc subdirectory and its contents. You MIGHT have to
+	 MANUALLY do the chmod on the parent directories. However,
+	 you should only need to do that once. -->
+
+    <chmod dir="${javadocDest}" perm="755" type="dir" includes="**" />
+    <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*" />
+    <echo>Javadoc deployed to ${javadocURL}</echo>
+  </target>
+    
 
 </project>

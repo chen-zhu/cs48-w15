@@ -10,6 +10,12 @@ import java.util.logging.*; //useless
 
 import javax.imageio.*; 
 
+/**
+ * A type of enemy that attacks in the air. (Name of class is misleading.)
+ * 
+ * @author UCSB-CS48-W15-G08
+ * @version 3/6/15
+ */
 
 public class enemytank {
 	//the time between enemies show 
@@ -19,7 +25,8 @@ public class enemytank {
 	
 	//construct a random function for flying 
 	public Random random= new Random();  
-	private int tmp=random.nextInt(300)+600 ;
+	private int tmp=random.nextInt(300)+600;
+
 	//health of enemy 
 	public int health; 
 	
@@ -31,18 +38,26 @@ public class enemytank {
 	public static double xmovinginit=-4; 
 	public static double xmoving=xmovinginit; 
 	
+	//image of enemy "tank"
 	public static BufferedImage enemytankimg; 
 	
-	//initialize theenemy 
+	/**
+	 * Initialize the enemy.
+	 *
+	 * @param x initial x position
+	 * @param y initial y position
+	 */ 
 	public void initialize(int x, int y){
 		health = 40; 
 		this.x=x; 
 		this.y=y; 
-		
 		this.xmoving=-1; 
 	}
 	
-	//change the properties of enemy; 
+	/**
+	 * Upon restarting the game, the enemy "tank's" properties are set to default.
+	 */
+ 
 	public static void restartenemy(){
 		enemytank.periodenemy=periodenemyinit;
 		enemytank.lastcreatedenemy=0; 
@@ -50,7 +65,10 @@ public class enemytank {
 	}
 	
 	
-	//modify the time, frequency and the difficulty of enemy 
+	/** 
+	 * Modify the time, frequency, and the difficulty of the enemy "tank"
+	 */
+ 
 	public static void speedup(){
 		if(enemytank.periodenemy > Framework.nanosecond){
 			enemytank.periodenemy-=Framework.nanosecond/10; 
@@ -59,7 +77,12 @@ public class enemytank {
 		
 	}
 	
-	//check if the enemy left the screen or not; 
+	/**
+	 * Checks to see of the enemy "tank" left the screen.
+	 *
+	 * @return a boolean that indicates whether the enemy "tank" left the screen or not
+	 */
+
 	public boolean isleft(){
 		if(x<0 - enemytankimg.getWidth())
 			return true; 
@@ -67,7 +90,12 @@ public class enemytank {
 			return false; 
 	}
 	
-	//check if the plane is shooting or not
+	/**
+	 * Checks to see if the enemy "tank" is shooting.
+	 *
+	 * @return a boolean that indicates if the enemy "tank" is shooting
+	 */
+
 	public boolean shooting(int r){
 		if(x==tmp){
 			return true; 
@@ -77,7 +105,10 @@ public class enemytank {
 	}
 
 	
-	//make enemytank move 
+	/**
+	 * Makes the enemy "tank" move.
+	 */
+
 	public void update(){
 		Random random = new Random();
 		int i =random.nextInt(999); 
@@ -102,7 +133,10 @@ public class enemytank {
 		
 	}
 	
-	//draw the enemy onto jpanel 
+	/**
+	 * Draws the enemy "tank."
+	 */
+
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(enemytankimg, x, y, null); 
 	}

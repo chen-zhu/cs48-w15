@@ -13,30 +13,46 @@ import javax.imageio.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 
+/** 
+ * The class that provides the mechanics for the whole game.
+ *
+ * @author UCSB-CS48-W15-G08
+ * @version 3/6/15
+ */ 
+
 public class game {
-	static Thread currThread; 
+	static Thread currThread;
+	
+	//background images 
 	public BufferedImage cloud; 
 	public BufferedImage desert; 
 	public background cloudmoving; 
-	public background desertmoving; 
+	public background desertmoving;
+ 
 	private Random random= new Random(); 
-	public Robot robot; 
-	public playertank player; 
-	public ArrayList<powerup> poweruplist; 
+	public Robot robot;
+ 
+	public playertank player;
+ 
+	public ArrayList<powerup> poweruplist; //arraylist for powerups
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
-	public ArrayList<enemytank> enemylist=new ArrayList<enemytank>(); 
-	public ArrayList<enemyground> groundlist=new ArrayList<enemyground>(); 
-	public ArrayList<enemybullet> enemybulletlist=new ArrayList<enemybullet>(); //the arraylist for bullet given by enemy 
-	public int runaway; 
-	public int killed; 
-	//public int r = random.nextInt(400)+500; 
-	AudioClip explode, attack, rocket, crash; 
+	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
+	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
+	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
+ 
+	public int runaway; //number of enemies that got away 
+	public int killed; //number of enemies that the player killed
+ 
+	AudioClip explode, attack, rocket, crash; //music and sound effects for game
 	
 	static Thread threadForInitGame;
 	
 	
-	//set down everything for the game
+	/** 
+	 * Initialize everything for the game.
+	 */
+
 	private void initialize(){
 		random = new Random(); 
 		try{
@@ -50,7 +66,9 @@ public class game {
 		desertmoving = new background(); 
 		
 		player=new playertank(0); //set the initial position for player tank
-		bulletlist=new ArrayList<bullet>(); //set up the bullet for tank 
+
+		//set up
+		bulletlist=new ArrayList<bullet>();  
 		enemylist=new ArrayList<enemytank>(); 
 		groundlist=new ArrayList<enemyground>(); 
 		superpowerlist=new ArrayList<superpower>(); 
@@ -61,10 +79,12 @@ public class game {
 		killed=0; 
 		if(Framework.musicplay){
 		Framework.clip.loop();}
-		//font = new Font("what wtahttttttt", Font.BOLD, 18);<<<<<<<<<<<<---------------------------------------
 	}
 	
-	//Assign images to variables. 
+	/**
+	 *  Set images.
+	 */
+ 
 	private void load(){
 		try {
 			//music
@@ -93,17 +113,20 @@ public class game {
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
-			//do whatever something here
 		} 
 		
 		//initialize moving 
-		desertmoving.initialize(desert, -2, 0);//---------------------------change data to modify background position
+		desertmoving.initialize(desert, -2, 0);//change data to modify background position
 		cloudmoving.initialize(cloud, -2, 0);
 	}
 	
-	//check if the player is alive; 
+	/**
+	 * Checks to see if the player is alive.
+	 *
+	 * @return a boolean that indicates whether the player is alive or not
+	 */
+ 
 	public boolean isplayeralive(){
 		if (player.health<=0){
 			Framework.clip.stop(); 
@@ -112,11 +135,13 @@ public class game {
 			return false; 
 		}
 		else 
-			//attack.play();
 			return true; 
 	}
 	
-	//check if the player is shooting; 
+	/**
+	 * When player left clicks, it sends out a bullet to attack enemies and plays sound effect.
+	 */
+ 
 	public void isplayershooting(long gametime){
 		if(player.shooting(gametime)){
 			if(Framework.musicplay){
@@ -128,7 +153,10 @@ public class game {
 		}
 	}
 	
-	//check if the enemy is shooting 
+	/**
+	 * Sends signal to let ground enemy shoot.
+	 */
+
 	public void isgroundenemyshooting(){
 		for (int i =0; i<groundlist.size(); i++){
 			if(groundlist.get(i).shooting(random.nextInt(400)+500)){
@@ -138,7 +166,10 @@ public class game {
 		}
 	}
 	
-	//check if the plane is shooting 
+	/**
+	 * Sends signal to let enemy "tank" shoot.
+	 */
+
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
 			if(enemylist.get(i).shooting(random.nextInt(400)+500)){
@@ -152,6 +183,11 @@ public class game {
 		}
 	}
 	
+	/**
+	 * When player right clicks, it sends out rockets that wipe out all enemies on the screen.
+	 * Sound effect is played.
+	 */
+
 	public void isplayerusingsuperpower(long gametime){
 		if(player.superpowering(gametime)){
 			if(Framework.musicplay){
@@ -163,7 +199,10 @@ public class game {
 	}
 	
 	
-	//make bullet move 
+	/**
+	 * Make bullet move.
+	 */
+
 	public void updatebullet(){
 		for(int i=0; i<bulletlist.size(); i++){
 			bullet bullet = bulletlist.get(i); 
@@ -195,7 +234,10 @@ public class game {
 		}
 	}
 
-	//make enemybullet move
+	/**
+	 * Make enemy bullet move.
+	 */
+
 	public void updateenemybullet(){
 		for(int i=0; i<enemybulletlist.size(); i++){
 			enemybullet enemybullet = enemybulletlist.get(i); 
@@ -219,7 +261,10 @@ public class game {
 			
 	}
 	
-	//update powerup 
+	/**
+	 * Updates a certain attribute when a powerup is gained.
+	 */
+
 	public void updatepowerup(long gametime){
 		for (int i = 0; i<poweruplist.size(); i++){
 			powerup po=poweruplist.get(i); 
@@ -246,7 +291,10 @@ public class game {
 		}
 	}
 
-	//make superpower move 
+	/**
+	 * Make superpower move.
+	 */
+
 	public void updatesuperpower(){
 		for(int i=0; i<superpowerlist.size(); i++){
 			superpower s = superpowerlist.get(i); 
@@ -281,7 +329,10 @@ public class game {
 		}
 	}
 	
-	//draw the picture onto the screen 
+	/**
+	 * Draw images on screen.
+	 */
+
 	public void Draw(Graphics2D g2d){
 		desertmoving.Draw(g2d);
 		cloudmoving.Draw(g2d);
@@ -336,8 +387,10 @@ public class game {
 		
 	}
 	
+	/**
+	 * Update the logic of the game. Keep the game checking the whole logic.
+	 */
 	
-	//update the logic of the game//keep game check the whole logic. 
 	@SuppressWarnings("deprecation")
 	public void updategame(long gametime, Point mouseposition){
 		
@@ -376,7 +429,6 @@ public class game {
 			Thread.currentThread().sleep(100000);
 			Framework.pause = false; 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} }
 		/*if(Framework.pause == false && Thread.currentThread().getState()==Thread.State.TIMED_WAITING){
@@ -386,7 +438,10 @@ public class game {
 	}
 	
 	
-	//create the enemyground when it comes to the right time 
+	/** 
+	 * Creates the ground enemy when it comes to the right time.
+	 */ 
+
 	public void createenemyground(long gametime){
 		if (gametime-enemyground.lastcreatedground>=enemyground.periodground){
 			enemyground r = new enemyground(); 
@@ -399,7 +454,10 @@ public class game {
 		}
 	}
 	
-	//update all the ground enemy in the list(making the move and remove from the list if they are not exist 
+	/** 
+	 * Update all the ground enemy in the list(making the move and remove from the list if they do not exist)
+	 */
+ 
 	public void updateenemyground(){
 		for (int i=0; i<groundlist.size(); i++){
 			enemyground r = groundlist.get(i); 
@@ -427,7 +485,10 @@ public class game {
 		}
 	}
 	
-	//creates the enemy when it comes to the right time 
+	/**
+	 * Creates the enemy "tank" when it comes to the right time.
+	 */ 
+
 	public void createenemytank(long gametime){
 		if(gametime-enemytank.lastcreatedenemy>=enemytank.periodenemy){
 			enemytank r=new enemytank(); 
@@ -443,7 +504,9 @@ public class game {
 		}
 	}
 	
-	//update all the enemy in the list 
+	/**
+	 * Update all the enemies in the list. 
+	 */
 	private void updateenemy(){
 		for(int i=0; i<enemylist.size(); i++){
 			enemytank r=enemylist.get(i); 
@@ -478,9 +541,12 @@ public class game {
 		}
 	}
 	
+	/**
+	 * Constructor for game class to set up the main mechanics of the game.
+	 */
 	public game(){
 		Framework.gamestate=Framework.GameState.gameloading; 
-	    Thread threadForInitGame=new Thread(){
+	    	Thread threadForInitGame=new Thread(){
 			@Override 
 			public void run(){
 				initialize(); 
@@ -489,14 +555,16 @@ public class game {
 			}
 		};
 		threadForInitGame.start(); 
-		//System.out.println("thread"); 
 	}
 	
 	
-	//set restart game for gameover 
+	/**
+	 * When restarting, everything is set to default.
+	 */
+
 	public void restartgame(){
 		player.reset(0,350);
-        player.superpowerfinal = 5;
+        	player.superpowerfinal = 5;
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
 		runaway=0; 
@@ -509,17 +577,20 @@ public class game {
 		superpowerlist.clear(); 
 		groundlist.clear(); 
 		poweruplist.clear(); 
-		if(Framework.musicplay){
-			Framework.clip.loop();}
+		if(Framework.musicplay){Framework.clip.loop();}
 	}
 	
+	/**
+	 * Prints the result after gameover.
+	 */
+
 	public void print(Graphics2D g2d, long gametime){
-        g2d.setFont(new Font("Results", Font.BOLD, 18));
-        g2d.setColor(Color.GRAY);
+        	g2d.setFont(new Font("Results", Font.BOLD, 18));
+        	g2d.setColor(Color.GRAY);
 		g2d.drawString("time: "+gametime/1000000000+"s", 400, 530/2-30); 
 		g2d.drawString("you've killed: "+killed+" enemies", 400, 530/2+20); 
 		g2d.drawString("run away: "+runaway, 400, 530/2+70);
-        g2d.drawString("total score: " + (killed - runaway), 400, 530/2 + 120);
+        	g2d.drawString("total score: " + (killed - runaway), 400, 530/2 + 120);
 		
 	}
 	

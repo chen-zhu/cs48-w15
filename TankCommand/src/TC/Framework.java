@@ -16,18 +16,26 @@ import javax.swing.JPanel;
 import java.applet.Applet;
 import java.applet.AudioClip;
 
-//the main class that provide the function for the whole game. 
+/** 
+ * The class that provides the basis for the whole game.
+ *
+ * @author UCSB-CS48-W15-G08
+ * @version 3/6/15
+ */ 
 
 public class Framework extends drawingpanel{
 	
 	//pause time 
 	public static boolean pause=false; 
 	public static boolean musicplay=true; 
- 
+
+	//Framework dimensions 
 	public static int width; 
-	public static int height; 
+	public static int height;
+ 
 	//nanoseconds; 
-	public static long nanosecond=1000000000L; 
+	public static long nanosecond=1000000000L;
+ 
 	//one millisecond in nanoseconds 
 	public static long milisecond=1000000L; 
 	
@@ -37,9 +45,10 @@ public class Framework extends drawingpanel{
 	//period during two updates:
 	private long period = nanosecond/fps; 
 	
+	//enumeration of each game state
 	public static enum GameState{starting, gameloading, main_menu, options, playing, gameover, destroyed, visualizing, pause} 
 	
-	//current state of game:
+	//current game state:
 	public static GameState gamestate; 
 	
 	//game running time; 
@@ -49,6 +58,7 @@ public class Framework extends drawingpanel{
 	public game game; 
 	private Font font; 
 	
+	//buttons that serve different functionalities
 	private JButton b,c,d,e,f,re; 
 	
 	//Image for starting menu. 
@@ -61,7 +71,12 @@ public class Framework extends drawingpanel{
 	//background music 
 	static AudioClip clip; 
 	
-	//update, showing the position of mouse
+	/**
+	 * Shows the mouse positon.
+	 *
+	 * @return a Point object that has the x and y coordinates of the mouse's current position
+	 */
+
 	private Point mouseposition(){
 		try {
 			Point a=this.getMousePosition(); 
@@ -75,7 +90,10 @@ public class Framework extends drawingpanel{
 	}
 	
 	
-	//start a new game 
+	/** 
+	 * Start a new game.
+	 */ 
+
 	private void newgame(){
 		gametime = 0; 
 		lasttime=System.nanoTime();
@@ -89,22 +107,29 @@ public class Framework extends drawingpanel{
 	}
 	
 	
-	//restart a new game 
+	/**
+	 * Restart a game.
+	 */
+ 
 	private void restartgame(){
 		gametime = 0; 
 		lasttime=System.nanoTime();
-		game.restartgame(); //<--------------------------------------------------------
+		game.restartgame();
 		gamestate=GameState.playing; //changing the state of the game 
 	}
 	
 	
-	//initialize the variables and objects. 
+	/**
+	 * Initialize the variables and objects. 
+	 */
 	
 	private void initialize(){
 		font = new Font ("Tank Command", Font.ITALIC, 28); 
 	}
 	
-	//load images for starting menu 
+	/**
+	 * Load images for starting menu
+	 */ 
 	
 	private void load(){
 		try {
@@ -135,7 +160,10 @@ public class Framework extends drawingpanel{
 	
 	
 	
-	//making different action by checking gamestate
+	/**
+	 * The game runs in this loop(). Does different actions depending on different gamestates.
+	 */
+	
 	private void loop(){
 		
 		//need time to load the correct frame and window content. 
@@ -150,7 +178,7 @@ public class Framework extends drawingpanel{
 			switch (gamestate){
 			case playing : 
 				gametime +=System.nanoTime() - lasttime; 
-				game.updategame(gametime, mouseposition()); //<------------------------------------------
+				game.updategame(gametime, mouseposition());
 				lasttime = System.nanoTime(); 
 				break; 
 				
@@ -161,12 +189,10 @@ public class Framework extends drawingpanel{
 			case options: 
 				break; 
 			case gameloading: 
-				//b.setVisible(false);
 				break; 
 			case starting:
 				initialize(); 
 				load(); 
-				//
 				gamestate=GameState.main_menu; 
 				break; 
 			case visualizing: 
@@ -206,7 +232,10 @@ public class Framework extends drawingpanel{
 	
 	
 	
-	//draw the begining menu 
+	/**
+	 * Draw the main menu.
+	 */
+ 
 	private void drawmenu(Graphics2D g2d){
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
@@ -219,7 +248,9 @@ public class Framework extends drawingpanel{
 	
 	
 	
-	//draw onto the screen. 
+	/** 
+	 * Draw onto the screen.
+	 */ 
 	@Override
 	public void Draw(Graphics2D g2d){
 		
@@ -236,7 +267,7 @@ public class Framework extends drawingpanel{
 				drawmenu(g2d); 
 				g2d.setColor(Color.GRAY);
 				g2d.drawString("Press  ESC to exit." , width/2-55, height/4-75);
-				game.print(g2d, gametime); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<important!!!!
+				game.print(g2d, gametime); //important!!!!
 				g2d.setFont(font);
 				g2d.drawString("Game over", width/2-70, height/4);
 				b.setVisible(false); 
@@ -261,15 +292,9 @@ public class Framework extends drawingpanel{
 
 				break; 
 			case options:
-				//......
+				//are we still doing this?
 				break; 
 			case pause: 
-			/*try {
-				Thread.sleep(pause);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
 				break; 
 			case gameloading: 
 				g2d.drawImage(black, 0, 0,null); 
@@ -281,43 +306,43 @@ public class Framework extends drawingpanel{
 				d.setVisible(false); 
 				e.setVisible(false);
 				break; 
-				
-				
-				//case select:              //adding control for level selecting. 
-				//g2d.drawImage(select_level, 0, 0 , null); //loadcontent for level select. 
-				//g2d.setColor(Color.white); 
-				//g2d.serFont(new Font("whatever you gonna do", Font.ITALIC,20)); 
-				//g2d.drawString("please input the level you want:", 800/2, 530/2); 
-				//g2d.drawString("press anykey to exit to main menu!", 800/2, 530/2+50); //add button to enter level and bring user to that level. gotta do it next week. 
-
 		}
 	}
 
+	/**
+	 * Exits game upon pressing the escape key.
+	 */
+
 	@Override
 	public void keyReleasedFramework(KeyEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_ESCAPE) {
-            System.exit(0);
-        }
+            		System.exit(0);
+        	}
 	}
 
-    public void keyTyped(KeyEvent e){}
+    	public void keyTyped(KeyEvent e){}
 
-    public void mouseClicked(MouseEvent e){}
+    	public void mouseClicked(MouseEvent e){}
 
-    public void mouseEntered(MouseEvent e){}
+    	public void mouseEntered(MouseEvent e){}
 
-    public void mouseExited(MouseEvent e){}
+    	public void mouseExited(MouseEvent e){}
 	
+	/**
+	 * Constructor to set up framework of the game.
+	 */
+
 	public Framework(){
-		super();  
+		super();
+  
 		//construct new thread. runing the thread on the same time. 
 		final Thread gameThread = new Thread(){
 			@Override 
 			public void run(){
 				loop(); 
-			}}; 
-			gameThread.start(); 
+			}
+		}; 
+		gameThread.start(); 
 			
 
 		gamestate = GameState.visualizing; 

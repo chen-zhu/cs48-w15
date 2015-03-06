@@ -4,6 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * A type of enemy that attacks on the ground.
+ * 
+ * @author UCSB-CS48-W15-G08
+ * @version 3/6/15
+ */ 
+
 public class enemyground {
 	//the time between enemies show 
 	public static long periodgroundinit=8*Framework.nanosecond; 
@@ -17,16 +24,18 @@ public class enemyground {
 	//health of enemy 
 	public int health; 
 		
-		//position of enemy 
+	//position of enemy 
 	public int x;
 	public int y;
 	private int tmp=random.nextInt(300)+600; 
 		
-		//moving speed:
+	//moving speed:
 	public static double xmovinginit=-0.1; 
-    public static double xmoving=xmovinginit; 
+	public static double xmoving=xmovinginit; 
 	
-	//update speed up 
+	/**
+	 * Modify the time, frequency, and the difficulty of the ground enemy. 
+	 */ 
 	public static void speedup(){
 		if(enemyground.periodgroundinit > Framework.nanosecond){
 			enemyground.periodground-=Framework.nanosecond/18; 
@@ -35,38 +44,44 @@ public class enemyground {
 		
 	}
 	
-	//change the properties of enemy; 
+	/** 
+	 * Upon restarting the game, the ground enemy's properties are set back to default.
+	 */ 
 	public static void restartenemyground(){
 			enemyground.periodground=periodgroundinit;
 			enemyground.lastcreatedground=0; 
 			enemyground.xmoving=xmovinginit; 
 		}
 	
-	//override the initialize position 
+	/**
+	 * Initialize ground enemy properties.
+	 *
+	 * @param x initial x position
+	 * @param y initial y position
+	 */
+
 	public void initialize(int x, int y){
 		health = 40; 
 		this.x=x; 
 		this.y=400; 
 		this.xmoving=-1; 
-		//this.tmp=random.nextInt(200)+700; 
 	}
 
 	
-	//@override te method in the superclass
-	//make enemytank move 
+	/**
+	 * Makes the ground enemy move.
+	 */
+
 	public void update(){
-		/*if (x<300){
-			xmoving=0.1; 
-		}
-		if (x>Framework.width){     ----------------------> bug!!! tank wont go back. 
-			xmoving=-0.1; 
-		} */
-
 		x+=xmoving;
-
 	}
 	
-	//check if the grounder left the screen or not
+	/**
+	 * Checks to see of the ground enemy left the screen.
+	 *
+	 * @return a boolean that indicates whether the ground enemy left the screen or not
+	 */
+
 	public boolean isleft(){
 		if(x<0 - enemygroundimg.getWidth())
 			return true; 
@@ -74,7 +89,12 @@ public class enemyground {
 			return false; 
 	}
 	
-	//check it the enemy is shooting or not. 
+	/**
+	 * Checks to see if the ground enemy is shooting.
+	 *
+	 * @return a boolean that indicates if the ground enemy is shooting
+	 */
+
 	public boolean shooting(int r){
 		if(x==tmp){
 			return true; 
@@ -84,7 +104,10 @@ public class enemyground {
 	}
 
 	
-	//override the method Draw in the superclass//for the enemy on the ground, the y coordinate doesnt change. 
+	/**
+	 * Draws the ground enemy. For the ground enemy, the y coordinate doesnt change.
+	 */
+
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(enemygroundimg, x, 389, null); 
 	}
