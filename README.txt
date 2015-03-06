@@ -36,3 +36,5 @@ TANK COMMAND READ-ME
 	Use power-up(superpower): Right-click
 
 	Pause: Hit pause(top of frame)
+	
+	Link to highscore sample code: http://forum.codecall.net/topic/50071-making-a-simple-high-score-system/
