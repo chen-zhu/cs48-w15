@@ -32,12 +32,6 @@ public abstract class drawingpanel extends JPanel implements KeyListener, MouseL
 		this.addMouseListener(this); 
 	}
 
-    /** Overridden in Framework.
-     *  Used to draw to the screen.
-     *
-     * @param g2d has same purpose as in JPanel
-     */
-
 	public abstract void Draw(Graphics2D g2d);
 
     /**

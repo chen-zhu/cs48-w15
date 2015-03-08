@@ -159,7 +159,7 @@ public class game {
 
 	public void isgroundenemyshooting(){
 		for (int i =0; i<groundlist.size(); i++){
-			if(groundlist.get(i).shooting(random.nextInt(400)+500)){
+			if(groundlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(groundlist.get(i).x, groundlist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
@@ -172,11 +172,11 @@ public class game {
 
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
-			if(enemylist.get(i).shooting(random.nextInt(400)+500)){
+			if(enemylist.get(i).shooting()){
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
-			if(enemylist.get(i).shooting(random.nextInt(400)+400)){
+			if(enemylist.get(i).shooting()){
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
@@ -265,7 +265,7 @@ public class game {
 	 * Updates a certain attribute when a powerup is gained.
 	 */
 
-	public void updatepowerup(long gametime){
+	public void updatepowerup(){
 		for (int i = 0; i<poweruplist.size(); i++){
 			powerup po=poweruplist.get(i); 
 			po.update();
@@ -392,7 +392,7 @@ public class game {
 	 */
 	
 	@SuppressWarnings("deprecation")
-	public void updategame(long gametime, Point mouseposition){
+	public void updategame(long gametime){
 		
 		//restart the game if the player is dead. 
 		if(!isplayeralive()){
@@ -419,7 +419,7 @@ public class game {
 		createenemytank(gametime); 
 		updateenemy(); 
 		//update powerup 
-		updatepowerup(gametime); 
+		updatepowerup();
 		//update the enemyground 
 		createenemyground(gametime); 
 		updateenemyground();
@@ -445,7 +445,7 @@ public class game {
 	public void createenemyground(long gametime){
 		if (gametime-enemyground.lastcreatedground>=enemyground.periodground){
 			enemyground r = new enemyground(); 
-			r.initialize(Framework.width, 400);
+			r.initialize(Framework.width);
 			//System.out.println("1");
 			groundlist.add(r); 
 			//System.out.println("2");
@@ -469,14 +469,17 @@ public class game {
                 player.health-=30;
 			    groundlist.remove(i);
 			}
-			else if(r.health<=0){
-				//attack.play();
-				if(Framework.musicplay){explode.play(); }
-				groundlist.remove(i); 
-				killed+=1;
-				continue; 
-			}
-            else {continue;}
+			else {
+                if (r.health <= 0) {
+                    //attack.play();
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    groundlist.remove(i);
+                    killed += 1;
+                    continue;
+                }
+            }
 			if(r.isleft()){
 				groundlist.remove(i); 
 				runaway+=1; }
@@ -520,19 +523,21 @@ public class game {
 				player.health-=30; 
 				enemylist.remove(i);    //<============================================================Doing collision. 
 			}
-			else if(r.health<=0){
-				if(Framework.musicplay){
-				explode.play(); }
-				random = new Random(); 
-				if (random.nextInt(12)==4){ //<==================change the possibility to generate powerup
-					powerup pow=new powerup(r.x, r.y); 
-					poweruplist.add(pow); 
-				}
-				enemylist.remove(i); 
-				killed+=1;
-				continue; 
-			}
-            else {continue;}
+			else {
+                if (r.health <= 0) {
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    random = new Random();
+                    if (random.nextInt(12) == 4) { //<==================change the possibility to generate powerup
+                        powerup pow = new powerup(r.x, r.y);
+                        poweruplist.add(pow);
+                    }
+                    enemylist.remove(i);
+                    killed += 1;
+                    continue;
+                }
+            }
 			if(r.isleft()){
 				enemylist.remove(i); 
 				runaway+=1; 

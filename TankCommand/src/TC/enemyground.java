@@ -57,10 +57,9 @@ public class enemyground {
 	 * Initialize ground enemy properties.
 	 *
 	 * @param x initial x position
-	 * @param y initial y position
 	 */
 
-	public void initialize(int x, int y){
+	public void initialize(int x){
 		health = 40; 
 		this.x=x; 
 		this.y=400; 
@@ -91,11 +90,9 @@ public class enemyground {
 	
 	/**
 	 * Checks to see if the ground enemy is shooting.
-	 *
-	 * @return a boolean that indicates if the ground enemy is shooting
 	 */
 
-	public boolean shooting(int r){
+	public boolean shooting(){
 		if(x==tmp){
 			return true; 
 		}

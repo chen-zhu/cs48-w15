@@ -92,11 +92,9 @@ public class enemytank {
 	
 	/**
 	 * Checks to see if the enemy "tank" is shooting.
-	 *
-	 * @return a boolean that indicates if the enemy "tank" is shooting
 	 */
 
-	public boolean shooting(int r){
+	public boolean shooting(){
 		if(x==tmp){
 			return true; 
 		}
