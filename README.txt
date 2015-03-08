@@ -12,8 +12,10 @@ TANK COMMAND READ-ME
 	Option 2:
 	a) A build.xml file has been made after option 1 was finalized.
 	b) At the command line, type in "ant" to compile all source files. Class files can be found in TankCommand/bin/TC.
-	c) At the command line, type in "ant copy" to copy all data files (i.e. images and sound) from the src directory to the bin directory.
-	d) At the command line, type in "java -cp TankCommand/bin TC.Window" to run the program.
+	   Upon compilation, resource files (i.e. images and sound files) will be copied into a resources directory in the bin
+	   directory from the src/resources directory.
+	c) At the command line (if you have X11 forwarding), type in "java -cp TankCommand/bin TC.Window" to run the program.
+	d) To generate a javadoc, type in "ant javadoc" at the command line.
 	e) To create a .jar file, follow the instructions in option 1.
 
 2) To add/modify data files

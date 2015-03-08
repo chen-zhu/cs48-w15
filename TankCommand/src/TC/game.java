@@ -465,19 +465,18 @@ public class game {
 			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			Rectangle e=new Rectangle(r.x, r.y,r.enemygroundimg.getWidth(), r.enemygroundimg.getHeight()); 
 			if(p.intersects(e)){
-				if(Framework.musicplay){
-				crash.play();}
-				player.health-=30; 
-				groundlist.remove(i);   
+				if(Framework.musicplay){crash.play();}
+                player.health-=30;
+			    groundlist.remove(i);
 			}
-			if(r.health<=0){
+			else if(r.health<=0){
 				//attack.play();
-				if(Framework.musicplay){
-				explode.play(); }
+				if(Framework.musicplay){explode.play(); }
 				groundlist.remove(i); 
 				killed+=1;
 				continue; 
 			}
+            else {continue;}
 			if(r.isleft()){
 				groundlist.remove(i); 
 				runaway+=1; }
@@ -521,7 +520,7 @@ public class game {
 				player.health-=30; 
 				enemylist.remove(i);    //<============================================================Doing collision. 
 			}
-			if(r.health<=0){
+			else if(r.health<=0){
 				if(Framework.musicplay){
 				explode.play(); }
 				random = new Random(); 
@@ -533,6 +532,7 @@ public class game {
 				killed+=1;
 				continue; 
 			}
+            else {continue;}
 			if(r.isleft()){
 				enemylist.remove(i); 
 				runaway+=1; 
@@ -564,7 +564,7 @@ public class game {
 
 	public void restartgame(){
 		player.reset(0,350);
-        	player.superpowerfinal = 5;
+        player.superpowerfinal = 5;
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
 		runaway=0; 
@@ -587,9 +587,9 @@ public class game {
 	public void print(Graphics2D g2d, long gametime){
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.GRAY);
-		g2d.drawString("time: "+gametime/1000000000+"s", 400, 530/2-30); 
-		g2d.drawString("you've killed: "+killed+" enemies", 400, 530/2+20); 
-		g2d.drawString("run away: "+runaway, 400, 530/2+70);
+		    g2d.drawString("time: "+gametime/1000000000+"s", 400, 530/2-30);
+		    g2d.drawString("you've killed: "+killed+" enemies", 400, 530/2+20);
+		    g2d.drawString("run away: "+runaway, 400, 530/2+70);
         	g2d.drawString("total score: " + (killed - runaway), 400, 530/2 + 120);
 		
 	}
