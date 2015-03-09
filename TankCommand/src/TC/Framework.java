@@ -433,7 +433,7 @@ public class Framework extends drawingpanel{
 				else if(count%3 == 2){
 					music=this.getClass().getResource("/TC/resources/sound/Space.wav");
 					clip = Applet.newAudioClip(music);
-					soundChangeButton.setText("  \"Blank Space\"  ");	
+					soundChangeButton.setText("     \"grave\"     ");	
 				}
 			}
 		}); 
