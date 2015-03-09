@@ -4,6 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * @author UCSB-CS48-W15-G08
+ * @version 3/8/15
+ * class for a boss enemy that moves on the ground
+ */
 public class bossground {
 	
 	//the time between enemies show 
@@ -27,7 +32,9 @@ public class bossground {
 	public static double xmovinginit=-0.05; 
 	public static double xmoving=xmovinginit; 
 		
-	//update speed up 
+/**
+ * Speeds the boss up in case side scroller moves faster than boss
+ */
 	public static void speedup(){
 		if(bossground.periodgroundinit > Framework.nanosecond){
 				bossground.periodground-=Framework.nanosecond/18; 
@@ -36,14 +43,20 @@ public class bossground {
 			
 	}
 		
-		//change the properties of enemy; 
+/**
+ * restarts state of the boss 
+ */
 	public static void restartbossground(){
 				bossground.periodground=periodgroundinit;
 				bossground.lastcreatedground=0; 
 				bossground.xmoving=xmovinginit; 
 	}
 		
-		//override the initialize position 
+/**
+	 * overrides the initialized position 
+	 * @param x x coordinate of new position
+	 * @param y y coordinate of new position
+ */
 	public void initialize(int x, int y){
 			health = 200; 
 			this.x=x; 
@@ -52,9 +65,9 @@ public class bossground {
 			//this.tmp=random.nextInt(200)+700; 
 	}
 
-		
-		//@override the method in the superclass
-		//make bossground move 
+/**
+ * 	controls the movement of the boss 
+ */
 	public void update(){
 			if (x<300){
 				xmoving=0.1; 
@@ -67,16 +80,12 @@ public class bossground {
 
 	}
 		
-	/*check if the grounder left the screen or not
-	public boolean isleft(){
-			if(x<0 - bossgroundimg.getWidth()) <-------------is this needed?
-				return true; 
-			else
-				return false; 
-	}
-	*/	
-		//check it the enemy is shooting or not. 
-	public boolean shooting(int r){
+/**
+ * Uses random numbers to decide whether or not the boss is shooting
+ * @return true if the boss is shooting
+ */
+
+	public boolean shooting(){
 			if(x==tmp){
 				return true; 
 			}
@@ -85,12 +94,14 @@ public class bossground {
 	}
 
 		
-		//override the method Draw in the superclass//for the enemy on the ground, the y coordinate doesnt change. 
+/**
+ * @param g2d allows the boss to be drawn with side-scrolling
+ */
 	public void Draw(Graphics2D g2d){
 			g2d.drawImage(bossgroundimg, x, 389, null); 
 	}
 
 
 
-	}
+}
 

@@ -10,6 +10,11 @@ import java.util.logging.*; //useless
 
 import javax.imageio.*; 
 
+/**
+ * @author UCSB-CS48-W15-G08
+ * @version 3/8/15
+ * class for enemy bosses that move in the air
+ */
 
 public class bossair {
 	//the time between enemies show 
@@ -55,9 +60,8 @@ public class bossair {
 		bossair.xmoving=xmovinginit; 
 	}
 	
-	
 	/**
-	 * Not really sure what this does or if we need it for the boss 
+	 * Speeds the aerial boss in case the window scrolls faster than the boss 
 	 */
 	public static void speedup(){
 		if(bossair.periodenemy > Framework.nanosecond){
@@ -68,8 +72,8 @@ public class bossair {
 	}
 	
 	/** 
-	 * Same as last function
-	 * @return boolean to see if the boss left the screen
+	 * Test to see whether boss is left
+	 * @return true if the boss is left the screen
 	 */
 	public boolean isleft(){
 		if(x<0 - bossairimg.getWidth())
@@ -79,11 +83,10 @@ public class bossair {
 	}
 	
 	/**
-	 * 
-	 * @param r - not sure
-	 * @return whether or not the boss is shooting
+	 * Uses random number to determine whether boss shoots
+	 * @return true if the boss is shooting
 	 */
-	public boolean shooting(int r){
+	public boolean shooting(){
 		if(x==tmp){
 			return true; 
 		}
@@ -119,10 +122,10 @@ public class bossair {
 		
 	}
 	
-	/**
-	 * 
-	 * @param g2d so GUI methods can be applied to draw the tank onto JPanel
-	 */
+	/** 
+	 * Function to draw aerial boss on side-scrolling window
+	 * @param g2d to apply graphical methods 
+	*/
 	public void Draw(Graphics2D g2d){
 		g2d.drawImage(bossairimg, x, y, null); 
 	}
