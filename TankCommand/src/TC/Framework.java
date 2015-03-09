@@ -291,7 +291,7 @@ public class Framework extends drawingpanel{
 				g2d.drawImage(title, width/2-title.getWidth()/2+30, height/4-50, null);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 18));
 				g2d.setColor(Color.YELLOW); 
-				g2d.drawString("Heighest Score: "+String.valueOf(i), width/2-80, height/8);
+				g2d.drawString("Highest Score: "+String.valueOf(i), width/2-80, height/8);
 				g2d.setColor(Color.GRAY); 
 				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 50,  height/2);
 				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 8 + 50, height / 2 + 30);
