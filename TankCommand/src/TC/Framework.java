@@ -25,56 +25,99 @@ import java.applet.AudioClip;
 
 public class Framework extends drawingpanel{
 	
-	//pause time 
-	public static boolean pause=false; 
+	/** 
+ 	 * A boolean that tests whether the pause menu is up or not.
+ 	 */ 
+	public static boolean pause=false;
+	
+	/** 
+ 	 * A boolean that tests if music is playing.
+ 	 */ 
 	public static boolean musicplay=true; 
 
-	//Framework dimensions 
-	public static int width; 
+	/** 
+ 	 * Width of the framework.
+ 	 */
+	public static int width;
+
+	/** 
+ 	 * Height of the framework.
+ 	 */ 
 	public static int height;
  
-	//nanoseconds; 
+	/** 
+ 	 * Nanoseconds that are used for the game time.
+ 	 */
 	public static long nanosecond=1000000000L;
  
-	//one millisecond in nanoseconds 
+	/** 
+ 	 * Milliseconds that are used for the game time.
+ 	 */ 
 	public static long milisecond=1000000L; 
 	
-	//the frame should update 60 times per second in order to be smooth. 
-	private int fps=60; 
-	public int highscore; 
+	private int fps=60;
+
+	/** 
+ 	 * A value that represents the highscore of the game.
+ 	 */ 
+	public int highscore;
+	
+	/** 
+ 	 * A temporary updatescore object that sets up the highscore file.
+ 	 */ 
 	public updatescore tmp = new updatescore(1); 
 	
-	//period during two updates:
 	private long period = nanosecond/fps; 
 	
-	//enumeration of each game state
+	/** 
+ 	 * Enumeration of each game state.
+ 	 */
 	public static enum GameState{starting, gameloading, main_menu, options, playing, gameover, destroyed, visualizing, pause} 
 	
-	//current game state:
+	/** 
+ 	 * Current game state.
+ 	 */
 	public static GameState gamestate; 
 	
-	//game running time; 
-	public long gametime; 
-	public long lasttime; 
-	
-	public game game; 
+	/** 
+ 	 * Game running time.
+ 	 */ 
+	public long gametime;
+
+	/** 
+ 	 * Game's last running time.
+ 	 */ 
+	public long lasttime;
+
+	/** 
+ 	 * The game.
+ 	 */ 	
+	public game game;
+
 	private Font font; 
 	
-	//buttons that serve different functionalities
 	private JButton b,c,d,e,f,re,mm; 
 	
-	//Image for starting menu. 
-	private BufferedImage b1; 
-	private BufferedImage title; 
-	private BufferedImage menuborder; 
-	private BufferedImage cloud; 
+	private BufferedImage b1;
+
+	private BufferedImage title;
+  
+	private BufferedImage menuborder;
+  
+	private BufferedImage cloud;
+
 	private BufferedImage black; 	
 	
-	//number control 
+	/** 
+ 	 * Number control.
+ 	 */ 
 	public int count=0; 
 	
-	//background music 
-	static AudioClip clip; 
+	static AudioClip clip;
+
+	/** 
+ 	 * Background music.
+ 	 */  
 	public URL music; 
 	
 	/**
