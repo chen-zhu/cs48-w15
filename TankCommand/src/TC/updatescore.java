@@ -31,7 +31,7 @@ public class updatescore {
 	/**
 	 * High score file.
 	 */ 
-	File file = new File("blah.txt");
+	File file = new File("HighScore.txt");
 
 	/**
 	 * Constructor that creates a high score file if the file did not exist already
