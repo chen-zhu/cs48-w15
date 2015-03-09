@@ -33,7 +33,7 @@ public class game {
 	public Robot robot;
  
 	public playertank player;
- 
+	public updatescore highscore; 
 	public ArrayList<powerup> poweruplist; //arraylist for powerups
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
@@ -74,6 +74,7 @@ public class game {
 		superpowerlist=new ArrayList<superpower>(); 
 		enemybulletlist=new ArrayList<enemybullet>();
 		poweruplist=new ArrayList<powerup>(); 
+		highscore=new updatescore(0); 
 		
 		runaway=0; 
 		killed=0; 
@@ -396,6 +397,9 @@ public class game {
 		
 		//restart the game if the player is dead. 
 		if(!isplayeralive()){
+			highscore.changescore(killed-runaway); 
+			highscore.getscore();
+			highscore.uploadscore();
 			Framework.gamestate=Framework.gamestate.gameover; 
 			return; //stop the game
 		}
