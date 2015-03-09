@@ -61,7 +61,7 @@ public class Framework extends drawingpanel{
 	private Font font; 
 	
 	//buttons that serve different functionalities
-	private JButton b,c,d,e,f,re; 
+	private JButton b,c,d,e,f,re,mm; 
 	
 	//Image for starting menu. 
 	private BufferedImage b1; 
@@ -122,6 +122,7 @@ public class Framework extends drawingpanel{
 		lasttime=System.nanoTime();
 		game.restartgame();
 		gamestate=GameState.playing; //changing the state of the game 
+		mm.setVisible(false);
 	}
 	
 	
@@ -278,9 +279,10 @@ public class Framework extends drawingpanel{
 				g2d.drawString("Game over", width/2-70, height/4);
 				b.setVisible(false); 
 				c.setVisible(false); 
-				d.setVisible(true); 
+				d.setVisible(false); 
 				e.setVisible(true);
 				f.setVisible(false);
+				mm.setVisible(true);
 				
 				break; 
 			case main_menu: 
@@ -298,7 +300,10 @@ public class Framework extends drawingpanel{
 				g2d.drawString("Press ESC to exit.", (width/8)*3 + 50, height/2+60);
 				b.setVisible(true);
 				c.setVisible(true); 
+				d.setVisible(true);
 				e.setVisible(false);
+				re.setVisible(false);
+				f.setVisible(false);
 				
 
 				break; 
@@ -417,7 +422,7 @@ public class Framework extends drawingpanel{
 			}
 		});
 		
-		re=new JButton("    Restart!!   "); 
+		re=new JButton("    Restart   ");
 		re.setFocusable(false); 
 		re.setVisible(false);
 		add(re); 
@@ -431,6 +436,19 @@ public class Framework extends drawingpanel{
 			}
 		});
 		
+		mm=new JButton("    Main Menu   ");
+		mm.setFocusable(false);
+		mm.setVisible(false);
+		add(mm);
+		mm.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pause=false;
+				game.currThread.interrupt();
+				mm.setVisible(false);
+				f.setText("  Pause  ");
+				gamestate=gamestate.main_menu;
+			}
+		});
 		
 		//pause menu 
 		f=new JButton("    Pause    "); 
@@ -443,6 +461,7 @@ public class Framework extends drawingpanel{
 				System.out.println(pause); 
 				f.setText("  Resume  ");
 				re.setVisible(pause);
+				mm.setVisible(pause);
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
 					f.setText("    Pause    ");
