@@ -278,7 +278,7 @@ public class game {
 			Rectangle b=new Rectangle((int)po.x, (int)po.y,powerup.powerupimg.getWidth(), powerup.powerupimg.getHeight()); 
 			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
 			if(p.intersects(b)){
-				if(random.nextInt(2)==1){
+				if(po.type==1){
 					if (player.health+50>=100)
 						{player.health=100;}
 				    else 

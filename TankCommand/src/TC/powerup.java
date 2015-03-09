@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.*; 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -23,7 +24,10 @@ public class powerup {
     //power speed because the powerup will be bouncing around when dropped
 	public double xspeed = 3; 
 	public double yspeed = 7;
-
+	
+	public int type; 
+	public Random random=new Random();
+	public URL URL; 
 
     /**
      * Powerup constructor that initializes all powerup components.
@@ -34,8 +38,12 @@ public class powerup {
 	public powerup(int x, int y) {
 		this.x=x; 
 		this.y=y; 
-		
-		URL URL=this.getClass().getResource("/TC/resources/images/powerup.png"); 
+		type=random.nextInt(2); 
+		if(type==0){
+			URL=this.getClass().getResource("/TC/resources/images/powerup.png"); }
+		else {
+			URL=this.getClass().getResource("/TC/resources/images/powerup1.png");
+		}
 		try {
 			powerupimg=ImageIO.read(URL);
 		} catch (IOException e) {
