@@ -40,6 +40,8 @@ public class game {
 	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
 	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
+	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
+	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
  
 	public int runaway; //number of enemies that got away 
 	public int killed; //number of enemies that the player killed
@@ -70,7 +72,9 @@ public class game {
 		//set up
 		bulletlist=new ArrayList<bullet>();  
 		enemylist=new ArrayList<enemytank>(); 
-		groundlist=new ArrayList<enemyground>(); 
+		groundlist=new ArrayList<enemyground>();
+		bossgroundlist = new ArrayList<bossground>();
+		bossairlist = new ArrayList<bossair>();
 		superpowerlist=new ArrayList<superpower>(); 
 		enemybulletlist=new ArrayList<enemybullet>();
 		poweruplist=new ArrayList<powerup>(); 
@@ -113,6 +117,16 @@ public class game {
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
+			
+			/*
+			 * TODO: Add images for bosses in the resource directory
+			
+			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
+			bossground.bossgroundimg=ImageIO.read(bossgroundURL); //read image for bossground
+			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossair.png"); 
+			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
+		
+			*/
 		} catch (IOException e) {
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
 		} 
