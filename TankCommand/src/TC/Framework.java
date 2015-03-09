@@ -289,10 +289,7 @@ public class Framework extends drawingpanel{
 	private void drawmenu(Graphics2D g2d){
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
-		//g2d.drawImage(cloud, 0, 0, width, height, null); 
-		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
 		g2d.setColor(Color.YELLOW);
-		//g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
 		g2d.drawString("UCSB -CS48 -G08", 15, height-10);
 	}
 	
@@ -341,7 +338,8 @@ public class Framework extends drawingpanel{
 				g2d.setColor(Color.GRAY); 
 				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 30,  height/2);
 				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 10 + 20, height / 2 + 30);
-				g2d.drawString("Press ESC to exit.", (width/8)*3 + 30, height/2+60);
+				g2d.drawString("Press K end the game instantly", (width/10)*3 + 30, height/2+60);
+				g2d.drawString("Press ESC to exit.", (width/8)*3 + 30, height/2+90);
 				startButton.setVisible(true);
 				soundChangeButton.setVisible(true); 
 				musicButton.setVisible(true);
@@ -352,7 +350,6 @@ public class Framework extends drawingpanel{
 
 				break; 
 			case options:
-				//are we still doing this?
 				break; 
 			case pause: 
 				break; 
@@ -395,7 +392,7 @@ public class Framework extends drawingpanel{
 	public Framework(){
 		super();
   
-		//construct new thread. runing the thread on the same time. 
+		//Construct new thread. Running the thread on the same time. 
 		final Thread gameThread = new Thread(){
 			@Override 
 			public void run(){
@@ -416,7 +413,7 @@ public class Framework extends drawingpanel{
 		});
 		
 		
-		//change the background music 
+		//Change the background music 
 		soundChangeButton=new JButton("   Sound Change   "); 
 		soundChangeButton.setFocusable(false);
 		add(soundChangeButton);  

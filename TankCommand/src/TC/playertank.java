@@ -194,6 +194,9 @@ public class playertank {
 			    }
 			}
 		}
+		if(drawingpanel.keystate(KeyEvent.VK_K)){
+				this.health = 0;
+		}
 
 	}
 	

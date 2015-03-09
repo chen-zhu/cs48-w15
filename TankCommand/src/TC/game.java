@@ -103,16 +103,16 @@ public class game {
 			crash=Applet.newAudioClip(music1URL);
 			
 			//pics
-			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
-			cloud=ImageIO.read(cURL);
-			URL dURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
-			desert=ImageIO.read(dURL);
+			URL cloudURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
+			cloud=ImageIO.read(cloudURL);
+			URL desertURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
+			desert=ImageIO.read(desertURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
 			URL enemybulletURL=this.getClass().getResource("/TC/resources/images/enemybullet.png"); 
 			enemybullet.enemybullet=ImageIO.read(enemybulletURL);     //read image for enemybullet
-			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
-			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
+			URL powerupURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
+			superpower.superpower=ImageIO.read(powerupURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.png"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
