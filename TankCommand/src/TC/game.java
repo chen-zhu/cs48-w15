@@ -600,7 +600,17 @@ public class game {
 		    g2d.drawString("You've killed: "+killed+" enemies", 400, 530/2+20);
 		    g2d.drawString("Run away: "+runaway, 400, 530/2+70);
         	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 120);
-        	g2d.drawString("Highest Score score: " + highscore.highestscore, 400, 530/2 + 170);
+        	
+        	g2d.setFont(new Font("Results", Font.BOLD, 18));
+        	g2d.setColor(Color.YELLOW);
+        	if ((killed - runaway)>highscore.highestscore){
+            	g2d.drawString("Highest score: " + (killed - runaway), 400, 530/2 + 170);
+            	g2d.drawString("Congratulation!" , 400, 530/2 -80);
+        	}
+        	else 
+            	g2d.drawString("Highest score: " + highscore.highestscore, 400, 530/2 + 170);
+
+        	
 
 		
 	}
