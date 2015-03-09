@@ -610,7 +610,6 @@ public class game {
 	public void print(Graphics2D g2d, long gametime){
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.GRAY);
-        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 120);
 		    g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2+20);
 		    g2d.drawString("You Killed: "+killed+" enemies", 400, 530/2+70);
 		    g2d.drawString("Escaped: "+runaway, 400, 530/2+120);
