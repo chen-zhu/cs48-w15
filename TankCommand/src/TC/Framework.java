@@ -245,7 +245,7 @@ public class Framework extends drawingpanel{
 	private void drawmenu(Graphics2D g2d){
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
-		g2d.drawImage(cloud, 0, 0, width, height, null); 
+		//g2d.drawImage(cloud, 0, 0, width, height, null); 
 		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
 		g2d.setColor(Color.YELLOW);
 		//g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
