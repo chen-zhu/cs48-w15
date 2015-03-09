@@ -174,7 +174,7 @@ public class Framework extends drawingpanel{
 	 */
 	
 	private void initialize(){
-		font = new Font ("Tank Command", Font.ITALIC, 28); 
+		font = new Font ("Tank Command", Font.ITALIC, 50); 
 	}
 	
 	/**
@@ -319,7 +319,8 @@ public class Framework extends drawingpanel{
 				g2d.drawString("Press  ESC to exit." , width/2-55, height/4-75);
 				game.print(g2d, gametime); //important!!!!
 				g2d.setFont(font);
-				g2d.drawString("Game over", width/2-70, height/4);
+				g2d.setColor(Color.BLACK);
+				g2d.drawString("Game over", width/2-125, height/4);
 				b.setVisible(false); 
 				c.setVisible(false); 
 				d.setVisible(false); 
@@ -336,7 +337,7 @@ public class Framework extends drawingpanel{
 				g2d.drawImage(title, width/2-title.getWidth()/2+30, height/4-50, null);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 18));
 				g2d.setColor(Color.YELLOW); 
-				g2d.drawString("Highest Score: "+String.valueOf(i), width/2-80, height/8);
+				g2d.drawString("High Score: "+String.valueOf(i), width/2-80, height/8);
 				g2d.setColor(Color.GRAY); 
 				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 30,  height/2);
 				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 10 + 20, height / 2 + 30);
@@ -478,21 +479,7 @@ public class Framework extends drawingpanel{
 				restartgame(); 
 			}
 		});
-		
-		mm=new JButton("    Main Menu   ");
-		mm.setFocusable(false);
-		mm.setVisible(false);
-		add(mm);
-		mm.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				pause=false;
-				game.currThread.interrupt();
-				mm.setVisible(false);
-				f.setText("  Pause  ");
-				gamestate=gamestate.main_menu;
-			}
-		});
-		
+			
 		//pause menu 
 		f=new JButton("    Pause    "); 
 		f.setFocusable(false);
@@ -513,7 +500,19 @@ public class Framework extends drawingpanel{
 			}
 		});
 		
-		
+		mm=new JButton("    Main Menu   ");
+		mm.setFocusable(false);
+		mm.setVisible(false);
+		add(mm);
+		mm.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pause=false;
+				game.currThread.interrupt();
+				mm.setVisible(false);
+				f.setText("  Pause  ");
+				gamestate=gamestate.main_menu;
+			}
+		});
 	}
 	
 

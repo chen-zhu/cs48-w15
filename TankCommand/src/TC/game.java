@@ -393,8 +393,8 @@ public class game {
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
 		g2d.drawString("Rocket: "+player.superpowerfinal, 10, 40);
-		g2d.drawString("Run away: "+runaway, 250, 20);
-		g2d.drawString("bullet period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
+		g2d.drawString("Escaped: "+runaway, 250, 20);
+		g2d.drawString("Bullet Period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
 		if(player.health<0){
 			player.health=0;
 		}
@@ -610,19 +610,35 @@ public class game {
 	public void print(Graphics2D g2d, long gametime){
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.GRAY);
+<<<<<<< Updated upstream
 		g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2-30);
 		g2d.drawString("You've killed: "+killed+" enemies", 400, 530/2+20);
 		g2d.drawString("Run away: "+runaway, 400, 530/2+70);
         	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 120);
+=======
+		    g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2+20);
+		    g2d.drawString("You Killed: "+killed+" enemies", 400, 530/2+70);
+		    g2d.drawString("Escaped: "+runaway, 400, 530/2+120);
+        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 170);
+>>>>>>> Stashed changes
         	
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.YELLOW);
         	if ((killed - runaway)>highscore.highestscore){
+<<<<<<< Updated upstream
             		g2d.drawString("Highest score: " + (killed - runaway), 400, 530/2 + 170);
             		g2d.drawString("Congratulation!" , 400, 530/2 -80);
         	}
         	else 
             		g2d.drawString("Highest score: " + highscore.highestscore, 400, 530/2 + 170);
+=======
+        		g2d.setFont(new Font("Congrats", Font.BOLD, 40));
+        		g2d.drawString("New High Score: " + (killed - runaway), 315, 530/2 - 30);
+            	g2d.drawString("Congratulations!" , 315, 530/2 -85);
+        	}
+        	else 
+            	g2d.drawString("Current High Score: " + highscore.highestscore, 400, 530/2 - 30);
+>>>>>>> Stashed changes
 
         	
 
