@@ -32,9 +32,9 @@ public class bossground {
 	public static double xmovinginit=-0.05; 
 	public static double xmoving=xmovinginit; 
 		
-/**
- * Speeds the boss up in case side scroller moves faster than boss
- */
+	/**
+ 	 * Speeds the boss up in case side scroller moves faster than boss
+ 	 */
 	public static void speedup(){
 		if(bossground.periodgroundinit > Framework.nanosecond){
 				bossground.periodground-=Framework.nanosecond/18; 
@@ -43,20 +43,20 @@ public class bossground {
 			
 	}
 		
-/**
- * restarts state of the boss 
- */
+	/**
+ 	 * restarts state of the boss 
+ 	 */
 	public static void restartbossground(){
 				bossground.periodground=periodgroundinit;
 				bossground.lastcreatedground=0; 
 				bossground.xmoving=xmovinginit; 
 	}
 		
-/**
+	/**
 	 * overrides the initialized position 
 	 * @param x x coordinate of new position
 	 * @param y y coordinate of new position
- */
+ 	 */
 	public void initialize(int x, int y){
 			health = 200; 
 			this.x=x; 
@@ -65,9 +65,9 @@ public class bossground {
 			//this.tmp=random.nextInt(200)+700; 
 	}
 
-/**
- * 	controls the movement of the boss 
- */
+	/**
+ 	 * controls the movement of the boss 
+ 	 */
 	public void update(){
 			if (x<300){
 				xmoving=0.1; 
@@ -80,10 +80,10 @@ public class bossground {
 
 	}
 		
-/**
- * Uses random numbers to decide whether or not the boss is shooting
- * @return true if the boss is shooting
- */
+	/**
+ 	 * Uses random numbers to decide whether or not the boss is shooting
+ 	 * @return true if the boss is shooting
+ 	 */
 
 	public boolean shooting(){
 			if(x==tmp){
@@ -94,9 +94,9 @@ public class bossground {
 	}
 
 		
-/**
- * @param g2d allows the boss to be drawn with side-scrolling
- */
+	/**
+ 	 * @param g2d allows the boss to be drawn with side-scrolling
+ 	 */
 	public void Draw(Graphics2D g2d){
 			g2d.drawImage(bossgroundimg, x, 389, null); 
 	}
