@@ -5,31 +5,60 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
+ * Class for a boss enemy that moves on the ground.
+ *
  * @author UCSB-CS48-W15-G08
  * @version 3/8/15
- * class for a boss enemy that moves on the ground
  */
+
 public class bossground {
-	
-	//the time between enemies show 
-	public static long periodgroundinit=16*Framework.nanosecond; 
-	public static long periodground=periodgroundinit; 
-	public static long lastcreatedground=0; 
-	private Random random= new Random(); 
-		
-	//img for enemyground.java
-	public static BufferedImage bossgroundimg; 
-		
-	//health of enemy 
-	public int health; 
-			
-	//position of enemy 
+
+    /**
+     * Ground boss's initial period of appearance.
+     */
+	public static long periodgroundinit=16*Framework.nanosecond;
+
+    /**
+     * Ground boss's period of appearance.
+     */
+	public static long periodground=periodgroundinit;
+
+    /**
+     * Keeps track of how many ground bosses appeared in the game.
+     */
+	public static long lastcreatedground=0;
+
+	private Random random= new Random();
+    private int tmp=random.nextInt(300)+600;
+
+    /**
+     * Ground boss image.
+     */
+	public static BufferedImage bossgroundimg;
+
+    /**
+     * Ground boss's health.
+     */
+	public int health;
+
+    /**
+     * Ground boss's x position.
+     */
 	public int x;
+
+    /**
+     * Ground boss's x position.
+     */
 	public int y;
-	private int tmp=random.nextInt(300)+600; 
-			
-	//moving speed:
-	public static double xmovinginit=-0.05; 
+
+    /**
+     * Ground boss's initial horizontal speed.
+     */
+	public static double xmovinginit=-0.05;
+
+    /**
+     * Ground boss's initial horizontal speed.
+     */
 	public static double xmoving=xmovinginit; 
 		
 	/**

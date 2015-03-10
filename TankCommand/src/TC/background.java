@@ -11,14 +11,24 @@ import java.awt.image.*;
  * @version 3/5/15
  */
 public class background {
-	//Background image
-	public BufferedImage background; 
-	
-	//speed of rolling 
-	public double speed; 
-	
-	//position 
-	public double x[]; 
+    /**
+     * Background image.
+     */
+	public BufferedImage background;
+
+    /**
+     * Side-scrolling speed.
+     */
+	public double speed;
+
+    /**
+     * The background's various x positions.
+     */
+	public double x[];
+
+    /**
+     * The background's y position.
+     */
 	public int y;
 
     /**

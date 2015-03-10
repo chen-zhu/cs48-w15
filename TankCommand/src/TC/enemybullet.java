@@ -11,18 +11,34 @@ import java.awt.image.*;
  */ 
 
 public class enemybullet {
-	//enemy bullet image
-	public static BufferedImage enemybullet; 
-	
-	//The amount damage the bullet can give
-	public static int damage=10; 
-	
-	//position of bullet 
+    /**
+     * Enemy bullet image.
+     */
+	public static BufferedImage enemybullet;
+
+    /**
+     * The amount of damage the enemy bullet can give to the player.
+     */
+	public static int damage=10;
+
+    /**
+     * The position of the enemy bullet.
+     */
 	public double x,y;
 
-	//speed of bullet 
-	public static double speed=-4; 
-	public double xspeed; 
+    /**
+     * The overall speed of the enemy bullet.
+     */
+	public static double speed=-4;
+
+    /**
+     * The horizontal speed of the enemy bullet.
+     */
+	public double xspeed;
+
+    /**
+     * The vertical speed of the enemy bullet.
+     */
 	public double yspeed; 
 	
 	/**
