@@ -18,27 +18,53 @@ import javax.imageio.*;
  */
 
 public class enemytank {
-	//the time between enemies show 
-	public static long periodenemyinit=5*Framework.nanosecond; 
-	public static long periodenemy=periodenemyinit; 
+    /**
+     * The initial period of time between the appearance of two air enemies.
+     */
+	public static long periodenemyinit=5*Framework.nanosecond;
+
+    /**
+     * The period of time between appearances of two air enemies.
+     */
+	public static long periodenemy=periodenemyinit;
+
+    /**
+     * Keeps track of how many air enemies appeared on the screen.
+     */
 	public static long lastcreatedenemy=0; 
 	
 	//construct a random function for flying 
-	public Random random= new Random();  
+	private Random random= new Random();
 	private int tmp=random.nextInt(300)+600;
 
-	//health of enemy 
-	public int health; 
-	
-	//position of enemy 
+    /**
+     * Air enemy's health.
+     */
+	public int health;
+
+    /**
+     * Air enemy's x position on screen.
+     */
 	public int x;
+
+    /**
+     * Air enemy's y position on screen.
+     */
 	public int y;
-	
-	//moving speed:
-	public static double xmovinginit=-4; 
-	public static double xmoving=xmovinginit; 
-	
-	//image of enemy "tank"
+
+    /**
+     * Air enemy's initial horizontal speed.
+     */
+	public static double xmovinginit=-4;
+
+    /**
+     * Air enemy's horizontal speed.
+     */
+	public static double xmoving=xmovinginit;
+
+    /**
+     * Air enemy's image.
+     */
 	public static BufferedImage enemytankimg; 
 	
 	/**

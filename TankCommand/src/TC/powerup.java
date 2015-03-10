@@ -16,17 +16,43 @@ import javax.imageio.ImageIO;
  * @version 3/5/15
  */
 public class powerup {
-
+    /**
+     * The powerup image.
+     */
 	public static BufferedImage powerupimg; //image of powerup
 
+    /**
+     * The powerup's position.
+     */
 	public double x,y; //powerup location
 
-    //power speed because the powerup will be bouncing around when dropped
-	public double xspeed = 3; 
+    /**
+     * Powerup's horizontal speed because the powerup will be
+     * bouncing around when dropped by the enemy.
+     */
+	public double xspeed = 3;
+
+    /**
+     * Powerup's vertical speed because the powerup will be bouncing
+     * around when dropped by the enemy.
+     */
 	public double yspeed = 7;
-	
-	public int type; 
+
+    /**
+     * The type of powerup that can be dropped:
+     *   -Type 1: Extra superpower (rocket)
+     *   -Type 2: Extra health (+50)
+     */
+	public int type;
+
+    /**
+     * Random variable used to randomize powerup drops.
+     */
 	public Random random=new Random();
+
+    /**
+     * The variable that refers to the location of the powerup image.
+     */
 	public URL URL; 
 
     /**

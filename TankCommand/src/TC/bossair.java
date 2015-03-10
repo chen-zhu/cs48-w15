@@ -11,31 +11,59 @@ import java.util.logging.*; //useless
 import javax.imageio.*; 
 
 /**
+ * Class for enemy bosses that move in the air
+ *
  * @author UCSB-CS48-W15-G08
  * @version 3/8/15
- * class for enemy bosses that move in the air
  */
 
 public class bossair {
-	//the time between enemies show 
-	public static long periodenemyinit=16*Framework.nanosecond; 
-	public static long periodenemy=periodenemyinit; 
-	public static long lastcreatedenemy=0; 
-	
-	//construct a random function for flying 
-	public Random random= new Random();  
+    /**
+     * Air boss's initial period of appearance.
+     */
+	public static long periodenemyinit=16*Framework.nanosecond;
+
+    /**
+     * Air boss's period of appearance.
+     */
+	public static long periodenemy=periodenemyinit;
+
+    /**
+     * Keeps track of how many air bosses appeared in the game.
+     */
+	public static long lastcreatedenemy=0;
+
+	private Random random= new Random();
 	private int tmp=random.nextInt(300)+600 ;
-	//health of enemy 
-	public int health; 
-	
-	//position of enemy 
+
+    /**
+     * Air boss's health.
+     */
+	public int health;
+
+    /**
+     * Air boss's x position.
+     */
 	public int x;
+
+    /**
+     * Air boss's y position.
+     */
 	public int y;
-	
-	//moving speed:
-	public static double xmovinginit=-0.05; 
-	public static double xmoving=xmovinginit; 
-	
+
+    /**
+     * Air boss's initial horizontal speed.
+     */
+	public static double xmovinginit=-0.05;
+
+    /**
+     * Air boss's horizontal speed.
+     */
+	public static double xmoving=xmovinginit;
+
+    /**
+     * Air boss image.
+     */
 	public static BufferedImage bossairimg; 
 	
 	/**

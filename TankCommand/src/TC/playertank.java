@@ -17,37 +17,81 @@ import javax.imageio.*;
  */
 
 public class playertank {
-	
-	//the health of player tank. 
-	public int healthinit=100; //initial health.
-	public int health; 
-	
-	//position of the tank on the screen 
+    /**
+     * The player's initial health.
+     */
+	public int healthinit=100;
+
+    /**
+     * The current health of the player.
+     */
+	public int health;
+
+    /**
+     * The player's x position on the screen.
+     */
 	public int x=0;
+
+    /**
+     * The player's y position on the screen.
+     */
 	public int y=350; //tank is always on the ground except when jumping
-	
-	//movingspeed 
-	public double xspeed; 
-	public double yspeed; //used for jump? 
-	
-	//setup for super power. 
+
+    /**
+     * The player's horizontal speed.
+     */
+	public double xspeed;
+
+    /**
+     * The player's vertical speed (used for jumping).
+     */
+	public double yspeed;
+
+    /**
+     * Number of superpowers (rockets) the player has initially.
+     */
 	public int numberofsuperpower = 5;
+
+    /**
+     * The final amount of superpowers (rockets) the player has after game over or
+     * after every use of a superpower (rocket).
+     */
 	public int superpowerfinal;
 
-	
-	//image for tank 
-	public BufferedImage tank, healthbar, healthbar1; 
-	
-	//initialize the position of bullet 
+
+    /**
+     * Player tank image with health bar.
+     */
+	public BufferedImage tank, healthbar, healthbar1;
+
+    /**
+     * The player's bullet's x position.
+     */
 	public int xgunontank;
-	public int ygunontank; 
-	
-	//accelerate for jump (gravity)
-	public int xacc=4; 
-	public int yacc=1; 
-	
-	//position of gun 
-	public int xgun; 
+
+    /**
+     * The player's bullet's y position.
+     */
+	public int ygunontank;
+
+    /**
+     * The player's horizontal acceleration.
+     */
+	public int xacc=4;
+
+    /**
+     * The player's vertical acceleration. (Never used...)
+     */
+	public int yacc=1;
+
+    /**
+     * The player's gun's x position.
+     */
+	public int xgun;
+
+    /**
+     * The player's gun's y position.
+     */
 	public int ygun; 
 	
 	/**

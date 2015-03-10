@@ -22,30 +22,97 @@ import java.applet.AudioClip;
 
 public class game {
 	static Thread currThread;
-	
-	//background images 
-	public BufferedImage cloud; 
-	public BufferedImage desert; 
-	public background cloudmoving; 
+
+    /**
+     * Cloud image.
+     */
+	public BufferedImage cloud;
+
+    /**
+     * Desert image.
+     */
+	public BufferedImage desert;
+
+    /**
+     * Moving cloud image.
+     */
+	public background cloudmoving;
+
+    /**
+     * Moving desert image.
+     */
 	public background desertmoving;
  
-	private Random random= new Random(); 
+	private Random random= new Random();
+
+    /**
+     * A robot that's used as the enemy AI.
+     */
 	public Robot robot;
- 
-	public playertank player;
-	public updatescore highscore; 
-	public ArrayList<powerup> poweruplist; //arraylist for powerups
-	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
-	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
-	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
-	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
+
+    /**
+     * Player tank.
+     */
+    public playertank player;
+
+    /**
+     * High score of game that's stored in a local .txt file.
+     */
+	public updatescore highscore;
+
+    /**
+     * Array list for powerups. Keeps track of the powerups on the screen.
+     */
+	public ArrayList<powerup> poweruplist;
+
+    /**
+     * Array list for player bullets. Keeps track of the bullets on the screen.
+     */
+	public ArrayList<bullet> bulletlist;
+
+    /**
+     * Array list for superpower (rockets). Keeps track of the superpowers (rockets)
+     * that are on the screen.
+     */
+	public ArrayList<superpower> superpowerlist;
+
+    /**
+     * Array list for enemy "tanks" (planes). Keeps track of the air enemies that are
+     * on the screen.
+     */
+	public ArrayList<enemytank> enemylist;
+
+    /**
+     * Array list for ground enemies. Keeps track of the ground enemies that are
+     * on the screen.
+     */
+	public ArrayList<enemyground> groundlist;
+
+    /**
+     * Array list for enemy bullets. Keeps track of the enemy bullets that are
+     * on the screen.
+     */
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
+<<<<<<< HEAD
 	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
 	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
  
 	public int runaway; //number of enemies that got away 
 	public int killed; //number of enemies that the player killed
  
+=======
+
+    /**
+     * Number of enemies that got away.
+     */
+	public int runaway;
+
+    /**
+     * Number of enemies that the player killed.
+     */
+	public int killed;
+
+>>>>>>> tamky
 	AudioClip explode, attack, rocket, crash; //music and sound effects for game
 	
 	static Thread threadForInitGame;

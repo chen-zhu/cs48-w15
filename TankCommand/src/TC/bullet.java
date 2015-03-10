@@ -11,23 +11,51 @@ import java.awt.image.*;
  */
 
 public class bullet {
-	
-	//set timeperiod for shooting bullet. 
+
+    /**
+     * This is the time between two bullets.
+     */
 	public static long bulletperiod = (long) (Framework.nanosecond/.5); //time between the two bullet <------changed the
-	                                                                    // data to change the frequency of the bullet.
-	public static long lastcreatbullet=0; 
-		
-	//bulletimage 
-	public static BufferedImage bullet; 
-	
-	//set bullet damage 
-	public static int damage=20; 
-	
-	//bulletposition 
+	                                                                   // data to change the frequency of the bullet.
+
+    /**
+     * Keeps track of how many bullets were shot.
+     */
+	public static long lastcreatbullet=0;
+
+    /**
+     * Bullet image.
+     */
+	public static BufferedImage bullet;
+
+    /**
+     * The amount of damage the bullet can do.
+     */
+	public static int damage=20;
+
+    /**
+     * The bullet's position.
+     */
 	public double x,y;
+
+    /**
+     * The bullet's overall speed.
+     */
 	public static double speed=8;
-	public double xspeed; 
-	public double yspeed; 
+
+    /**
+     * The bullet's horizontal speed.
+     */
+	public double xspeed;
+
+    /**
+     * The bullet's vertical speed.
+     */
+	public double yspeed;
+
+    /**
+     * A temporary variable for testing purposes.
+     */
 	public  int tmp=0;
 
     /**
