@@ -111,15 +111,12 @@ public class bossair {
 	}
 	
 	/**
-	 * Uses random number to determine whether boss shoots
-	 * @return true if the boss is shooting
+	 * check to see whether the air boss is still alive
+	 * @return true if the boss is alive
 	 */
-	public boolean shooting(){
-		if(x==tmp){
-			return true; 
-		}
-		else 
-			return false; 
+	public boolean isAlive(){
+		if(health>0) return true;
+		else return false;
 	}
 
 	

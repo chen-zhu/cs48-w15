@@ -110,16 +110,12 @@ public class bossground {
 	}
 		
 	/**
- 	 * Uses random numbers to decide whether or not the boss is shooting
- 	 * @return true if the boss is shooting
- 	 */
-
-	public boolean shooting(){
-			if(x==tmp){
-				return true; 
-			}
-			else 
-				return false; 
+	 * checks to see if the ground boss is still alive
+	 * @return true if the boss is alive
+	 */
+	public boolean isAlive(){
+		if(health>0) return true;
+		else return false;
 	}
 
 		

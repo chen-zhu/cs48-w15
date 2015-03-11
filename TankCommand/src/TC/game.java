@@ -87,22 +87,22 @@ public class game {
      * on the screen.
      */
 	public ArrayList<enemyground> groundlist;
-
-    /**
+	/**
+	 * Array list for ground bosses. Keeps track of the ground bosses that are
+	 * on the screen
+	 */
+	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
+	/**
+	 * Array list for air bosses. Keeps track of the air bosses that are 
+	 * on the screen
+	 */
+	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
+	/**
      * Array list for enemy bullets. Keeps track of the enemy bullets that are
      * on the screen.
      */
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
-<<<<<<< HEAD
-	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
-	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
- 
-	public int runaway; //number of enemies that got away 
-	public int killed; //number of enemies that the player killed
- 
-=======
-
-    /**
+	/**
      * Number of enemies that got away.
      */
 	public int runaway;
@@ -112,7 +112,7 @@ public class game {
      */
 	public int killed;
 
->>>>>>> tamky
+
 	AudioClip explode, attack, rocket, crash; //music and sound effects for game
 	
 	static Thread threadForInitGame;
@@ -238,7 +238,6 @@ public class game {
 	/**
 	 * Sends signal to let ground enemy shoot.
 	 */
-
 	public void isgroundenemyshooting(){
 		for (int i =0; i<groundlist.size(); i++){
 			if(groundlist.get(i).shooting()){
@@ -251,7 +250,6 @@ public class game {
 	/**
 	 * Sends signal to let enemy "tank" shoot.
 	 */
-
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
 			if(enemylist.get(i).shooting()){
@@ -261,6 +259,30 @@ public class game {
 			if(enemylist.get(i).shooting()){
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	/**
+	 * Sends signal to let boss ground shoot
+	 */
+	public void isbossgroundshooting(){
+		for (int i=0; i<bossgroundlist.size(); i++){
+			while(bossgroundlist.get(i).isAlive()){
+				enemybullet bgb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y +50); 
+				enemybulletlist.add(bgb); 
+			}
+		}
+	}
+	
+	/**
+	 * Sends signal to let boss air shoot
+	 */
+	public void isbossairshooting(){
+		for(int i=0; i<bossairlist.size(); i++){
+			while(bossairlist.get(i).isAlive()){
+				enemybullet bab = new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y);
+				enemybulletlist.add(bab);
 			}
 		}
 	}
@@ -309,6 +331,20 @@ public class game {
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
 				if (b.intersects(f)){
 					rr.health-=bullet.damage; 
+				}
+			}
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground bg=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(bg.x, bg.y,bg.bossgroundimg.getWidth(), bg.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					bg.health-=bullet.damage; 
+				}
+			}
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair ba=bossairlist.get(t); 
+				Rectangle f=new Rectangle(ba.x, ba.y,ba.bossairimg.getWidth(), ba.bossairimg.getHeight()); 
+				if (b.intersects(f)){
+					ba.health-=bullet.damage; 
 				}
 			} 
 
@@ -396,8 +432,7 @@ public class game {
 				if (b.intersects(e)){
 					r.health-=s.superdamage; 
 				}
-			}
-			
+			}			
 			for (int t=0; t<groundlist.size(); t++){
 				enemyground rr=groundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
@@ -405,9 +440,20 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
-
-
-			
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground bg=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(bg.x, bg.y,bg.bossgroundimg.getWidth(), bg.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					bg.health-=bullet.damage; 
+				}
+			}
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair ba=bossairlist.get(t); 
+				Rectangle f=new Rectangle(ba.x, ba.y,ba.bossairimg.getWidth(), ba.bossairimg.getHeight()); 
+				if (b.intersects(f)){
+					ba.health-=bullet.damage; 
+				}
+			}
 		}
 	}
 	
@@ -436,6 +482,20 @@ public class game {
 			groundlist.get(i).Draw(g2d);
 		}
 		
+		/* TODO: uncomment once images are added to resource folder
+		 * draw bossground
+		
+		for (int i=0; i<bossgroundlist.size(); i++){
+			bossgroundlist.get(i).Draw(g2d);
+		}
+				
+		//draw bossair
+		for (int i=0; i<bossairlist.size(); i++){
+			bossairlist.get(i).Draw(g2d);
+		}
+		
+		*/
+				
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);
