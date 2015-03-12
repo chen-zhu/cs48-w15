@@ -124,6 +124,8 @@ public class bossground {
 
 		
 	/**
+     * Draws the ground boss.
+     *
  	 * @param g2d allows the boss to be drawn with side-scrolling
  	 */
 	public void Draw(Graphics2D g2d){
