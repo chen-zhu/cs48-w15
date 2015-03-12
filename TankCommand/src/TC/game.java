@@ -263,6 +263,8 @@ public class game {
 				bossground rr=bossgroundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
 				if (b.intersects(f)){
+					if(Framework.musicplay){
+						crash.play();}
 					rr.health-=bullet.damage; 
 				}
 			} 
