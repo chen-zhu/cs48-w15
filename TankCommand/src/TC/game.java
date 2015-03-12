@@ -40,6 +40,8 @@ public class game {
 	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
 	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
+	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
+	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
  
 	public int runaway; //number of enemies that got away 
 	public int killed; //number of enemies that the player killed
@@ -70,7 +72,9 @@ public class game {
 		//set up
 		bulletlist=new ArrayList<bullet>();  
 		enemylist=new ArrayList<enemytank>(); 
-		groundlist=new ArrayList<enemyground>(); 
+		groundlist=new ArrayList<enemyground>();
+		bossgroundlist = new ArrayList<bossground>();
+		bossairlist = new ArrayList<bossair>();
 		superpowerlist=new ArrayList<superpower>(); 
 		enemybulletlist=new ArrayList<enemybullet>();
 		poweruplist=new ArrayList<powerup>(); 
@@ -99,20 +103,30 @@ public class game {
 			crash=Applet.newAudioClip(music1URL);
 			
 			//pics
-			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
-			cloud=ImageIO.read(cURL);
-			URL dURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
-			desert=ImageIO.read(dURL);
+			URL cloudURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
+			cloud=ImageIO.read(cloudURL);
+			URL desertURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
+			desert=ImageIO.read(desertURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
 			URL enemybulletURL=this.getClass().getResource("/TC/resources/images/enemybullet.png"); 
 			enemybullet.enemybullet=ImageIO.read(enemybulletURL);     //read image for enemybullet
-			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
-			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
+			URL powerupURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
+			superpower.superpower=ImageIO.read(powerupURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.png"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
+			
+			/*
+			 * TODO: Add images for bosses in the resource directory
+			
+			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
+			bossground.bossgroundimg=ImageIO.read(bossgroundURL); //read image for bossground
+			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossair.png"); 
+			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
+		
+			*/
 		} catch (IOException e) {
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
 		} 
@@ -379,8 +393,8 @@ public class game {
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
 		g2d.drawString("Rocket: "+player.superpowerfinal, 10, 40);
-		g2d.drawString("Run away: "+runaway, 250, 20);
-		g2d.drawString("bullet period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
+		g2d.drawString("Escaped: "+runaway, 250, 20);
+		g2d.drawString("Bullet Period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
 		if(player.health<0){
 			player.health=0;
 		}
@@ -596,24 +610,20 @@ public class game {
 	public void print(Graphics2D g2d, long gametime){
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.GRAY);
-		    g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2-30);
-		    g2d.drawString("You've killed: "+killed+" enemies", 400, 530/2+20);
-		    g2d.drawString("Run away: "+runaway, 400, 530/2+70);
-        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 120);
+		    g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2+20);
+		    g2d.drawString("You Killed: "+killed+" enemies", 400, 530/2+70);
+		    g2d.drawString("Escaped: "+runaway, 400, 530/2+120);
+        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 170);
         	
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.YELLOW);
-        	if ((killed - runaway)>highscore.highestscore){
-            	g2d.drawString("Highest score: " + (killed - runaway), 400, 530/2 + 170);
-            	g2d.drawString("Congratulation!" , 400, 530/2 -80);
+        	if ((killed - runaway)>highscore.highestscore){	
+        		g2d.setFont(new Font("Congrats", Font.BOLD, 40));
+        		g2d.drawString("New High Score: " + (killed - runaway), 315, 530/2 - 30);
+            	g2d.drawString("Congratulations!" , 315, 530/2 -85);
         	}
         	else 
-            	g2d.drawString("Highest score: " + highscore.highestscore, 400, 530/2 + 170);
-
+            	g2d.drawString("Current High Score: " + highscore.highestscore, 400, 530/2 - 30);   	
         	
-
-		
 	}
-	
-
 }

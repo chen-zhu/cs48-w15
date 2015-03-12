@@ -25,56 +25,99 @@ import java.applet.AudioClip;
 
 public class Framework extends drawingpanel{
 	
-	//pause time 
-	public static boolean pause=false; 
+	/** 
+ 	 * A boolean that tests whether the pause menu is up or not.
+ 	 */ 
+	public static boolean pause=false;
+	
+	/** 
+ 	 * A boolean that tests if music is playing.
+ 	 */ 
 	public static boolean musicplay=true; 
 
-	//Framework dimensions 
-	public static int width; 
+	/** 
+ 	 * Width of the framework.
+ 	 */
+	public static int width;
+
+	/** 
+ 	 * Height of the framework.
+ 	 */ 
 	public static int height;
  
-	//nanoseconds; 
+	/** 
+ 	 * Nanoseconds that are used for the game time.
+ 	 */
 	public static long nanosecond=1000000000L;
  
-	//one millisecond in nanoseconds 
+	/** 
+ 	 * Milliseconds that are used for the game time.
+ 	 */ 
 	public static long milisecond=1000000L; 
 	
-	//the frame should update 60 times per second in order to be smooth. 
-	private int fps=60; 
-	public int highscore; 
+	private int fps=60;
+
+	/** 
+ 	 * A value that represents the highscore of the game.
+ 	 */ 
+	public int highscore;
+	
+	/** 
+ 	 * A temporary updatescore object that sets up the highscore file.
+ 	 */ 
 	public updatescore tmp = new updatescore(1); 
 	
-	//period during two updates:
 	private long period = nanosecond/fps; 
 	
-	//enumeration of each game state
+	/** 
+ 	 * Enumeration of each game state.
+ 	 */
 	public static enum GameState{starting, gameloading, main_menu, options, playing, gameover, destroyed, visualizing, pause} 
 	
-	//current game state:
+	/** 
+ 	 * Current game state.
+ 	 */
 	public static GameState gamestate; 
 	
-	//game running time; 
-	public long gametime; 
-	public long lasttime; 
-	
-	public game game; 
+	/** 
+ 	 * Game running time.
+ 	 */ 
+	public long gametime;
+
+	/** 
+ 	 * Game's last running time.
+ 	 */ 
+	public long lasttime;
+
+	/** 
+ 	 * The game.
+ 	 */ 	
+	public game game;
+
 	private Font font; 
 	
-	//buttons that serve different functionalities
-	private JButton b,c,d,e,f,re,mm; 
+	private JButton startButton,soundChangeButton,musicButton,restartButton1,pauseButton,restartButton2,mainMenuButton; 
 	
-	//Image for starting menu. 
-	private BufferedImage b1; 
-	private BufferedImage title; 
-	private BufferedImage menuborder; 
-	private BufferedImage cloud; 
+	private BufferedImage b1;
+
+	private BufferedImage title;
+  
+	private BufferedImage menuborder;
+  
+	private BufferedImage cloud;
+
 	private BufferedImage black; 	
 	
-	//number control 
+	/** 
+ 	 * Number control.
+ 	 */ 
 	public int count=0; 
 	
-	//background music 
-	static AudioClip clip; 
+	static AudioClip clip;
+
+	/** 
+ 	 * Background music.
+ 	 */  
 	public URL music; 
 	
 	/**
@@ -122,7 +165,7 @@ public class Framework extends drawingpanel{
 		lasttime=System.nanoTime();
 		game.restartgame();
 		gamestate=GameState.playing; //changing the state of the game 
-		mm.setVisible(false);
+		mainMenuButton.setVisible(false);
 	}
 	
 	
@@ -131,7 +174,7 @@ public class Framework extends drawingpanel{
 	 */
 	
 	private void initialize(){
-		font = new Font ("Tank Command", Font.ITALIC, 28); 
+		font = new Font ("Tank Command", Font.ITALIC, 50); 
 	}
 	
 	/**
@@ -246,10 +289,7 @@ public class Framework extends drawingpanel{
 	private void drawmenu(Graphics2D g2d){
 		g2d.setBackground(Color.green);
 		g2d.drawImage(b1, 0, 0, width, height, null); 
-		//g2d.drawImage(cloud, 0, 0, width, height, null); 
-		//g2d.drawImage(menuborder, 0, 0, width, height, null); 
 		g2d.setColor(Color.YELLOW);
-		//g2d.setFont(new Font("whatevereverever", Font.BOLD, 20));
 		g2d.drawString("UCSB -CS48 -G08", 15, height-10);
 	}
 	
@@ -264,11 +304,11 @@ public class Framework extends drawingpanel{
 		switch (gamestate){
 			case playing: 
 				game.Draw(g2d);
-				b.setVisible(false); 
-				c.setVisible(false); 
-				d.setVisible(false); 
-				e.setVisible(false);
-				f.setVisible(true);
+				startButton.setVisible(false); 
+				soundChangeButton.setVisible(false); 
+				musicButton.setVisible(false); 
+				restartButton1.setVisible(false);
+				pauseButton.setVisible(true);
 				break; 
 			case gameover: 
 				drawmenu(g2d); 
@@ -276,13 +316,14 @@ public class Framework extends drawingpanel{
 				g2d.drawString("Press  ESC to exit." , width/2-55, height/4-75);
 				game.print(g2d, gametime); //important!!!!
 				g2d.setFont(font);
-				g2d.drawString("Game over", width/2-70, height/4);
-				b.setVisible(false); 
-				c.setVisible(false); 
-				d.setVisible(false); 
-				e.setVisible(true);
-				f.setVisible(false);
-				mm.setVisible(true);
+				g2d.setColor(Color.BLACK);
+				g2d.drawString("Game over", width/2-125, height/4);
+				startButton.setVisible(false); 
+				soundChangeButton.setVisible(false); 
+				musicButton.setVisible(false); 
+				restartButton1.setVisible(true);
+				pauseButton.setVisible(false);
+				mainMenuButton.setVisible(true);
 				
 				break; 
 			case main_menu: 
@@ -293,22 +334,22 @@ public class Framework extends drawingpanel{
 				g2d.drawImage(title, width/2-title.getWidth()/2+30, height/4-50, null);
 				g2d.setFont(new Font("whatevereverever", Font.BOLD, 18));
 				g2d.setColor(Color.YELLOW); 
-				g2d.drawString("Highest Score: "+String.valueOf(i), width/2-80, height/8);
+				g2d.drawString("High Score: "+String.valueOf(i), width/2-80, height/8);
 				g2d.setColor(Color.GRAY); 
-				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 50,  height/2);
-				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 8 + 50, height / 2 + 30);
-				g2d.drawString("Press ESC to exit.", (width/8)*3 + 50, height/2+60);
-				b.setVisible(true);
-				c.setVisible(true); 
-				d.setVisible(true);
-				e.setVisible(false);
-				re.setVisible(false);
-				f.setVisible(false);
+				g2d.drawString("Use A, W, D or the arrow keys to move the tank." , width/4 + 30,  height/2);
+				g2d.drawString("Press left mouse button to fire bullet and right mouse button to use rocket.", width / 10 + 20, height / 2 + 30);
+				g2d.drawString("Press K end the game instantly", (width/10)*3 + 30, height/2+60);
+				g2d.drawString("Press ESC to exit.", (width/8)*3 + 30, height/2+90);
+				startButton.setVisible(true);
+				soundChangeButton.setVisible(true); 
+				musicButton.setVisible(true);
+				restartButton1.setVisible(false);
+				restartButton2.setVisible(false);
+				pauseButton.setVisible(false);
 				
 
 				break; 
 			case options:
-				//are we still doing this?
 				break; 
 			case pause: 
 				break; 
@@ -317,10 +358,10 @@ public class Framework extends drawingpanel{
 				g2d.setColor(Color.white); 
 				g2d.setFont(new Font("what wtahttttttt", Font.ITALIC, 20));
 				g2d.drawString("Game is Loading!", 800/2, 530/2); 
-				b.setVisible(false); 
-				c.setVisible(false); 
-				d.setVisible(false); 
-				e.setVisible(false);
+				startButton.setVisible(false); 
+				soundChangeButton.setVisible(false); 
+				musicButton.setVisible(false); 
+				restartButton1.setVisible(false);
 				break; 
 		}
 	}
@@ -351,7 +392,7 @@ public class Framework extends drawingpanel{
 	public Framework(){
 		super();
   
-		//construct new thread. runing the thread on the same time. 
+		//Construct new thread. Running the thread on the same time. 
 		final Thread gameThread = new Thread(){
 			@Override 
 			public void run(){
@@ -362,115 +403,113 @@ public class Framework extends drawingpanel{
 			
 
 		gamestate = GameState.visualizing; 
-		b=new JButton("       Start       "); 
-		b.setFocusable(false);
-		add(b);
-		b.addActionListener(new ActionListener(){
+		startButton=new JButton("       Start       "); 
+		startButton.setFocusable(false);
+		add(startButton);
+		startButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				newgame(); 
 			}
 		});
 		
 		
-		//change the background music 
-		c=new JButton("   Sound Change   "); 
-		c.setFocusable(false);
-		add(c);  
-		c.addActionListener(new ActionListener(){
+		//Change the background music 
+		soundChangeButton=new JButton("   Sound Change   "); 
+		soundChangeButton.setFocusable(false);
+		add(soundChangeButton);  
+		soundChangeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				count++; 
 				if(count % 3 == 0){
 					music=this.getClass().getResource("/TC/resources/sound/firework1.wav");
 					clip = Applet.newAudioClip(music);
-					c.setText("   \"Firework\"   ");
+					soundChangeButton.setText("   \"Firework\"   ");
 				}
 				else if(count%3 == 1){
 					music=this.getClass().getResource("/TC/resources/sound/firework.wav");
 					clip = Applet.newAudioClip(music);
-					c.setText("   \"Desperate\"   ");
+					soundChangeButton.setText("   \"Desperate\"   ");
 				}
 				else if(count%3 == 2){
 					music=this.getClass().getResource("/TC/resources/sound/Space.wav");
 					clip = Applet.newAudioClip(music);
-					c.setText("  \"Blank Space\"  ");	
+					soundChangeButton.setText("     \"grave\"     ");	
 				}
 			}
 		}); 
 		
 		
-		d=new JButton("   Music On   "); 
-		d.setFocusable(false);
-		add(d); 
-		d.addActionListener(new ActionListener(){
+		musicButton=new JButton("   Music On   "); 
+		musicButton.setFocusable(false);
+		add(musicButton); 
+		musicButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				musicplay=!musicplay;
-				if(d.getText()=="   Music On   "){
-				d.setText("   Music Off   "); }
+				if(musicButton.getText()=="   Music On   "){
+				musicButton.setText("   Music Off   "); }
 				else 
-					d.setText("   Music On   ");
+					musicButton.setText("   Music On   ");
 			}
 		});
 		
 		
-		e=new JButton("    Restart    "); 
-		e.setFocusable(false);
-		e.setVisible(false);
-		add(e); 
-		e.addActionListener(new ActionListener(){
+		restartButton1=new JButton("    Restart    "); 
+		restartButton1.setFocusable(false);
+		restartButton1.setVisible(false);
+		add(restartButton1); 
+		restartButton1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				restartgame(); 
 			}
 		});
 		
-		re=new JButton("    Restart   ");
-		re.setFocusable(false); 
-		re.setVisible(false);
-		add(re); 
-		re.addActionListener(new ActionListener(){
+		restartButton2=new JButton("    Restart   ");
+		restartButton2.setFocusable(false); 
+		restartButton2.setVisible(false);
+		add(restartButton2); 
+		restartButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pause=false; 
 				game.currThread.interrupt();
-				f.setText("    Pause    ");
-				re.setVisible(false); 
+				pauseButton.setText("    Pause    ");
+				restartButton2.setVisible(false); 
 				restartgame(); 
 			}
 		});
-		
-		mm=new JButton("    Main Menu   ");
-		mm.setFocusable(false);
-		mm.setVisible(false);
-		add(mm);
-		mm.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				pause=false;
-				game.currThread.interrupt();
-				mm.setVisible(false);
-				f.setText("  Pause  ");
-				gamestate=gamestate.main_menu;
-			}
-		});
-		
+			
 		//pause menu 
-		f=new JButton("    Pause    "); 
-		f.setFocusable(false);
-		f.setVisible(false);
-		add(f); 
-		f.addActionListener(new ActionListener(){
+		pauseButton=new JButton("    Pause    "); 
+		pauseButton.setFocusable(false);
+		pauseButton.setVisible(false);
+		add(pauseButton); 
+		pauseButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pause=!pause; 
 				System.out.println(pause); 
-				f.setText("  Resume  ");
-				re.setVisible(pause);
-				mm.setVisible(pause);
+				pauseButton.setText("  Resume  ");
+				restartButton2.setVisible(pause);
+				mainMenuButton.setVisible(pause);
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
-					f.setText("    Pause    ");
+					pauseButton.setText("    Pause    ");
 				}
 				System.out.println(game.currThread.getName()+" "+game.currThread.getState());
 			}
 		});
 		
-		
+		mainMenuButton=new JButton("    Main Menu   ");
+		mainMenuButton.setFocusable(false);
+		mainMenuButton.setVisible(false);
+		add(mainMenuButton);
+		mainMenuButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pause=false;
+				game.currThread.interrupt();
+				mainMenuButton.setVisible(false);
+				pauseButton.setText("  Pause  ");
+				gamestate=gamestate.main_menu;
+			}
+		});
 	}
 	
 
