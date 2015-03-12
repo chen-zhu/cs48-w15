@@ -12,7 +12,7 @@ import java.util.Random;
 public class bossground {
 	
 	//the time between enemies show 
-	public static long periodgroundinit=16*Framework.nanosecond; 
+	public static long periodgroundinit=16*Framework.nanosecond; //change to 16
 	public static long periodground=periodgroundinit; 
 	public static long lastcreatedground=0; 
 	private Random random= new Random(); 
@@ -27,6 +27,10 @@ public class bossground {
 	public int x;
 	public int y;
 	private int tmp=random.nextInt(300)+600; 
+	private int tmp1=random.nextInt(300)+400; 
+	private int tmp2=random.nextInt(300)+200; 
+
+
 			
 	//moving speed:
 	public static double xmovinginit=-0.05; 
@@ -69,8 +73,8 @@ public class bossground {
  	 * controls the movement of the boss 
  	 */
 	public void update(){
-			if (x<300){
-				xmoving=0.1; 
+			if (x<200){
+				xmoving=1; 
 			}
 			if (x>900){     
 				xmoving=-0.1; 
@@ -86,7 +90,7 @@ public class bossground {
  	 */
 
 	public boolean shooting(){
-			if(x==tmp){
+			if(x==tmp || x==tmp1 || x==tmp2){
 				return true; 
 			}
 			else 
@@ -98,7 +102,7 @@ public class bossground {
  	 * @param g2d allows the boss to be drawn with side-scrolling
  	 */
 	public void Draw(Graphics2D g2d){
-			g2d.drawImage(bossgroundimg, x, 389, null); 
+			g2d.drawImage(bossgroundimg, x, 380, null); 
 	}
 
 

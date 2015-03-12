@@ -117,6 +117,8 @@ public class game {
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
+			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
+			bossground.bossgroundimg=ImageIO.read(bossgroundURL);
 			
 			/*
 			 * TODO: Add images for bosses in the resource directory
@@ -168,6 +170,23 @@ public class game {
 		}
 	}
 	
+	
+	/**
+	 * When player right clicks, it sends out rockets that wipe out all enemies on the screen.
+	 * Sound effect is played.
+	 */
+
+	public void isplayerusingsuperpower(long gametime){
+		if(player.superpowering(gametime)){
+			if(Framework.musicplay){
+			rocket.play(); }
+			superpower.lastcreatsuperpower=gametime; 
+			superpower s=new superpower(); 
+			superpowerlist.add(s); 
+		}
+	}
+	
+	
 	/**
 	 * Sends signal to let ground enemy shoot.
 	 */
@@ -176,6 +195,19 @@ public class game {
 		for (int i =0; i<groundlist.size(); i++){
 			if(groundlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(groundlist.get(i).x, groundlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	/**
+	 * Sends signal to let ground boss shoot.
+	 */
+
+	public void isgroundbossshooting(long gametime){
+		for (int i =0; i<bossgroundlist.size(); i++){
+			if(bossgroundlist.get(i).shooting()){
+				enemybullet enb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
 		}
@@ -198,22 +230,7 @@ public class game {
 		}
 	}
 	
-	/**
-	 * When player right clicks, it sends out rockets that wipe out all enemies on the screen.
-	 * Sound effect is played.
-	 */
 
-	public void isplayerusingsuperpower(long gametime){
-		if(player.superpowering(gametime)){
-			if(Framework.musicplay){
-			rocket.play(); }
-			superpower.lastcreatsuperpower=gametime; 
-			superpower s=new superpower(); 
-			superpowerlist.add(s); 
-		}
-	}
-	
-	
 	/**
 	 * Make bullet move.
 	 */
@@ -240,6 +257,13 @@ public class game {
 			for (int t=0; t<groundlist.size(); t++){
 				enemyground rr=groundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			} 
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground rr=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
 				if (b.intersects(f)){
 					rr.health-=bullet.damage; 
 				}
@@ -338,6 +362,14 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
+			
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground rr=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			}
 
 
 			
@@ -367,6 +399,11 @@ public class game {
 		//draw enemyground
 		for (int i=0; i<groundlist.size(); i++){
 			groundlist.get(i).Draw(g2d);
+		}
+		
+		//draw enemyground
+		for (int i=0; i<bossgroundlist.size(); i++){
+			bossgroundlist.get(i).Draw(g2d);
 		}
 		
 		//draw arraylist for bullet 
@@ -429,6 +466,7 @@ public class game {
 		//go through all the groundenemy 
 		isgroundenemyshooting();
 		isenemyshooting(); 
+		isgroundbossshooting(gametime); 
 		//update bullet action
 		updatebullet(); 
 		updatesuperpower(); 
@@ -436,6 +474,9 @@ public class game {
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
+		//update groundboss
+		createbossground(gametime); 
+		updatebossground(); 
 		//update powerup 
 		updatepowerup();
 		//update the enemyground 
@@ -449,10 +490,6 @@ public class game {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} }
-		/*if(Framework.pause == false && Thread.currentThread().getState()==Thread.State.TIMED_WAITING){
-			Thread.currentThread().interrupt();
-		}*/
-		//System.out.println(Thread.currentThread().getName()+" "+Thread.currentThread().getState()); 
 	}
 	
 	
@@ -471,6 +508,24 @@ public class game {
 			enemyground.lastcreatedground=gametime; 
 		}
 	}
+	
+	
+	/** 
+	 * Creates the ground boss when it comes to the right time.
+	 */ 
+
+	public void createbossground(long gametime){
+		if (gametime-bossground.lastcreatedground>=bossground.periodground && bossgroundlist.size()==0){
+			bossground r = new bossground(); 
+			r.initialize(Framework.width,1);
+			//System.out.println("1");
+			bossgroundlist.add(r); 
+			//System.out.println("2");
+			bossground.speedup();
+			bossground.lastcreatedground=gametime; 
+		}
+	}
+	
 	
 	/** 
 	 * Update all the ground enemy in the list(making the move and remove from the list if they do not exist)
@@ -502,6 +557,35 @@ public class game {
 				groundlist.remove(i); 
 				runaway+=1; }
 			
+		}
+	}
+	
+	/** 
+	 * Update all the ground enemy in the list(making the move and remove from the list if they do not exist)
+	 */
+ 
+	public void updatebossground(){
+		for (int i=0; i<bossgroundlist.size(); i++){
+			bossground r = bossgroundlist.get(i); 
+			r.update(); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
+			Rectangle e=new Rectangle(r.x, r.y,r.bossgroundimg.getWidth(), r.bossgroundimg.getHeight()); 
+			if(p.intersects(e)){
+				if(Framework.musicplay){crash.play();}
+                player.health-=30;
+                bossgroundlist.remove(i);
+			}
+			else {
+                if (r.health <= 0) {
+                    //attack.play();
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    bossgroundlist.remove(i);
+                    killed += 10;
+                    continue;
+                }
+            }
 		}
 	}
 	
@@ -590,6 +674,7 @@ public class game {
         player.superpowerfinal = 5;
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
+		bossground.restartbossground();
 		runaway=0; 
 		killed=0; 
 		superpower.lastcreatsuperpower=0; 
@@ -600,6 +685,7 @@ public class game {
 		superpowerlist.clear(); 
 		groundlist.clear(); 
 		poweruplist.clear(); 
+		bossgroundlist.clear();
 		if(Framework.musicplay){Framework.clip.loop();}
 	}
 	
