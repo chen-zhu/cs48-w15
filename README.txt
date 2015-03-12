@@ -14,7 +14,7 @@ TANK COMMAND READ-ME
 	b) At the command line, type in "ant" to compile all source files. Class files can be found in TankCommand/bin/TC.
 	   Upon compilation, resource files (i.e. images and sound files) will be copied into a resources directory in the bin
 	   directory from the src/resources directory.
-	c) At the command line (if you have X11 forwarding), type in "java -cp TankCommand/bin TC.Window" to run the program.
+	c) At the command line (if you have X11 forwarding enabled), type in "ant run" to run the program.
 	d) To generate a javadoc, type in "ant javadoc" at the command line.
 	e) To create a .jar file, follow the instructions in option 1.
 
