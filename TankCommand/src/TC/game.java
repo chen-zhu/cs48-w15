@@ -123,8 +123,6 @@ public class game {
 			/*
 			 * TODO: Add images for bosses in the resource directory
 			
-			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
-			bossground.bossgroundimg=ImageIO.read(bossgroundURL); //read image for bossground
 			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossair.png"); 
 			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
 		
@@ -561,7 +559,7 @@ public class game {
 	}
 	
 	/** 
-	 * Update all the ground enemy in the list(making the move and remove from the list if they do not exist)
+	 * Update all the ground boss in the list(making the move and remove from the list if they do not exist)
 	 */
  
 	public void updatebossground(){
