@@ -18,74 +18,30 @@ import javax.imageio.*;
  */
 
 public class enemytank {
-<<<<<<< HEAD
-    /**
-     * The initial period of time between the appearance of two air enemies.
-     */
-	public static long periodenemyinit=5*Framework.nanosecond;
-
-    /**
-     * The period of time between appearances of two air enemies.
-     */
-	public static long periodenemy=periodenemyinit;
-
-    /**
-     * Keeps track of how many air enemies appeared on the screen.
-     */
-	public static long lastcreatedenemy=0; 
-	
-	//construct a random function for flying 
-<<<<<<< HEAD
-	private Random random= new Random();
-	private int tmp=random.nextInt(300)+600;
-=======
 	//the time between enemies show 
 	public static long periodenemyinit=8*Framework.nanosecond; 
 	public static long periodenemy=periodenemyinit; 
 	public static long lastcreatedenemy=0; 
 	
 	//construct a random function for flying 
-=======
-
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public Random random= new Random();  
 	private int tmp=random.nextInt(300)+700;
 	private int tmp1=random.nextInt(300)+600;
 	private int tmp2=random.nextInt(300)+400;
 
-<<<<<<< HEAD
->>>>>>> origin/stone
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
-    /**
-     * Air enemy's health.
-     */
-	public int health;
-
-    /**
-     * Air enemy's x position on screen.
-     */
+	//health of enemy 
+	public int health; 
+	
+	//position of enemy 
 	public int x;
-
-    /**
-     * Air enemy's y position on screen.
-     */
 	public int y;
-
-    /**
-     * Air enemy's initial horizontal speed.
-     */
-	public static double xmovinginit=-4;
-
-    /**
-     * Air enemy's horizontal speed.
-     */
-	public static double xmoving=xmovinginit;
-
-    /**
-     * Air enemy's image.
-     */
+	
+	//moving speed:
+	public static double xmovinginit=-4; 
+	public static double xmoving=xmovinginit; 
+	
+	//image of enemy "tank"
 	public static BufferedImage enemytankimg; 
 	
 	/**

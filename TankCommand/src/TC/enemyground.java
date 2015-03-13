@@ -12,38 +12,6 @@ import java.util.Random;
  */ 
 
 public class enemyground {
-<<<<<<< HEAD
-    /**
-     * The initial period of time between the appearance of two ground enemies.
-     */
-	public static long periodgroundinit=8*Framework.nanosecond;
-
-    /**
-     * The period of time between appearances of two ground enemies.
-     */
-	public static long periodground=periodgroundinit;
-
-    /**
-     * Keeps track of how many ground enemies appeared on the screen.
-     */
-	public static long lastcreatedground=0;
-
-	private Random random= new Random();
-
-    /**
-     * Ground enemy image.
-     */
-	public static BufferedImage enemygroundimg;
-
-    /**
-     * Ground enemy health.
-     */
-	public int health;
-
-    /**
-     * Ground enemy's x position on the screen.
-     */
-=======
 	//the time between enemies show 
 	public static long periodgroundinit=10*Framework.nanosecond; 
 	public static long periodground=periodgroundinit; 
@@ -57,19 +25,8 @@ public class enemyground {
 	public int health; 
 		
 	//position of enemy 
->>>>>>> origin/stone
 	public int x;
-
-    /**
-     * Ground enemy's y position on the screen.
-     */
 	public int y;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
-
-	
 	private int tmp=random.nextInt(300)+700; 
 	private int tmp1=random.nextInt(300)+600; 
 	private int tmp2=random.nextInt(300)+450; 
@@ -78,11 +35,6 @@ public class enemyground {
 		
 	//moving speed:
 	public static double xmovinginit=-0.1; 
-<<<<<<< HEAD
->>>>>>> origin/stone
-=======
-
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public static double xmoving=xmovinginit; 
 	
 	/**

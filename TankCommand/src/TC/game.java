@@ -22,77 +22,15 @@ import java.applet.AudioClip;
 
 public class game {
 	static Thread currThread;
-
-    /**
-     * Cloud image.
-     */
-	public BufferedImage cloud;
-
-    /**
-     * Desert image.
-     */
-	public BufferedImage desert;
-
-    /**
-     * Moving cloud image.
-     */
-	public background cloudmoving;
-
-    /**
-     * Moving desert image.
-     */
+	
+	//background images 
+	public BufferedImage cloud; 
+	public BufferedImage desert; 
+	public background cloudmoving; 
 	public background desertmoving;
  
-	private Random random= new Random();
-
-    /**
-     * A robot that's used as the enemy AI.
-     */
+	private Random random= new Random(); 
 	public Robot robot;
-<<<<<<< HEAD
-
-    /**
-     * Player tank.
-     */
-    public playertank player;
-
-    /**
-     * High score of game that's stored in a local .txt file.
-     */
-	public updatescore highscore;
-
-    /**
-     * Array list for powerups. Keeps track of the powerups on the screen.
-     */
-	public ArrayList<powerup> poweruplist;
-
-    /**
-     * Array list for player bullets. Keeps track of the bullets on the screen.
-     */
-	public ArrayList<bullet> bulletlist;
-
-    /**
-     * Array list for superpower (rockets). Keeps track of the superpowers (rockets)
-     * that are on the screen.
-     */
-	public ArrayList<superpower> superpowerlist;
-
-    /**
-     * Array list for enemy "tanks" (planes). Keeps track of the air enemies that are
-     * on the screen.
-     */
-	public ArrayList<enemytank> enemylist;
-
-    /**
-     * Array list for ground enemies. Keeps track of the ground enemies that are
-     * on the screen.
-     */
-	public ArrayList<enemyground> groundlist;
-	/**
-	 * Array list for ground bosses. Keeps track of the ground bosses that are
-	 * on the screen
-	 */
-=======
  
 	public playertank player;
 	public updatescore highscore;  
@@ -102,29 +40,12 @@ public class game {
 	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
 	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
->>>>>>> origin/stone
 	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
-	/**
-	 * Array list for air bosses. Keeps track of the air bosses that are 
-	 * on the screen
-	 */
 	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
-	/**
-     * Array list for enemy bullets. Keeps track of the enemy bullets that are
-     * on the screen.
-     */
-	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
-	/**
-     * Number of enemies that got away.
-     */
-	public int runaway;
-
-    /**
-     * Number of enemies that the player killed.
-     */
-	public int killed;
-
-
+ 
+	public int runaway; //number of enemies that got away 
+	public int killed; //number of enemies that the player killed
+ 
 	AudioClip explode, attack, rocket, crash; //music and sound effects for game
 	
 	static Thread threadForInitGame;
@@ -264,6 +185,7 @@ public class game {
 	/**
 	 * Sends signal to let ground enemy shoot.
 	 */
+
 	public void isgroundenemyshooting(){
 		for (int i =0; i<groundlist.size(); i++){
 			if(groundlist.get(i).shooting()){
@@ -276,22 +198,11 @@ public class game {
 	/**
 	 * Sends signal to let ground boss shoot.
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public void isenemyshooting(){
-		for (int i =0; i<enemylist.size(); i++){
-			if(enemylist.get(i).shooting()){
-				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
-=======
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
 	public void isgroundbossshooting(long gametime){
 		for (int i =0; i<bossgroundlist.size(); i++){
 			if(bossgroundlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y+50); 
-<<<<<<< HEAD
->>>>>>> origin/stone
 				enemybulletlist.add(enb); 
 			}
 		}
@@ -301,49 +212,15 @@ public class game {
 		for (int i =0; i<bossairlist.size(); i++){
 			if(bossairlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y+50); 
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 				enemybulletlist.add(enb); 
 			}
 		}
 	}
 	
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * Sends signal to let boss ground shoot
-	 */
-	public void isbossgroundshooting(){
-		for (int i=0; i<bossgroundlist.size(); i++){
-			while(bossgroundlist.get(i).isAlive()){
-				enemybullet bgb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y +50); 
-				enemybulletlist.add(bgb); 
-			}
-		}
-	}
-	
-	/**
-	 * Sends signal to let boss air shoot
-	 */
-	public void isbossairshooting(){
-		for(int i=0; i<bossairlist.size(); i++){
-			while(bossairlist.get(i).isAlive()){
-				enemybullet bab = new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y);
-				enemybulletlist.add(bab);
-			}
-		}
-	}
-	
-	/**
-	 * When player right clicks, it sends out rockets that wipe out all enemies on the screen.
-	 * Sound effect is played.
-=======
 	 * Sends signal to let enemy "tank" shoot.
->>>>>>> origin/stone
-=======
-	 * Sends signal to let enemy "tank" shoot.
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	 */
+
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
 			if(enemylist.get(i).shooting()){
@@ -353,9 +230,6 @@ public class game {
 		}
 	}
 	
-
-	
-
 
 	/**
 	 * Make bullet move.
@@ -385,20 +259,6 @@ public class game {
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
 				if (b.intersects(f)){
 					rr.health-=bullet.damage; 
-				}
-			}
-			for (int t=0; t<bossgroundlist.size(); t++){
-				bossground bg=bossgroundlist.get(t); 
-				Rectangle f=new Rectangle(bg.x, bg.y,bg.bossgroundimg.getWidth(), bg.bossgroundimg.getHeight()); 
-				if (b.intersects(f)){
-					bg.health-=bullet.damage; 
-				}
-			}
-			for (int t=0; t<bossairlist.size(); t++){
-				bossair ba=bossairlist.get(t); 
-				Rectangle f=new Rectangle(ba.x, ba.y,ba.bossairimg.getWidth(), ba.bossairimg.getHeight()); 
-				if (b.intersects(f)){
-					ba.health-=bullet.damage; 
 				}
 			} 
 			for (int t=0; t<bossgroundlist.size(); t++){
@@ -504,7 +364,8 @@ public class game {
 				if (b.intersects(e)){
 					r.health-=s.superdamage; 
 				}
-			}			
+			}
+			
 			for (int t=0; t<groundlist.size(); t++){
 				enemyground rr=groundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.enemygroundimg.getWidth(), rr.enemygroundimg.getHeight()); 
@@ -512,26 +373,6 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
-<<<<<<< HEAD
-<<<<<<< HEAD
-			for (int t=0; t<bossgroundlist.size(); t++){
-				bossground bg=bossgroundlist.get(t); 
-				Rectangle f=new Rectangle(bg.x, bg.y,bg.bossgroundimg.getWidth(), bg.bossgroundimg.getHeight()); 
-				if (b.intersects(f)){
-					bg.health-=bullet.damage; 
-				}
-			}
-			for (int t=0; t<bossairlist.size(); t++){
-				bossair ba=bossairlist.get(t); 
-				Rectangle f=new Rectangle(ba.x, ba.y,ba.bossairimg.getWidth(), ba.bossairimg.getHeight()); 
-				if (b.intersects(f)){
-					ba.health-=bullet.damage; 
-				}
-			}
-=======
-=======
-
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 			
 			for (int t=0; t<bossgroundlist.size(); t++){
 				bossground rr=bossgroundlist.get(t); 
@@ -540,7 +381,6 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
-<<<<<<< HEAD
 			for (int t=0; t<bossairlist.size(); t++){
 				bossair rr=bossairlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
@@ -551,9 +391,6 @@ public class game {
 
 
 			
->>>>>>> origin/stone
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		}
 	}
 	
@@ -582,39 +419,16 @@ public class game {
 			groundlist.get(i).Draw(g2d);
 		}
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		/* TODO: uncomment once images are added to resource folder
-		 * draw bossground
-		
-		for (int i=0; i<bossgroundlist.size(); i++){
-			bossgroundlist.get(i).Draw(g2d);
-		}
-				
-		//draw bossair
-=======
 		//draw bossground
-=======
-		//draw enemyground
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		for (int i=0; i<bossgroundlist.size(); i++){
 			bossgroundlist.get(i).Draw(g2d);
 		}
 		
-<<<<<<< HEAD
 		//draw airboss
->>>>>>> origin/stone
 		for (int i=0; i<bossairlist.size(); i++){
 			bossairlist.get(i).Draw(g2d);
 		}
 		
-<<<<<<< HEAD
-		*/
-				
-=======
->>>>>>> origin/stone
-=======
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);

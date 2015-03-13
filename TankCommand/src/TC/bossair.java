@@ -5,44 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * Class for enemy bosses that move in the air
- *
  * @author UCSB-CS48-W15-G08
  * @version 3/8/15
-<<<<<<< HEAD
-=======
  * class for a boss enemy that moves on the air
->>>>>>> origin/stone
  */
 public class bossair {
-<<<<<<< HEAD
-    /**
-     * Air boss's initial period of appearance.
-     */
-	public static long periodenemyinit=16*Framework.nanosecond;
-
-    /**
-     * Air boss's period of appearance.
-     */
-	public static long periodenemy=periodenemyinit;
-
-    /**
-     * Keeps track of how many air bosses appeared in the game.
-     */
-	public static long lastcreatedenemy=0;
-
-	private Random random= new Random();
-	private int tmp=random.nextInt(300)+600 ;
-
-    /**
-     * Air boss's health.
-     */
-	public int health;
-
-    /**
-     * Air boss's x position.
-     */
-=======
 	
 	//the time between enemies show 
 	public static long periodairinit=14*Framework.nanosecond;
@@ -57,40 +24,8 @@ public class bossair {
 	public int health; 
 			
 	//position of enemy 
->>>>>>> origin/stone
 	public int x;
-
-    /**
-     * Air boss's y position.
-     */
 	public int y;
-<<<<<<< HEAD
-
-    /**
-     * Air boss's initial horizontal speed.
-     */
-	public static double xmovinginit=-0.05;
-
-    /**
-     * Air boss's horizontal speed.
-     */
-	public static double xmoving=xmovinginit;
-
-    /**
-     * Air boss image.
-     */
-	public static BufferedImage bossairimg; 
-	
-	/**
-	 * Initialize the aerial boss 
-	 * @param x x coordinate of initialization
-	 * @param y y coordinate of initialization
-	 */
-	public void initialize(int x, int y){
-		health = 200; 
-		this.x=x; 
-		this.y=y; 
-=======
 	private int tmp=random.nextInt(300)+600; 
 	private int tmp1=random.nextInt(300)+400; 
 	private int tmp2=random.nextInt(300)+300; 
@@ -101,7 +36,6 @@ public class bossair {
 	//moving speed:
 	public static double xmovinginit=-.03; 
 	public static double xmoving=xmovinginit; 
->>>>>>> origin/stone
 		
 	/**
  	 * Speeds the boss up in case side scroller moves faster than boss
@@ -124,14 +58,6 @@ public class bossair {
 	}
 		
 	/**
-<<<<<<< HEAD
-	 * check to see whether the air boss is still alive
-	 * @return true if the boss is alive
-	 */
-	public boolean isAlive(){
-		if(health>0) return true;
-		else return false;
-=======
 	 * overrides the initialized position 
 	 * @param x x coordinate of new position
 	 * @param y y coordinate of new position
@@ -142,7 +68,6 @@ public class bossair {
 			this.y=100; 
 			this.xmoving=-.03; 
 			//this.tmp=random.nextInt(200)+700; 
->>>>>>> origin/stone
 	}
 
 	/**
@@ -184,4 +109,3 @@ public class bossair {
 
 
 }
-

@@ -5,51 +5,11 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * Class for a boss enemy that moves on the ground.
- *
  * @author UCSB-CS48-W15-G08
  * @version 3/8/15
+ * class for a boss enemy that moves on the ground
  */
-
-<<<<<<< HEAD
 public class bossground {
-<<<<<<< HEAD
-=======
-public class bossground {
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
-
-    /**
-     * Ground boss's initial period of appearance.
-     */
-	public static long periodgroundinit=16*Framework.nanosecond;
-
-    /**
-     * Ground boss's period of appearance.
-     */
-	public static long periodground=periodgroundinit;
-
-    /**
-     * Keeps track of how many ground bosses appeared in the game.
-     */
-	public static long lastcreatedground=0;
-
-	private Random random= new Random();
-	
-    /**
-     * Ground boss image.
-     */
-	public static BufferedImage bossgroundimg;
-
-    /**
-     * Ground boss's health.
-     */
-	public int health;
-
-    /**
-     * Ground boss's x position.
-<<<<<<< HEAD
-     */
-=======
 	
 	//the time between enemies show 
 	public static long periodgroundinit=20*Framework.nanosecond; //change to 16
@@ -64,44 +24,17 @@ public class bossground {
 	public int health; 
 			
 	//position of enemy 
->>>>>>> origin/stone
 	public int x;
-=======
-     */
-	public int x;
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
-
-    /**
-     * Ground boss's x position.
-     */
-<<<<<<< HEAD
 	public int y;
-<<<<<<< HEAD
-=======
-	public int y;
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
-
-    /**
-     * Ground boss's initial horizontal speed.
-     */
-	public static double xmovinginit=-0.05;
-
-
 	private int tmp=random.nextInt(300)+700; 
 	private int tmp1=random.nextInt(300)+600; 
 	private int tmp2=random.nextInt(300)+500; 
 	private int tmp3=random.nextInt(300)+350; 
 
 
-
-<<<<<<< HEAD
 			
 	//moving speed:
 	public static double xmovinginit=-0.05; 
->>>>>>> origin/stone
-=======
-			
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public static double xmoving=xmovinginit; 
 		
 	/**
@@ -152,19 +85,7 @@ public class bossground {
 
 	}
 		
-<<<<<<< HEAD
 	/**
-<<<<<<< HEAD
-	 * checks to see if the ground boss is still alive
-	 * @return true if the boss is alive
-	 */
-	public boolean isAlive(){
-		if(health>0) return true;
-		else return false;
-=======
-=======
-	/**
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
  	 * Uses random numbers to decide whether or not the boss is shooting
  	 * @return true if the boss is shooting
  	 */
@@ -174,12 +95,7 @@ public class bossground {
 				return true; 
 			}
 			else 
-<<<<<<< HEAD
 				return false; 
->>>>>>> origin/stone
-=======
-				return false; 
->>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	}
 
 		
@@ -193,4 +109,3 @@ public class bossground {
 
 
 }
-
