@@ -117,9 +117,9 @@ public class Framework extends drawingpanel{
  	 * Number control.
  	 */ 
 	public int count=0; 
-	
+		
 	static AudioClip clip;
-
+	
 	/** 
  	 * Background music.
  	 */  
@@ -190,7 +190,6 @@ public class Framework extends drawingpanel{
 		try {
 			URL music=this.getClass().getResource("/TC/resources/sound/firework.wav");
 			clip = Applet.newAudioClip(music);      //----------------------------------->>background music 
-			//clip.loop(); 
 		
 			URL burl=this.getClass().getResource("/TC/resources/images/desert.png");
 			b1 = ImageIO.read(burl); 
@@ -514,6 +513,7 @@ public class Framework extends drawingpanel{
 		mainMenuButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pause=false;
+				Framework.clip.stop();
 				game.currThread.interrupt();
 				mainMenuButton.setVisible(false);
 				pauseButton.setText("  Pause  ");

@@ -33,7 +33,7 @@ public class game {
 	public Robot robot;
  
 	public playertank player;
-	public updatescore highscore; 
+	public updatescore highscore;  
 	public ArrayList<powerup> poweruplist; //arraylist for powerups
 	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
 	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
@@ -119,14 +119,11 @@ public class game {
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
 			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
 			bossground.bossgroundimg=ImageIO.read(bossgroundURL);
-			
-			/*
-			 * TODO: Add images for bosses in the resource directory
-			
-			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossair.png"); 
+					
+			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
 			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
 		
-			*/
+			
 		} catch (IOException e) {
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
 		} 
@@ -211,6 +208,15 @@ public class game {
 		}
 	}
 	
+	public void isairbossshooting(long gametime){
+		for (int i =0; i<bossairlist.size(); i++){
+			if(bossairlist.get(i).shooting()){
+				enemybullet enb=new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
 	/**
 	 * Sends signal to let enemy "tank" shoot.
 	 */
@@ -262,6 +268,15 @@ public class game {
 			for (int t=0; t<bossgroundlist.size(); t++){
 				bossground rr=bossgroundlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					if(Framework.musicplay){
+						crash.play();}
+					rr.health-=bullet.damage; 
+				}
+			} 
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair rr=bossairlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
 				if (b.intersects(f)){
 					if(Framework.musicplay){
 						crash.play();}
@@ -370,6 +385,13 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair rr=bossairlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			}
 
 
 			
@@ -401,9 +423,14 @@ public class game {
 			groundlist.get(i).Draw(g2d);
 		}
 		
-		//draw enemyground
+		//draw bossground
 		for (int i=0; i<bossgroundlist.size(); i++){
 			bossgroundlist.get(i).Draw(g2d);
+		}
+		
+		//draw airboss
+		for (int i=0; i<bossairlist.size(); i++){
+			bossairlist.get(i).Draw(g2d);
 		}
 		
 		//draw arraylist for bullet 
@@ -467,6 +494,7 @@ public class game {
 		isgroundenemyshooting();
 		isenemyshooting(); 
 		isgroundbossshooting(gametime); 
+		isairbossshooting(gametime);
 		//update bullet action
 		updatebullet(); 
 		updatesuperpower(); 
@@ -476,7 +504,9 @@ public class game {
 		updateenemy(); 
 		//update groundboss
 		createbossground(gametime); 
+		createbossair(gametime);
 		updatebossground(); 
+		updatebossair();
 		//update powerup 
 		updatepowerup();
 		//update the enemyground 
@@ -526,6 +556,21 @@ public class game {
 		}
 	}
 	
+	/** 
+	 * Creates the air boss when it comes to the right time.
+	 */ 
+
+	public void createbossair(long gametime){
+		if (gametime-bossair.lastcreatedair>=bossair.periodair && bossairlist.size()==0){
+			bossair r = new bossair(); 
+			r.initialize(Framework.width,5);
+			//System.out.println("1");
+			bossairlist.add(r); 
+			//System.out.println("2");
+			bossair.speedup();
+			bossair.lastcreatedair=gametime; 
+		}
+	}
 	
 	/** 
 	 * Update all the ground enemy in the list(making the move and remove from the list if they do not exist)
@@ -582,6 +627,35 @@ public class game {
                         explode.play();
                     }
                     bossgroundlist.remove(i);
+                    killed += 10;
+                    continue;
+                }
+            }
+		}
+	}
+	
+	/** 
+	 * Update all the ground boss in the list(making the move and remove from the list if they do not exist)
+	 */
+ 
+	public void updatebossair(){
+		for (int i=0; i<bossairlist.size(); i++){
+			bossair r = bossairlist.get(i); 
+			r.update(); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
+			Rectangle e=new Rectangle(r.x, r.y,r.bossairimg.getWidth(), r.bossairimg.getHeight()); 
+			if(p.intersects(e)){
+				if(Framework.musicplay){crash.play();}
+                player.health-=30;
+                bossairlist.remove(i);
+			}
+			else {
+                if (r.health <= 0) {
+                    //attack.play();
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    bossairlist.remove(i);
                     killed += 10;
                     continue;
                 }
@@ -675,6 +749,7 @@ public class game {
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
 		bossground.restartbossground();
+		bossair.restartbossair();
 		runaway=0; 
 		killed=0; 
 		superpower.lastcreatsuperpower=0; 
@@ -686,6 +761,7 @@ public class game {
 		groundlist.clear(); 
 		poweruplist.clear(); 
 		bossgroundlist.clear();
+		bossairlist.clear();
 		if(Framework.musicplay){Framework.clip.loop();}
 	}
 	
