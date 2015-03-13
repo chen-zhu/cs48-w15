@@ -49,6 +49,7 @@ public class enemyground {
      */
 	public int y;
 
+	
 	private int tmp=random.nextInt(300)+700; 
 	private int tmp1=random.nextInt(300)+600; 
 	private int tmp2=random.nextInt(300)+450; 
