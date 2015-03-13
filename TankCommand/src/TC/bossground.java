@@ -75,7 +75,7 @@ public class bossground {
  	 */
 	public void update(){
 			if (x<200){
-				xmoving=1; 
+				xmoving=2; 
 			}
 			if (x>900){     
 				xmoving=-0.1; 
