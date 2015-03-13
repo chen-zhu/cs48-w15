@@ -227,10 +227,6 @@ public class game {
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
-			/*if(enemylist.get(i).shooting()){
-				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
-				enemybulletlist.add(enb); 
-			}*/
 		}
 	}
 	
@@ -308,7 +304,7 @@ public class game {
 				if(Framework.musicplay){
 				crash.play();}
 				player.health-=enemybullet.damage; 
-				enemybulletlist.remove(i);    //<============================================================Doing collision. 
+				enemybulletlist.remove(i); 
 			}
 		} 
 
@@ -515,7 +511,7 @@ public class game {
 		currThread=Thread.currentThread();
 		if(Framework.pause == true){
 		try {
-			Thread.currentThread().sleep(100000);
+			Thread.currentThread().sleep(100000000);
 			Framework.pause = false; 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -766,7 +762,7 @@ public class game {
 	}
 	
 	/**
-	 * Prints the result after gameover.
+	 * Prints the result after game over.
 	 */
 
 	public void print(Graphics2D g2d, long gametime){

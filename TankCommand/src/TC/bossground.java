@@ -26,10 +26,10 @@ public class bossground {
 	//position of enemy 
 	public int x;
 	public int y;
-	private int tmp=random.nextInt(300)+600; 
-	private int tmp1=random.nextInt(300)+400; 
-	private int tmp2=random.nextInt(300)+300; 
-	private int tmp3=random.nextInt(300)+200; 
+	private int tmp=random.nextInt(300)+700; 
+	private int tmp1=random.nextInt(300)+600; 
+	private int tmp2=random.nextInt(300)+500; 
+	private int tmp3=random.nextInt(300)+350; 
 
 
 			
@@ -42,7 +42,7 @@ public class bossground {
  	 */
 	public static void speedup(){
 		if(bossground.periodgroundinit > Framework.nanosecond){
-				bossground.periodground-=Framework.nanosecond/18; 
+				bossground.periodground-=Framework.nanosecond/28; 
 				bossground.xmoving-=0.05; 
 		}
 			
@@ -75,7 +75,7 @@ public class bossground {
  	 */
 	public void update(){
 			if (x<200){
-				xmoving=1; 
+				xmoving=2; 
 			}
 			if (x>900){     
 				xmoving=-0.1; 
