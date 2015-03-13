@@ -563,7 +563,7 @@ public class game {
 	public void createbossair(long gametime){
 		if (gametime-bossair.lastcreatedair>=bossair.periodair && bossairlist.size()==0){
 			bossair r = new bossair(); 
-			r.initialize(Framework.width,5);
+			r.initialize(Framework.width,1);
 			//System.out.println("1");
 			bossairlist.add(r); 
 			//System.out.println("2");

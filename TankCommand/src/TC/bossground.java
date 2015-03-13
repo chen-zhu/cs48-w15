@@ -12,7 +12,7 @@ import java.util.Random;
 public class bossground {
 	
 	//the time between enemies show 
-	public static long periodgroundinit=16*Framework.nanosecond; //change to 16
+	public static long periodgroundinit=20*Framework.nanosecond; //change to 16
 	public static long periodground=periodgroundinit; 
 	public static long lastcreatedground=0; 
 	private Random random= new Random(); 

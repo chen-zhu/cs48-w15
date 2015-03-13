@@ -12,7 +12,7 @@ import java.util.Random;
 public class bossair {
 	
 	//the time between enemies show 
-	public static long periodairinit=4*Framework.nanosecond; //change to 16
+	public static long periodairinit=14*Framework.nanosecond;
 	public static long periodair=periodairinit; 
 	public static long lastcreatedair=0; 
 	private Random random= new Random(); 
@@ -34,7 +34,7 @@ public class bossair {
 
 			
 	//moving speed:
-	public static double xmovinginit=-0.05; 
+	public static double xmovinginit=-.03; 
 	public static double xmoving=xmovinginit; 
 		
 	/**
@@ -43,7 +43,7 @@ public class bossair {
 	public static void speedup(){
 		if(bossair.periodairinit > Framework.nanosecond){
 				bossair.periodair-=Framework.nanosecond/18; 
-				bossair.xmoving-=0.05; 
+				bossair.xmoving-=0.03; 
 		}
 			
 	}
@@ -63,10 +63,10 @@ public class bossair {
 	 * @param y y coordinate of new position
  	 */
 	public void initialize(int x, int y){
-			health = 200; 
+			health = 300; 
 			this.x=x; 
-			this.y=400; 
-			this.xmoving=-1; 
+			this.y=100; 
+			this.xmoving=-.03; 
 			//this.tmp=random.nextInt(200)+700; 
 	}
 
@@ -78,7 +78,7 @@ public class bossair {
 				xmoving=1; 
 			}
 			if (x>900){     
-				xmoving=-0.1; 
+				xmoving=-.1; 
 			} 
 
 			x+=xmoving;
@@ -103,7 +103,7 @@ public class bossair {
  	 * @param g2d allows the boss to be drawn with side-scrolling
  	 */
 	public void Draw(Graphics2D g2d){
-			g2d.drawImage(bossairimg, x, 180, null); 
+			g2d.drawImage(bossairimg, x, y, null); 
 	}
 
 

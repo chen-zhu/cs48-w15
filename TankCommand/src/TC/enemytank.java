@@ -19,7 +19,7 @@ import javax.imageio.*;
 
 public class enemytank {
 	//the time between enemies show 
-	public static long periodenemyinit=5*Framework.nanosecond; 
+	public static long periodenemyinit=8*Framework.nanosecond; 
 	public static long periodenemy=periodenemyinit; 
 	public static long lastcreatedenemy=0; 
 	
