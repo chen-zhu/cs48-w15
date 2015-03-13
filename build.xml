@@ -8,7 +8,7 @@
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
   <property name="projectName" value="TankCommand" />
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" />
-  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" />
 
   <target name="compile" description="compile my code">
     <mkdir dir="TankCommand/bin"/>
@@ -57,12 +57,13 @@
     <echo>Javadoc deployed to ${javadocURL}</echo>
   </target>
   
-  <target name="jar" description="Create an executable jar file">
-    <jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC">
-      <manifest file="MANIFEST.mf">
-        <attribute name="Window" value="TankCommand.bin.TC.Window"/>
-      </manifest>
-    </jar>
+  <target name="jar" depends="compile" description="Create an executable jar file">
+    <manifest file="TankCommand/bin/TC/MANIFEST.MF">
+      <attribute name="Built-By" value="UCSB-CS48-W15-G08"/>
+      <attribute name="Built-On" value="3/12/15"/>
+      <attribute name="Main-Class" value="TankCommand.bin.TC.Window"/>
+    </manifest>
+    <jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC"/>
   </target>	
 
 </project>
