@@ -58,7 +58,11 @@
   </target>
   
   <target name="jar" description="Create an executable jar file">
-    <jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC/"/>
+    <jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC/">
+      <manifest>
+        <attribute name="Window" value="TankCommand.bin.TC.Window"/>
+      </manifest>
+    </jar>
   </target>	
 
 </project>
