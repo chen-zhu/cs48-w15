@@ -26,6 +26,9 @@ public class enemytank {
 	//construct a random function for flying 
 	public Random random= new Random();  
 	private int tmp=random.nextInt(300)+600;
+	private int tmp1=random.nextInt(300)+400;
+	private int tmp2=random.nextInt(300)+300;
+
 
 	//health of enemy 
 	public int health; 
@@ -95,7 +98,7 @@ public class enemytank {
 	 */
 
 	public boolean shooting(){
-		if(x==tmp){
+		if(x==tmp || x==tmp1 || x==tmp2){
 			return true; 
 		}
 		else 
