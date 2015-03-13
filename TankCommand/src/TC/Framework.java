@@ -381,13 +381,30 @@ public class Framework extends drawingpanel{
         	}
 	}
 
-    	public void keyTyped(KeyEvent e){}
 
-    	public void mouseClicked(MouseEvent e){}
+    /**
+     * Does nothing.
+     * @param e Some event
+     */
+    public void keyTyped(KeyEvent e){}
 
-    	public void mouseEntered(MouseEvent e){}
+    /**
+     * Does nothing.
+     * @param e Some event
+     */
+    public void mouseClicked(MouseEvent e){}
 
-    	public void mouseExited(MouseEvent e){}
+    /**
+     * Does nothing.
+     * @param e Some event
+     */
+    public void mouseEntered(MouseEvent e){}
+
+    /**
+     * Does nothing.
+     * @param e Some event
+     */
+    public void mouseExited(MouseEvent e){}
 	
 	/**
 	 * Constructor to set up framework of the game.

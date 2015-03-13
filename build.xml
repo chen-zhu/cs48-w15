@@ -8,7 +8,7 @@
   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
   <property name="projectName" value="TankCommand" />
   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" />
-  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" />
 
   <target name="compile" description="compile my code">
     <mkdir dir="TankCommand/bin"/>
@@ -55,7 +55,6 @@
     <chmod dir="${javadocDest}" perm="755" type="dir" includes="**" />
     <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*" />
     <echo>Javadoc deployed to ${javadocURL}</echo>
-  </target>
-    
+  </target>	
 
 </project>
