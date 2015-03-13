@@ -497,10 +497,12 @@ public class Framework extends drawingpanel{
 				pause=!pause; 
 				System.out.println(pause); 
 				pauseButton.setText("  Resume  ");
+				clip.stop(); 
 				restartButton2.setVisible(pause);
 				mainMenuButton.setVisible(pause);
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
+					clip.loop(); 
 					pauseButton.setText("    Pause    ");
 				}
 				System.out.println(game.currThread.getName()+" "+game.currThread.getState());
@@ -514,6 +516,7 @@ public class Framework extends drawingpanel{
 		mainMenuButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pause=false;
+				clip.stop(); 
 				game.currThread.interrupt();
 				mainMenuButton.setVisible(false);
 				pauseButton.setText("  Pause  ");
