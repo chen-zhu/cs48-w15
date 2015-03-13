@@ -56,6 +56,6 @@
     <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*" />
     <echo>Javadoc deployed to ${javadocURL}</echo>
   </target>
-    
+    <target name="jar" description="Create an executable jar file">	<jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC/"/>    </target>	
 
 </project>
