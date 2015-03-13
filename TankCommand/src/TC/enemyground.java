@@ -28,6 +28,10 @@ public class enemyground {
 	public int x;
 	public int y;
 	private int tmp=random.nextInt(300)+600; 
+	private int tmp1=random.nextInt(300)+500; 
+	private int tmp2=random.nextInt(300)+400; 
+
+
 		
 	//moving speed:
 	public static double xmovinginit=-0.1; 
@@ -93,7 +97,7 @@ public class enemyground {
 	 */
 
 	public boolean shooting(){
-		if(x==tmp){
+		if(x==tmp || x==tmp1 || x==tmp2){
 			return true; 
 		}
 		else 

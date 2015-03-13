@@ -221,10 +221,10 @@ public class game {
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
 			}
-			if(enemylist.get(i).shooting()){
+			/*if(enemylist.get(i).shooting()){
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 				enemybulletlist.add(enb); 
-			}
+			}*/
 		}
 	}
 	

@@ -28,7 +28,8 @@ public class bossground {
 	public int y;
 	private int tmp=random.nextInt(300)+600; 
 	private int tmp1=random.nextInt(300)+400; 
-	private int tmp2=random.nextInt(300)+200; 
+	private int tmp2=random.nextInt(300)+300; 
+	private int tmp3=random.nextInt(300)+200; 
 
 
 			
@@ -90,7 +91,7 @@ public class bossground {
  	 */
 
 	public boolean shooting(){
-			if(x==tmp || x==tmp1 || x==tmp2){
+			if(x==tmp || x==tmp1 || x==tmp2 || x == tmp3){
 				return true; 
 			}
 			else 
