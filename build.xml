@@ -60,7 +60,7 @@
   <target name="jar" description="Create an executable jar file">
     <jar destfile="lib/TankCommand.jar">
     <fileset dir="TankCommand/bin/TC/"/>
-    <zipfileset includes="*.class" "resources/images/*.png" "resources/images/*.jpg" "resources/sound/*.wav"/>
+    <zipfileset includes="*.class,resources/images/*.png,resources/images/*.jpg,resources/sound/*.wav"/>
       <manifest>
         <attribute name="Window" value="TankCommand.bin.TC.Window"/>
       </manifest>
