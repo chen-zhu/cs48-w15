@@ -18,6 +18,7 @@ import javax.imageio.*;
  */
 
 public class enemytank {
+<<<<<<< HEAD
     /**
      * The initial period of time between the appearance of two air enemies.
      */
@@ -36,6 +37,19 @@ public class enemytank {
 	//construct a random function for flying 
 	private Random random= new Random();
 	private int tmp=random.nextInt(300)+600;
+=======
+	//the time between enemies show 
+	public static long periodenemyinit=8*Framework.nanosecond; 
+	public static long periodenemy=periodenemyinit; 
+	public static long lastcreatedenemy=0; 
+	
+	//construct a random function for flying 
+	public Random random= new Random();  
+	private int tmp=random.nextInt(300)+700;
+	private int tmp1=random.nextInt(300)+600;
+	private int tmp2=random.nextInt(300)+400;
+
+>>>>>>> origin/stone
 
     /**
      * Air enemy's health.
@@ -121,7 +135,7 @@ public class enemytank {
 	 */
 
 	public boolean shooting(){
-		if(x==tmp){
+		if(x==tmp || x==tmp1 || x==tmp2){
 			return true; 
 		}
 		else 

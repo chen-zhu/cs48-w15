@@ -31,6 +31,11 @@ public class Framework extends drawingpanel{
 	public static boolean pause=false;
 	
 	/** 
+ 	 * used for debugging restart. 
+ 	 */ 
+	public int gamestatenumber=0; 
+	
+	/** 
  	 * A boolean that tests if music is playing.
  	 */ 
 	public static boolean musicplay=true; 
@@ -112,9 +117,9 @@ public class Framework extends drawingpanel{
  	 * Number control.
  	 */ 
 	public int count=0; 
-	
+		
 	static AudioClip clip;
-
+	
 	/** 
  	 * Background music.
  	 */  
@@ -185,7 +190,6 @@ public class Framework extends drawingpanel{
 		try {
 			URL music=this.getClass().getResource("/TC/resources/sound/firework.wav");
 			clip = Applet.newAudioClip(music);      //----------------------------------->>background music 
-			//clip.loop(); 
 		
 			URL burl=this.getClass().getResource("/TC/resources/images/desert.png");
 			b1 = ImageIO.read(burl); 
@@ -408,7 +412,12 @@ public class Framework extends drawingpanel{
 		add(startButton);
 		startButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(gamestatenumber==0){
 				newgame(); 
+				gamestatenumber=1; 
+				}
+				else 
+					restartgame(); 
 			}
 		});
 		
@@ -487,10 +496,12 @@ public class Framework extends drawingpanel{
 				pause=!pause; 
 				System.out.println(pause); 
 				pauseButton.setText("  Resume  ");
+				clip.stop(); 
 				restartButton2.setVisible(pause);
 				mainMenuButton.setVisible(pause);
 				if (pause == false && game.currThread.getState()==Thread.State.TIMED_WAITING){
 					game.currThread.interrupt();
+					clip.loop(); 
 					pauseButton.setText("    Pause    ");
 				}
 				System.out.println(game.currThread.getName()+" "+game.currThread.getState());
@@ -504,6 +515,7 @@ public class Framework extends drawingpanel{
 		mainMenuButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				pause=false;
+				Framework.clip.stop();
 				game.currThread.interrupt();
 				mainMenuButton.setVisible(false);
 				pauseButton.setText("  Pause  ");

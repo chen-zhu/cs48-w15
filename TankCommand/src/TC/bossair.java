@@ -1,23 +1,21 @@
 package TC;
 
-import java.awt.*; 
-import java.awt.event.*; 
-import java.awt.image.*; 
-import java.io.*; 
-import java.net.*; 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Random;
-import java.util.logging.*; //useless
-
-import javax.imageio.*; 
 
 /**
  * Class for enemy bosses that move in the air
  *
  * @author UCSB-CS48-W15-G08
  * @version 3/8/15
+<<<<<<< HEAD
+=======
+ * class for a boss enemy that moves on the air
+>>>>>>> origin/stone
  */
-
 public class bossair {
+<<<<<<< HEAD
     /**
      * Air boss's initial period of appearance.
      */
@@ -44,12 +42,29 @@ public class bossair {
     /**
      * Air boss's x position.
      */
+=======
+	
+	//the time between enemies show 
+	public static long periodairinit=14*Framework.nanosecond;
+	public static long periodair=periodairinit; 
+	public static long lastcreatedair=0; 
+	private Random random= new Random(); 
+		
+	//img for enemyair.java
+	public static BufferedImage bossairimg; 
+		
+	//health of enemy 
+	public int health; 
+			
+	//position of enemy 
+>>>>>>> origin/stone
 	public int x;
 
     /**
      * Air boss's y position.
      */
 	public int y;
+<<<<<<< HEAD
 
     /**
      * Air boss's initial horizontal speed.
@@ -75,87 +90,98 @@ public class bossair {
 		health = 200; 
 		this.x=x; 
 		this.y=y; 
+=======
+	private int tmp=random.nextInt(300)+600; 
+	private int tmp1=random.nextInt(300)+400; 
+	private int tmp2=random.nextInt(300)+300; 
+	private int tmp3=random.nextInt(300)+200; 
+
+
+			
+	//moving speed:
+	public static double xmovinginit=-.03; 
+	public static double xmoving=xmovinginit; 
+>>>>>>> origin/stone
 		
-		this.xmoving=-0.05; 
-	}
-	
 	/**
-	 * Restarts the aerial boss
-	 */
-	public static void restartenemy(){
-		bossair.periodenemy=periodenemyinit;
-		bossair.lastcreatedenemy=0; 
-		bossair.xmoving=xmovinginit; 
-	}
-	
-	/**
-	 * Speeds the aerial boss in case the window scrolls faster than the boss 
-	 */
+ 	 * Speeds the boss up in case side scroller moves faster than boss
+ 	 */
 	public static void speedup(){
-		if(bossair.periodenemy > Framework.nanosecond){
-			bossair.periodenemy-=Framework.nanosecond/10; 
-			bossair.xmoving-=0.25; 
+		if(bossair.periodairinit > Framework.nanosecond){
+				bossair.periodair-=Framework.nanosecond/18; 
+				bossair.xmoving-=0.03; 
 		}
+			
+	}
 		
-	}
-	
-	/** 
-	 * Test to see whether boss is left
-	 * @return true if the boss is left the screen
-	 */
-	public boolean isleft(){
-		if(x<0 - bossairimg.getWidth())
-			return true; 
-		else
-			return false; 
-	}
-	
 	/**
+ 	 * restarts state of the boss 
+ 	 */
+	public static void restartbossair(){
+				bossair.periodair=periodairinit;
+				bossair.lastcreatedair=0; 
+				bossair.xmoving=xmovinginit; 
+	}
+		
+	/**
+<<<<<<< HEAD
 	 * check to see whether the air boss is still alive
 	 * @return true if the boss is alive
 	 */
 	public boolean isAlive(){
 		if(health>0) return true;
 		else return false;
+=======
+	 * overrides the initialized position 
+	 * @param x x coordinate of new position
+	 * @param y y coordinate of new position
+ 	 */
+	public void initialize(int x, int y){
+			health = 300; 
+			this.x=x; 
+			this.y=100; 
+			this.xmoving=-.03; 
+			//this.tmp=random.nextInt(200)+700; 
+>>>>>>> origin/stone
 	}
 
-	
 	/**
-	 * Function to update the boss movement
-	 */
+ 	 * controls the movement of the boss 
+ 	 */
 	public void update(){
-		Random random = new Random();
-		int i =random.nextInt(999); 
-		if(i%4==1){
-		    x+=(xmoving+0.05); 
-		    y+=(xmoving-0.1);}
-		if(i%4==2){
-			x+=(xmoving+0.05);
-			y-=(xmoving-0.1);}
-		if(i%4==0){
-			x+=(xmoving); 
-			//y+=xmoving;
-		}
-		if(i%4==3){
-			x+=(xmoving); 
-			//y+=xmoving;
-		}
-		if(y<40)
-			y=40; 
-		if(y>400)
-			y=400;
+			if (x<200){
+				xmoving=1; 
+			}
+			if (x>900){     
+				xmoving=-.1; 
+			} 
+
+			x+=xmoving;
+
+	}
 		
+	/**
+ 	 * Uses random numbers to decide whether or not the boss is shooting
+ 	 * @return true if the boss is shooting
+ 	 */
+
+	public boolean shooting(){
+			if(x==tmp || x==tmp1 || x==tmp2 || x == tmp3){
+				return true; 
+			}
+			else 
+				return false; 
 	}
-	
-	/** 
-	 * Function to draw aerial boss on side-scrolling window
-	 * @param g2d to apply graphical methods 
-	*/
+
+		
+	/**
+ 	 * @param g2d allows the boss to be drawn with side-scrolling
+ 	 */
 	public void Draw(Graphics2D g2d){
-		g2d.drawImage(bossairimg, x, y, null); 
+			g2d.drawImage(bossairimg, x, y, null); 
 	}
-	
-	
-	
+
+
 
 }
+

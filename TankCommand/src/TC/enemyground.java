@@ -12,6 +12,7 @@ import java.util.Random;
  */ 
 
 public class enemyground {
+<<<<<<< HEAD
     /**
      * The initial period of time between the appearance of two ground enemies.
      */
@@ -43,12 +44,28 @@ public class enemyground {
     /**
      * Ground enemy's x position on the screen.
      */
+=======
+	//the time between enemies show 
+	public static long periodgroundinit=10*Framework.nanosecond; 
+	public static long periodground=periodgroundinit; 
+	public static long lastcreatedground=0; 
+	private Random random= new Random(); 
+	
+	//img for enemyground.java
+	public static BufferedImage enemygroundimg; 
+	
+	//health of enemy 
+	public int health; 
+		
+	//position of enemy 
+>>>>>>> origin/stone
 	public int x;
 
     /**
      * Ground enemy's y position on the screen.
      */
 	public int y;
+<<<<<<< HEAD
 
     /**
      * The ground enemy's initial horizontal speed.
@@ -58,6 +75,16 @@ public class enemyground {
     /**
      * The ground enemy's horizontal speed.
      */
+=======
+	private int tmp=random.nextInt(300)+700; 
+	private int tmp1=random.nextInt(300)+600; 
+	private int tmp2=random.nextInt(300)+450; 
+
+
+		
+	//moving speed:
+	public static double xmovinginit=-0.1; 
+>>>>>>> origin/stone
 	public static double xmoving=xmovinginit; 
 	
 	/**
@@ -120,7 +147,7 @@ public class enemyground {
 	 */
 
 	public boolean shooting(){
-		if(x==tmp){
+		if(x==tmp || x==tmp1 || x==tmp2){
 			return true; 
 		}
 		else 
