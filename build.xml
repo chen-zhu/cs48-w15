@@ -55,19 +55,6 @@
     <chmod dir="${javadocDest}" perm="755" type="dir" includes="**" />
     <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*" />
     <echo>Javadoc deployed to ${javadocURL}</echo>
-  </target>
-  
-  <target name="jar" depends="compile" description="Create an executable jar file">
-    <mkdir dir="TankCommand/bin/TC/META-INF"/>
-    <manifest file="TankCommand/bin/TC/META-INF/MANIFEST.MF">
-      <attribute name="Application-Name" value="Tank Command"/>
-      <attribute name="Name" value="TankCommand/bin/TC"/>
-      <attrubute name="Sealed" value="true"/>
-      <attribute name="Built-By" value="UCSB-CS48-W15-G08"/>
-      <attribute name="Built-On" value="3/12/15"/>
-      <attribute name="Main-Class" value="TankCommand.bin.TC.Window"/>
-    </manifest>
-    <jar destfile="lib/TankCommand.jar" basedir="TankCommand/bin/TC"/>
   </target>	
 
 </project>
