@@ -120,7 +120,7 @@ public class game {
 			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
 			bossground.bossgroundimg=ImageIO.read(bossgroundURL);
 					
-			URL bossairURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
+			URL bossairURL=this.getClass().getResource("/TC/resources/images/boss_plane.png"); 
 			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
 		
 			
