@@ -277,16 +277,20 @@ public class game {
 	 * Sends signal to let ground boss shoot.
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
 			if(enemylist.get(i).shooting()){
 				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
 =======
+=======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
 	public void isgroundbossshooting(long gametime){
 		for (int i =0; i<bossgroundlist.size(); i++){
 			if(bossgroundlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y+50); 
+<<<<<<< HEAD
 >>>>>>> origin/stone
 				enemybulletlist.add(enb); 
 			}
@@ -297,12 +301,15 @@ public class game {
 		for (int i =0; i<bossairlist.size(); i++){
 			if(bossairlist.get(i).shooting()){
 				enemybullet enb=new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y+50); 
+=======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 				enemybulletlist.add(enb); 
 			}
 		}
 	}
 	
 	/**
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 * Sends signal to let boss ground shoot
 	 */
@@ -333,8 +340,10 @@ public class game {
 =======
 	 * Sends signal to let enemy "tank" shoot.
 >>>>>>> origin/stone
+=======
+	 * Sends signal to let enemy "tank" shoot.
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	 */
-
 	public void isenemyshooting(){
 		for (int i =0; i<enemylist.size(); i++){
 			if(enemylist.get(i).shooting()){
@@ -344,6 +353,9 @@ public class game {
 		}
 	}
 	
+
+	
+
 
 	/**
 	 * Make bullet move.
@@ -501,6 +513,7 @@ public class game {
 				}
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			for (int t=0; t<bossgroundlist.size(); t++){
 				bossground bg=bossgroundlist.get(t); 
 				Rectangle f=new Rectangle(bg.x, bg.y,bg.bossgroundimg.getWidth(), bg.bossgroundimg.getHeight()); 
@@ -516,6 +529,9 @@ public class game {
 				}
 			}
 =======
+=======
+
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 			
 			for (int t=0; t<bossgroundlist.size(); t++){
 				bossground rr=bossgroundlist.get(t); 
@@ -524,6 +540,7 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
+<<<<<<< HEAD
 			for (int t=0; t<bossairlist.size(); t++){
 				bossair rr=bossairlist.get(t); 
 				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
@@ -535,6 +552,8 @@ public class game {
 
 			
 >>>>>>> origin/stone
+=======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		}
 	}
 	
@@ -564,6 +583,7 @@ public class game {
 		}
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		/* TODO: uncomment once images are added to resource folder
 		 * draw bossground
 		
@@ -574,10 +594,14 @@ public class game {
 		//draw bossair
 =======
 		//draw bossground
+=======
+		//draw enemyground
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		for (int i=0; i<bossgroundlist.size(); i++){
 			bossgroundlist.get(i).Draw(g2d);
 		}
 		
+<<<<<<< HEAD
 		//draw airboss
 >>>>>>> origin/stone
 		for (int i=0; i<bossairlist.size(); i++){
@@ -589,6 +613,8 @@ public class game {
 				
 =======
 >>>>>>> origin/stone
+=======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);

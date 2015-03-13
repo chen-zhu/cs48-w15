@@ -35,6 +35,7 @@ public class enemytank {
 	public static long lastcreatedenemy=0; 
 	
 	//construct a random function for flying 
+<<<<<<< HEAD
 	private Random random= new Random();
 	private int tmp=random.nextInt(300)+600;
 =======
@@ -44,12 +45,18 @@ public class enemytank {
 	public static long lastcreatedenemy=0; 
 	
 	//construct a random function for flying 
+=======
+
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public Random random= new Random();  
 	private int tmp=random.nextInt(300)+700;
 	private int tmp1=random.nextInt(300)+600;
 	private int tmp2=random.nextInt(300)+400;
 
+<<<<<<< HEAD
 >>>>>>> origin/stone
+=======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
     /**
      * Air enemy's health.

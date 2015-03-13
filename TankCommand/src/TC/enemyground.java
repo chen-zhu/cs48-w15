@@ -29,7 +29,6 @@ public class enemyground {
 	public static long lastcreatedground=0;
 
 	private Random random= new Random();
-    private int tmp=random.nextInt(300)+600;
 
     /**
      * Ground enemy image.
@@ -66,16 +65,11 @@ public class enemyground {
      */
 	public int y;
 <<<<<<< HEAD
-
-    /**
-     * The ground enemy's initial horizontal speed.
-     */
-	public static double xmovinginit=-0.1;
-
-    /**
-     * The ground enemy's horizontal speed.
-     */
+<<<<<<< HEAD
 =======
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
+
+	
 	private int tmp=random.nextInt(300)+700; 
 	private int tmp1=random.nextInt(300)+600; 
 	private int tmp2=random.nextInt(300)+450; 
@@ -84,7 +78,11 @@ public class enemyground {
 		
 	//moving speed:
 	public static double xmovinginit=-0.1; 
+<<<<<<< HEAD
 >>>>>>> origin/stone
+=======
+
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public static double xmoving=xmovinginit; 
 	
 	/**

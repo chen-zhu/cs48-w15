@@ -11,8 +11,12 @@ import java.util.Random;
  * @version 3/8/15
  */
 
+<<<<<<< HEAD
 public class bossground {
 <<<<<<< HEAD
+=======
+public class bossground {
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
     /**
      * Ground boss's initial period of appearance.
@@ -30,8 +34,7 @@ public class bossground {
 	public static long lastcreatedground=0;
 
 	private Random random= new Random();
-    private int tmp=random.nextInt(300)+600;
-
+	
     /**
      * Ground boss image.
      */
@@ -44,6 +47,7 @@ public class bossground {
 
     /**
      * Ground boss's x position.
+<<<<<<< HEAD
      */
 =======
 	
@@ -62,32 +66,42 @@ public class bossground {
 	//position of enemy 
 >>>>>>> origin/stone
 	public int x;
+=======
+     */
+	public int x;
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
     /**
      * Ground boss's x position.
      */
+<<<<<<< HEAD
 	public int y;
 <<<<<<< HEAD
+=======
+	public int y;
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 
     /**
      * Ground boss's initial horizontal speed.
      */
 	public static double xmovinginit=-0.05;
 
-    /**
-     * Ground boss's initial horizontal speed.
-     */
-=======
+
 	private int tmp=random.nextInt(300)+700; 
 	private int tmp1=random.nextInt(300)+600; 
 	private int tmp2=random.nextInt(300)+500; 
 	private int tmp3=random.nextInt(300)+350; 
 
 
+
+<<<<<<< HEAD
 			
 	//moving speed:
 	public static double xmovinginit=-0.05; 
 >>>>>>> origin/stone
+=======
+			
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	public static double xmoving=xmovinginit; 
 		
 	/**
@@ -138,6 +152,7 @@ public class bossground {
 
 	}
 		
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * checks to see if the ground boss is still alive
@@ -147,6 +162,9 @@ public class bossground {
 		if(health>0) return true;
 		else return false;
 =======
+=======
+	/**
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
  	 * Uses random numbers to decide whether or not the boss is shooting
  	 * @return true if the boss is shooting
  	 */
@@ -156,8 +174,12 @@ public class bossground {
 				return true; 
 			}
 			else 
+<<<<<<< HEAD
 				return false; 
 >>>>>>> origin/stone
+=======
+				return false; 
+>>>>>>> d07fcb51776fdd0ae1be9880a119420a4d34b9e7
 	}
 
 		
