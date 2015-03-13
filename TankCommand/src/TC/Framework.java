@@ -31,6 +31,11 @@ public class Framework extends drawingpanel{
 	public static boolean pause=false;
 	
 	/** 
+ 	 * used for debugging restart. 
+ 	 */ 
+	public int gamestatenumber=0; 
+	
+	/** 
  	 * A boolean that tests if music is playing.
  	 */ 
 	public static boolean musicplay=true; 
@@ -408,7 +413,12 @@ public class Framework extends drawingpanel{
 		add(startButton);
 		startButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(gamestatenumber==0){
 				newgame(); 
+				gamestatenumber=1; 
+				}
+				else 
+					restartgame(); 
 			}
 		});
 		

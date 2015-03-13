@@ -29,8 +29,7 @@ public class bossground {
 	public static long lastcreatedground=0;
 
 	private Random random= new Random();
-    private int tmp=random.nextInt(300)+600;
-
+	
     /**
      * Ground boss image.
      */
@@ -51,6 +50,7 @@ public class bossground {
      */
 	public int y;
 
+
     /**
      * Ground boss's initial horizontal speed.
      */
@@ -59,6 +59,14 @@ public class bossground {
     /**
      * Ground boss's initial horizontal speed.
      */
+
+	private int tmp=random.nextInt(300)+600; 
+	private int tmp1=random.nextInt(300)+400; 
+	private int tmp2=random.nextInt(300)+300; 
+	private int tmp3=random.nextInt(300)+200; 
+
+
+			
 	public static double xmoving=xmovinginit; 
 		
 	/**
@@ -98,8 +106,8 @@ public class bossground {
  	 * controls the movement of the boss 
  	 */
 	public void update(){
-			if (x<300){
-				xmoving=0.1; 
+			if (x<200){
+				xmoving=1; 
 			}
 			if (x>900){     
 				xmoving=-0.1; 
@@ -110,12 +118,16 @@ public class bossground {
 	}
 		
 	/**
-	 * checks to see if the ground boss is still alive
-	 * @return true if the boss is alive
-	 */
-	public boolean isAlive(){
-		if(health>0) return true;
-		else return false;
+ 	 * Uses random numbers to decide whether or not the boss is shooting
+ 	 * @return true if the boss is shooting
+ 	 */
+
+	public boolean shooting(){
+			if(x==tmp || x==tmp1 || x==tmp2 || x == tmp3){
+				return true; 
+			}
+			else 
+				return false; 
 	}
 
 		
@@ -123,7 +135,7 @@ public class bossground {
  	 * @param g2d allows the boss to be drawn with side-scrolling
  	 */
 	public void Draw(Graphics2D g2d){
-			g2d.drawImage(bossgroundimg, x, 389, null); 
+			g2d.drawImage(bossgroundimg, x, 380, null); 
 	}
 
 

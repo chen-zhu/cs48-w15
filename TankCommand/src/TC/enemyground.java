@@ -28,7 +28,6 @@ public class enemyground {
 	public static long lastcreatedground=0;
 
 	private Random random= new Random();
-    private int tmp=random.nextInt(300)+600;
 
     /**
      * Ground enemy image.
@@ -50,14 +49,15 @@ public class enemyground {
      */
 	public int y;
 
-    /**
-     * The ground enemy's initial horizontal speed.
-     */
-	public static double xmovinginit=-0.1;
+	private int tmp=random.nextInt(300)+600; 
+	private int tmp1=random.nextInt(300)+500; 
+	private int tmp2=random.nextInt(300)+400; 
 
-    /**
-     * The ground enemy's horizontal speed.
-     */
+
+		
+	//moving speed:
+	public static double xmovinginit=-0.1; 
+
 	public static double xmoving=xmovinginit; 
 	
 	/**
@@ -120,7 +120,7 @@ public class enemyground {
 	 */
 
 	public boolean shooting(){
-		if(x==tmp){
+		if(x==tmp || x==tmp1 || x==tmp2){
 			return true; 
 		}
 		else 
