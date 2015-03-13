@@ -58,7 +58,7 @@
   </target>
   
   <target name="jar" depends="compile" description="Create an executable jar file">
-    <manifest file="TankCommand/bin/TC/MANIFEST.MF">
+    <manifest file="TankCommand/bin/TC/META-INF/MANIFEST.MF">
       <attribute name="Built-By" value="UCSB-CS48-W15-G08"/>
       <attribute name="Built-On" value="3/12/15"/>
       <attribute name="Main-Class" value="TankCommand.bin.TC.Window"/>
