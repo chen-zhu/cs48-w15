@@ -65,6 +65,8 @@ public class bullet {
      * @param y initial y-coordinate
      */
 	public bullet (int x, int y){
+		x+=115;
+		y-=65;
 		this.x=x; 
 		this.y=y;
 		xspeed=speed; 

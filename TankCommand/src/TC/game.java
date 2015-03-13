@@ -22,88 +22,30 @@ import java.applet.AudioClip;
 
 public class game {
 	static Thread currThread;
-
-    /**
-     * Cloud image.
-     */
-	public BufferedImage cloud;
-
-    /**
-     * Desert image.
-     */
-	public BufferedImage desert;
-
-    /**
-     * Moving cloud image.
-     */
-	public background cloudmoving;
-
-    /**
-     * Moving desert image.
-     */
+	
+	//background images 
+	public BufferedImage cloud; 
+	public BufferedImage desert; 
+	public background cloudmoving; 
 	public background desertmoving;
  
-	private Random random= new Random();
-
-    /**
-     * A robot that's used as the enemy AI.
-     */
+	private Random random= new Random(); 
 	public Robot robot;
-
-    /**
-     * Player tank.
-     */
-    public playertank player;
-
-    /**
-     * High score of game that's stored in a local .txt file.
-     */
-	public updatescore highscore;
-
-    /**
-     * Array list for powerups. Keeps track of the powerups on the screen.
-     */
-	public ArrayList<powerup> poweruplist;
-
-    /**
-     * Array list for player bullets. Keeps track of the bullets on the screen.
-     */
-	public ArrayList<bullet> bulletlist;
-
-    /**
-     * Array list for superpower (rockets). Keeps track of the superpowers (rockets)
-     * that are on the screen.
-     */
-	public ArrayList<superpower> superpowerlist;
-
-    /**
-     * Array list for enemy "tanks" (planes). Keeps track of the air enemies that are
-     * on the screen.
-     */
-	public ArrayList<enemytank> enemylist;
-
-    /**
-     * Array list for ground enemies. Keeps track of the ground enemies that are
-     * on the screen.
-     */
-	public ArrayList<enemyground> groundlist;
-
-    /**
-     * Array list for enemy bullets. Keeps track of the enemy bullets that are
-     * on the screen.
-     */
+ 
+	public playertank player;
+	public updatescore highscore;  
+	public ArrayList<powerup> poweruplist; //arraylist for powerups
+	public ArrayList<bullet> bulletlist; //the arraylist for bullets 
+	public ArrayList<superpower> superpowerlist; //the arraylist for superpower 
+	public ArrayList<enemytank> enemylist; //arraylist for enemy "tanks"
+	public ArrayList<enemyground> groundlist; //arraylist for ground enemies
 	public ArrayList<enemybullet> enemybulletlist; //the arraylist for bullet given by enemy
-
-    /**
-     * Number of enemies that got away.
-     */
-	public int runaway;
-
-    /**
-     * Number of enemies that the player killed.
-     */
-	public int killed;
-
+	public ArrayList<bossground> bossgroundlist; //the arraylist for bosses on the ground
+	public ArrayList<bossair> bossairlist; //the arraylist for bosses in the air
+ 
+	public int runaway; //number of enemies that got away 
+	public int killed; //number of enemies that the player killed
+ 
 	AudioClip explode, attack, rocket, crash; //music and sound effects for game
 	
 	static Thread threadForInitGame;
@@ -130,7 +72,9 @@ public class game {
 		//set up
 		bulletlist=new ArrayList<bullet>();  
 		enemylist=new ArrayList<enemytank>(); 
-		groundlist=new ArrayList<enemyground>(); 
+		groundlist=new ArrayList<enemyground>();
+		bossgroundlist = new ArrayList<bossground>();
+		bossairlist = new ArrayList<bossair>();
 		superpowerlist=new ArrayList<superpower>(); 
 		enemybulletlist=new ArrayList<enemybullet>();
 		poweruplist=new ArrayList<powerup>(); 
@@ -159,20 +103,27 @@ public class game {
 			crash=Applet.newAudioClip(music1URL);
 			
 			//pics
-			URL cURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
-			cloud=ImageIO.read(cURL);
-			URL dURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
-			desert=ImageIO.read(dURL);
+			URL cloudURL=this.getClass().getResource("/TC/resources/images/cloud_layer_1.png"); 
+			cloud=ImageIO.read(cloudURL);
+			URL desertURL=this.getClass().getResource("/TC/resources/images/desert.png"); 
+			desert=ImageIO.read(desertURL);
 			URL bulletURL=this.getClass().getResource("/TC/resources/images/bullet.png"); 
 			bullet.bullet=ImageIO.read(bulletURL);     //read image for bullet 
 			URL enemybulletURL=this.getClass().getResource("/TC/resources/images/enemybullet.png"); 
 			enemybullet.enemybullet=ImageIO.read(enemybulletURL);     //read image for enemybullet
-			URL pURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
-			superpower.superpower=ImageIO.read(pURL);     //read image for bullet 
+			URL powerupURL=this.getClass().getResource("/TC/resources/images/superpower.png"); 
+			superpower.superpower=ImageIO.read(powerupURL);     //read image for bullet 
 			URL enemytankURL=this.getClass().getResource("/TC/resources/images/enemy_plane.png"); 
 			enemytank.enemytankimg=ImageIO.read(enemytankURL); //read image for enemy 
 			URL enemygroundURL=this.getClass().getResource("/TC/resources/images/enemyground.png"); 
 			enemyground.enemygroundimg=ImageIO.read(enemygroundURL); //read image for enemyground
+			URL bossgroundURL=this.getClass().getResource("/TC/resources/images/bossground.png"); 
+			bossground.bossgroundimg=ImageIO.read(bossgroundURL);
+					
+			URL bossairURL=this.getClass().getResource("/TC/resources/images/boss_plane.png"); 
+			bossair.bossairimg=ImageIO.read(bossairURL); //read image for bossair
+		
+			
 		} catch (IOException e) {
 			Logger.getLogger(game.class.getName()).log(Level.SEVERE, null, e);
 		} 
@@ -214,35 +165,6 @@ public class game {
 		}
 	}
 	
-	/**
-	 * Sends signal to let ground enemy shoot.
-	 */
-
-	public void isgroundenemyshooting(){
-		for (int i =0; i<groundlist.size(); i++){
-			if(groundlist.get(i).shooting()){
-				enemybullet enb=new enemybullet(groundlist.get(i).x, groundlist.get(i).y, player.x, player.y+50); 
-				enemybulletlist.add(enb); 
-			}
-		}
-	}
-	
-	/**
-	 * Sends signal to let enemy "tank" shoot.
-	 */
-
-	public void isenemyshooting(){
-		for (int i =0; i<enemylist.size(); i++){
-			if(enemylist.get(i).shooting()){
-				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
-				enemybulletlist.add(enb); 
-			}
-			if(enemylist.get(i).shooting()){
-				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
-				enemybulletlist.add(enb); 
-			}
-		}
-	}
 	
 	/**
 	 * When player right clicks, it sends out rockets that wipe out all enemies on the screen.
@@ -260,6 +182,55 @@ public class game {
 	}
 	
 	
+	/**
+	 * Sends signal to let ground enemy shoot.
+	 */
+
+	public void isgroundenemyshooting(){
+		for (int i =0; i<groundlist.size(); i++){
+			if(groundlist.get(i).shooting()){
+				enemybullet enb=new enemybullet(groundlist.get(i).x, groundlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	/**
+	 * Sends signal to let ground boss shoot.
+	 */
+
+	public void isgroundbossshooting(long gametime){
+		for (int i =0; i<bossgroundlist.size(); i++){
+			if(bossgroundlist.get(i).shooting()){
+				enemybullet enb=new enemybullet(bossgroundlist.get(i).x, bossgroundlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	public void isairbossshooting(long gametime){
+		for (int i =0; i<bossairlist.size(); i++){
+			if(bossairlist.get(i).shooting()){
+				enemybullet enb=new enemybullet(bossairlist.get(i).x, bossairlist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+	/**
+	 * Sends signal to let enemy "tank" shoot.
+	 */
+
+	public void isenemyshooting(){
+		for (int i =0; i<enemylist.size(); i++){
+			if(enemylist.get(i).shooting()){
+				enemybullet enb=new enemybullet(enemylist.get(i).x, enemylist.get(i).y, player.x, player.y+50); 
+				enemybulletlist.add(enb); 
+			}
+		}
+	}
+	
+
 	/**
 	 * Make bullet move.
 	 */
@@ -290,6 +261,24 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			} 
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground rr=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					if(Framework.musicplay){
+						crash.play();}
+					rr.health-=bullet.damage; 
+				}
+			} 
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair rr=bossairlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
+				if (b.intersects(f)){
+					if(Framework.musicplay){
+						crash.play();}
+					rr.health-=bullet.damage; 
+				}
+			} 
 
 			
 		}
@@ -315,7 +304,7 @@ public class game {
 				if(Framework.musicplay){
 				crash.play();}
 				player.health-=enemybullet.damage; 
-				enemybulletlist.remove(i);    //<============================================================Doing collision. 
+				enemybulletlist.remove(i); 
 			}
 		} 
 
@@ -384,6 +373,21 @@ public class game {
 					rr.health-=bullet.damage; 
 				}
 			}
+			
+			for (int t=0; t<bossgroundlist.size(); t++){
+				bossground rr=bossgroundlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossgroundimg.getWidth(), rr.bossgroundimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			}
+			for (int t=0; t<bossairlist.size(); t++){
+				bossair rr=bossairlist.get(t); 
+				Rectangle f=new Rectangle(rr.x, rr.y,rr.bossairimg.getWidth(), rr.bossairimg.getHeight()); 
+				if (b.intersects(f)){
+					rr.health-=bullet.damage; 
+				}
+			}
 
 
 			
@@ -415,6 +419,16 @@ public class game {
 			groundlist.get(i).Draw(g2d);
 		}
 		
+		//draw bossground
+		for (int i=0; i<bossgroundlist.size(); i++){
+			bossgroundlist.get(i).Draw(g2d);
+		}
+		
+		//draw airboss
+		for (int i=0; i<bossairlist.size(); i++){
+			bossairlist.get(i).Draw(g2d);
+		}
+		
 		//draw arraylist for bullet 
 		for(int i=0; i<bulletlist.size(); i++){
 			bulletlist.get(i).Draw(g2d);
@@ -439,8 +453,8 @@ public class game {
 		g2d.setColor(Color.gray );
 		g2d.drawString("Killed: "+killed, 10, 20);
 		g2d.drawString("Rocket: "+player.superpowerfinal, 10, 40);
-		g2d.drawString("Run away: "+runaway, 250, 20);
-		g2d.drawString("bullet period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
+		g2d.drawString("Escaped: "+runaway, 250, 20);
+		g2d.drawString("Bullet Period: "+bullet.bulletperiod/1000000000+"s", 250, 40);
 		if(player.health<0){
 			player.health=0;
 		}
@@ -475,6 +489,8 @@ public class game {
 		//go through all the groundenemy 
 		isgroundenemyshooting();
 		isenemyshooting(); 
+		isgroundbossshooting(gametime); 
+		isairbossshooting(gametime);
 		//update bullet action
 		updatebullet(); 
 		updatesuperpower(); 
@@ -482,6 +498,11 @@ public class game {
 		//update the enemy 
 		createenemytank(gametime); 
 		updateenemy(); 
+		//update groundboss
+		createbossground(gametime); 
+		createbossair(gametime);
+		updatebossground(); 
+		updatebossair();
 		//update powerup 
 		updatepowerup();
 		//update the enemyground 
@@ -490,15 +511,11 @@ public class game {
 		currThread=Thread.currentThread();
 		if(Framework.pause == true){
 		try {
-			Thread.currentThread().sleep(100000);
+			Thread.currentThread().sleep(100000000);
 			Framework.pause = false; 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} }
-		/*if(Framework.pause == false && Thread.currentThread().getState()==Thread.State.TIMED_WAITING){
-			Thread.currentThread().interrupt();
-		}*/
-		//System.out.println(Thread.currentThread().getName()+" "+Thread.currentThread().getState()); 
 	}
 	
 	
@@ -515,6 +532,39 @@ public class game {
 			//System.out.println("2");
 			enemyground.speedup();
 			enemyground.lastcreatedground=gametime; 
+		}
+	}
+	
+	
+	/** 
+	 * Creates the ground boss when it comes to the right time.
+	 */ 
+
+	public void createbossground(long gametime){
+		if (gametime-bossground.lastcreatedground>=bossground.periodground && bossgroundlist.size()==0){
+			bossground r = new bossground(); 
+			r.initialize(Framework.width,1);
+			//System.out.println("1");
+			bossgroundlist.add(r); 
+			//System.out.println("2");
+			bossground.speedup();
+			bossground.lastcreatedground=gametime; 
+		}
+	}
+	
+	/** 
+	 * Creates the air boss when it comes to the right time.
+	 */ 
+
+	public void createbossair(long gametime){
+		if (gametime-bossair.lastcreatedair>=bossair.periodair && bossairlist.size()==0){
+			bossair r = new bossair(); 
+			r.initialize(Framework.width,1);
+			//System.out.println("1");
+			bossairlist.add(r); 
+			//System.out.println("2");
+			bossair.speedup();
+			bossair.lastcreatedair=gametime; 
 		}
 	}
 	
@@ -548,6 +598,64 @@ public class game {
 				groundlist.remove(i); 
 				runaway+=1; }
 			
+		}
+	}
+	
+	/** 
+	 * Update all the ground boss in the list(making the move and remove from the list if they do not exist)
+	 */
+ 
+	public void updatebossground(){
+		for (int i=0; i<bossgroundlist.size(); i++){
+			bossground r = bossgroundlist.get(i); 
+			r.update(); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
+			Rectangle e=new Rectangle(r.x, r.y,r.bossgroundimg.getWidth(), r.bossgroundimg.getHeight()); 
+			if(p.intersects(e)){
+				if(Framework.musicplay){crash.play();}
+                player.health-=30;
+                bossgroundlist.remove(i);
+			}
+			else {
+                if (r.health <= 0) {
+                    //attack.play();
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    bossgroundlist.remove(i);
+                    killed += 10;
+                    continue;
+                }
+            }
+		}
+	}
+	
+	/** 
+	 * Update all the ground boss in the list(making the move and remove from the list if they do not exist)
+	 */
+ 
+	public void updatebossair(){
+		for (int i=0; i<bossairlist.size(); i++){
+			bossair r = bossairlist.get(i); 
+			r.update(); 
+			Rectangle p=new Rectangle(player.x+35, player.y+38,player.tank.getWidth()/2-10, player.tank.getHeight()/2-10); 
+			Rectangle e=new Rectangle(r.x, r.y,r.bossairimg.getWidth(), r.bossairimg.getHeight()); 
+			if(p.intersects(e)){
+				if(Framework.musicplay){crash.play();}
+                player.health-=30;
+                bossairlist.remove(i);
+			}
+			else {
+                if (r.health <= 0) {
+                    //attack.play();
+                    if (Framework.musicplay) {
+                        explode.play();
+                    }
+                    bossairlist.remove(i);
+                    killed += 10;
+                    continue;
+                }
+            }
 		}
 	}
 	
@@ -636,6 +744,8 @@ public class game {
         player.superpowerfinal = 5;
 		enemytank.restartenemy();
 		enemyground.restartenemyground();
+		bossground.restartbossground();
+		bossair.restartbossair();
 		runaway=0; 
 		killed=0; 
 		superpower.lastcreatsuperpower=0; 
@@ -646,34 +756,32 @@ public class game {
 		superpowerlist.clear(); 
 		groundlist.clear(); 
 		poweruplist.clear(); 
+		bossgroundlist.clear();
+		bossairlist.clear();
 		if(Framework.musicplay){Framework.clip.loop();}
 	}
 	
 	/**
-	 * Prints the result after gameover.
+	 * Prints the result after game over.
 	 */
 
 	public void print(Graphics2D g2d, long gametime){
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.GRAY);
-		g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2-30);
-		g2d.drawString("You've killed: "+killed+" enemies", 400, 530/2+20);
-		g2d.drawString("Run away: "+runaway, 400, 530/2+70);
-        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 120);
+		    g2d.drawString("Time: "+gametime/1000000000+"s", 400, 530/2+20);
+		    g2d.drawString("You Killed: "+killed+" enemies", 400, 530/2+70);
+		    g2d.drawString("Escaped: "+runaway, 400, 530/2+120);
+        	g2d.drawString("Total score: " + (killed - runaway), 400, 530/2 + 170);
         	
         	g2d.setFont(new Font("Results", Font.BOLD, 18));
         	g2d.setColor(Color.YELLOW);
-        	if ((killed - runaway)>highscore.highestscore){
-            		g2d.drawString("Highest score: " + (killed - runaway), 400, 530/2 + 170);
-            		g2d.drawString("Congratulation!" , 400, 530/2 -80);
+        	if ((killed - runaway)>highscore.highestscore){	
+        		g2d.setFont(new Font("Congrats", Font.BOLD, 40));
+        		g2d.drawString("New High Score: " + (killed - runaway), 315, 530/2 - 30);
+            	g2d.drawString("Congratulations!" , 315, 530/2 -85);
         	}
         	else 
-            		g2d.drawString("Highest score: " + highscore.highestscore, 400, 530/2 + 170);
-
+            	g2d.drawString("Current High Score: " + highscore.highestscore, 400, 530/2 - 30);   	
         	
-
-		
 	}
-	
-
 }
